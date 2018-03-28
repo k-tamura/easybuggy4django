@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from . import views
 
-app_name = "easybuggy4django"
+app_name = "easybuggy"
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),

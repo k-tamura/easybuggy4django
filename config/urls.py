@@ -19,6 +19,6 @@ from django.conf.urls import include, url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-#    url(r'^easybuggy4django/', include('easybuggy4django.urls', namespace='easybuggy4django')),
-    url(r'^', include('easybuggy4django.urls', namespace='easybuggy4django')),
+#    url(r'^easybuggy/', include('easybuggy.urls', namespace='easybuggy')),
+    url(r'^', include('easybuggy.urls', namespace='easybuggy')),
 ]
