@@ -1,0 +1,51 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-03-29 03:09+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: templates/base.html:6
+msgid "Sample Page"
+msgstr "サンプルページ"
+
+#: templates/index.html:12
+msgid "description.all"
+msgstr "警告：一部のリンクは重大なメモリリークやCPU使用率の上昇を引き起こします。これによりコンピュータの動作が不安定になる可能性があります。結果はJREの種類/バージョン、JVMオプション、OS、ハードウェア（メモリやCPU）などによって変わることがあります。"
+
+#: templates/index.html:21
+msgid "section.troubles"
+msgstr "障害"
+
+#: templates/index.html:23
+msgid "description.troubles"
+msgstr "メモリリーク、無限ループ、デッドロックなど"
+
+#: templates/index.html:25
+msgid "function.name.infinite.loop"
+msgstr "無限ループ"
+
+#: templates/index.html:25
+msgid "function.description.infinite.loop"
+msgstr "このリンクをクリックすると、無限ループが発生します。"
+
+#: templates/index.html:32
+msgid "section.vulnerabilities"
+msgstr "脆弱性"
+
+#: templates/index.html:34
+msgid "description.vulnerabilities"
+msgstr "XSS、SQLインジェクション、LDAPインジェクションなど"
