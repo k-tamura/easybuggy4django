@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block body %}
+<body style="margin-top: 20px; margin-left: 20px; margin-right: 20px;">
+<header>
+    <table style="width: 720px;">
+        <tr>
+            <td rowspan="1" colspan="1">
+                <img src="/static/easybuggy.png" class="bounceInRight animated"/>
+            </td>
+            <td rowspan="1" colspan="1"><span class="glyphicon glyphicon-warning-sign"></span>
+                <span>警告：一部のリンクは重大なメモリリークやCPU使用率の上昇を引き起こします。これによりコンピュータの動作が不安定になる可能性があります。結果はJREの種類/バージョン、JVMオプション、OS、ハードウェア（メモリやCPU）などによって変わることがあります。</span>
+            </td>
+        </tr>
+    </table>
+</header>
+<hr/>
+
+<h2>
+    <span class="glyphicon glyphicon-knight"></span>
+    <span>障害</span>
+</h2>
+<p>メモリリーク、無限ループ、デッドロックなど。</p>
+<ul>
+    <li><p><a href="{% url 'easybuggy4django:infiniteloop' %}" target="_blank" shape="rect">無限ループ</a>: <span>このリンクをクリックすると、無限ループが発生します。</span>
+    </p></li>
+</ul>
+
+
+<h2>
+    <span class="glyphicon glyphicon-knight"></span>
+    <span>脆弱性</span>
+</h2>
+<p>XSS、SQLインジェクション、LDAPインジェクションなど</p>
+<ul>
+    <li><p><a href="{% url 'easybuggy4django:xss' %}" shape="rect">XSS (クロスサイトスクリプティング)</a>:
+        <span>このページにはXSSの脆弱性があります。</span></p></li>
+</ul>
+
+<hr/>
+<footer>
+    <img src="/static/easybuggyL.png"/>Copyright &copy; 2018 T246 OSS Lab, all rights reserved.<br/><br/>
+</footer>
+</body>
+{% endblock %}
