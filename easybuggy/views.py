@@ -15,8 +15,16 @@ def infiniteloop(request):
 
 
 def xss(request):
-    d = {
-        'title': _('title.xss.page'),
-        'msg': _('msg.enter.string'),
-    }
+    str = request.POST["string"]
+    if str is not None:
+        d = {
+            'title': _('title.xss.page'),
+            'msg': str[::-1],
+        }
+    else:
+        d = {
+            'title': _('title.xss.page'),
+            'msg': _('msg.enter.string'),
+        }
+
     return render(request, 'xss.html', d)

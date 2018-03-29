@@ -9,7 +9,9 @@
 		<label>{% trans 'label.string' %}</label><span>: </span>
 			<input type="text" name="string" size="100" maxlength="100" /><br />
 			<br /> <input type="submit" value="{% trans 'label.submit' %}" /><br /><br />
+            {% autoescape off %}
 			<p>{{ msg }}</p><br />
+            {% endautoescape %}
 		<div class="alert alert-info" role="alert">
 			<span class="glyphicon glyphicon-info-sign"></span>
              {% trans 'msg.note.xss' %}
