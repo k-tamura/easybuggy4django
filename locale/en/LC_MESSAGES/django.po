@@ -38,8 +38,8 @@ msgstr "Go to main page"
 msgid "description.all"
 msgstr ""
 "Warning: Several links cause severe memory leaks or increase a CPU usage "
-"rate. They can make your computer unstable.The result may change depending "
-"on JRE type / version, JVM option, OS, hardware (memory, CPU) or etc."
+"rate. They can make your computer unstable. The result may change depending "
+"on Python version, OS, hardware (memory, CPU) or etc."
 
 #: templates/index.html:21
 msgid "section.troubles"
