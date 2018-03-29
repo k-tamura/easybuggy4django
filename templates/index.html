@@ -22,8 +22,9 @@
 </h2>
 <p>{% trans 'description.troubles' %}</p>
 <ul>
-    <li><p><a href="{% url 'easybuggy:infiniteloop' %}" target="_blank" shape="rect">{% trans
-        'function.name.infinite.loop' %}</a>: <span>{% trans 'function.description.infinite.loop' %}</span>
+    <li><p><a href="{% url 'easybuggy:infiniteloop' %}" target="_blank" shape="rect">
+        {% trans 'function.name.infinite.loop' %}</a>:
+        <span>{% trans 'function.description.infinite.loop' %}</span>
     </p></li>
 </ul>
 
@@ -34,8 +35,9 @@
 </h2>
 <p>{% trans 'description.vulnerabilities' %}</p>
 <ul>
-    <li><p><a href="{% url 'easybuggy:xss' %}" shape="rect">XSS (クロスサイトスクリプティング)</a>:
-        <span>このページにはXSSの脆弱性があります。</span></p></li>
+    <li><p><a href="{% url 'easybuggy:xss' %}" shape="rect">
+        {% trans 'function.name.xss' %}</a>:
+        <span>{% trans 'function.description.xss' %}</span></p></li>
 </ul>
 
 <hr/>

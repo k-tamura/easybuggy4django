@@ -1,18 +1,10 @@
 from django.shortcuts import render
 from django.http.response import HttpResponse
 from datetime import datetime
-
+from django.utils.translation import ugettext as _
 
 def index(request):
     return render(request, 'index.html')
-
-
-def hello_template(request):
-    d = {
-        'hour': datetime.now().hour,
-        'message': 'Sample message',
-    }
-    return render(request, 'index.html', d)
 
 
 def infiniteloop(request):
@@ -24,7 +16,7 @@ def infiniteloop(request):
 
 def xss(request):
     d = {
-        'hour': datetime.now().hour,
-        'message': 'Sample message',
+        'title': _('title.xss.page'),
+        'msg': _('msg.enter.string'),
     }
     return render(request, 'xss.html', d)

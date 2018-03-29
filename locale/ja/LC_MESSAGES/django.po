@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-29 03:09+0900\n"
+"POT-Creation-Date: 2018-03-29 13:27+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,13 +18,29 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+#: easybuggy/views.py:19
+msgid "title.xss.page"
+msgstr "文字列の逆転"
+
+#: easybuggy/views.py:20
+msgid "msg.enter.string"
+msgstr "文字列を入力して下さい。"
+
 #: templates/base.html:6
 msgid "Sample Page"
 msgstr "サンプルページ"
 
+#: templates/header.html:4
+msgid "label.go.to.main"
+msgstr "メインページへ"
+
 #: templates/index.html:12
 msgid "description.all"
-msgstr "警告：一部のリンクは重大なメモリリークやCPU使用率の上昇を引き起こします。これによりコンピュータの動作が不安定になる可能性があります。結果はJREの種類/バージョン、JVMオプション、OS、ハードウェア（メモリやCPU）などによって変わることがあります。"
+msgstr ""
+"警告：一部のリンクは重大なメモリリークやCPU使用率の上昇を引き起こします。これ"
+"によりコンピュータの動作が不安定になる可能性があります。結果はJREの種類/バー"
+"ジョン、JVMオプション、OS、ハードウェア（メモリやCPU）などによって変わること"
+"があります。"
 
 #: templates/index.html:21
 msgid "section.troubles"
@@ -34,18 +50,44 @@ msgstr "障害"
 msgid "description.troubles"
 msgstr "メモリリーク、無限ループ、デッドロックなど"
 
-#: templates/index.html:25
+#: templates/index.html:26
 msgid "function.name.infinite.loop"
 msgstr "無限ループ"
 
-#: templates/index.html:25
+#: templates/index.html:27
 msgid "function.description.infinite.loop"
 msgstr "このリンクをクリックすると、無限ループが発生します。"
 
-#: templates/index.html:32
+#: templates/index.html:34
 msgid "section.vulnerabilities"
 msgstr "脆弱性"
 
-#: templates/index.html:34
+#: templates/index.html:36
 msgid "description.vulnerabilities"
 msgstr "XSS、SQLインジェクション、LDAPインジェクションなど"
+
+#: templates/index.html:39
+msgid "function.name.xss"
+msgstr "XSS (クロスサイトスクリプティング)"
+
+#: templates/index.html:40
+msgid "function.description.xss"
+msgstr "このページにはXSSの脆弱性があります。"
+
+#: templates/xss.html:7
+msgid "description.reverse.string"
+msgstr "文字列を入力すると、文字列が逆転して表示されます。"
+
+#: templates/xss.html:8
+msgid "label.string"
+msgstr "文字列"
+
+#: templates/xss.html:10
+msgid "label.submit"
+msgstr "送信"
+
+#: templates/xss.html:14
+msgid "msg.note.xss"
+msgstr ""
+"名前に<code>>tpircs/<;)eikooc.tnemucod(trela>tpIrcs<</code>を入力すると、セッ"
+"ションIDが表示されます。"

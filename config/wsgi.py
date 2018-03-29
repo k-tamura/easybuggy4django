@@ -1,5 +1,5 @@
 """
-WSGI config for mysite project.
+WSGI config for easybuggy4django project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

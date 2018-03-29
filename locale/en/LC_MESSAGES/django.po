@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-29 03:09+0900\n"
+"POT-Creation-Date: 2018-03-29 13:27+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,13 +18,28 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: easybuggy/views.py:19
+msgid "title.xss.page"
+msgstr "Reverse String"
+
+#: easybuggy/views.py:20
+msgid "msg.enter.string"
+msgstr "Please enter a string."
+
 #: templates/base.html:6
 msgid "Sample Page"
 msgstr "Sample Page"
 
+#: templates/header.html:4
+msgid "label.go.to.main"
+msgstr "Go to main page"
+
 #: templates/index.html:12
 msgid "description.all"
-msgstr "Warning: Several links cause severe memory leaks or increase a CPU usage rate. They can make your computer unstable.The result may change depending on JRE type / version, JVM option, OS, hardware (memory, CPU) or etc."
+msgstr ""
+"Warning: Several links cause severe memory leaks or increase a CPU usage "
+"rate. They can make your computer unstable.The result may change depending "
+"on JRE type / version, JVM option, OS, hardware (memory, CPU) or etc."
 
 #: templates/index.html:21
 msgid "section.troubles"
@@ -34,18 +49,44 @@ msgstr "Troubles"
 msgid "description.troubles"
 msgstr "Memory leak, infinite loop, deadlock, and so on:"
 
-#: templates/index.html:25
+#: templates/index.html:26
 msgid "function.name.infinite.loop"
 msgstr "Infinite Loop"
 
-#: templates/index.html:25
+#: templates/index.html:27
 msgid "function.description.infinite.loop"
 msgstr "Infinite loop occurs if you click this link."
 
-#: templates/index.html:32
+#: templates/index.html:34
 msgid "section.vulnerabilities"
 msgstr "Vulnerabilities"
 
-#: templates/index.html:34
+#: templates/index.html:36
 msgid "description.vulnerabilities"
 msgstr "XSS, SQL Injection, LDAP injection, and so on："
+
+#: templates/index.html:39
+msgid "function.name.xss"
+msgstr "XSS (Cross Site Scripting)"
+
+#: templates/index.html:40
+msgid "function.description.xss"
+msgstr "There is a cross site scripting vulnerability in this page."
+
+#: templates/xss.html:7
+msgid "description.reverse.string"
+msgstr "If you enter a string, then the reversed string is shown."
+
+#: templates/xss.html:8
+msgid "label.string"
+msgstr "String"
+
+#: templates/xss.html:10
+msgid "label.submit"
+msgstr "Submit"
+
+#: templates/xss.html:14
+msgid "msg.note.xss"
+msgstr ""
+"Session ID is shown if you enter name to <code>>tpircs/<;)eikooc."
+"tnemucod(trela>tpIrcs<</code>"

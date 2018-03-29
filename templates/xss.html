@@ -1,25 +1,17 @@
 {% extends "base.html" %}
-
+{% load i18n %}
 {% block body %}
 <body style="margin-left: 20px; margin-right: 20px;">
-	<table style="width: 100%;">
-	<tr>
-		<td><h2><span class="glyphicon glyphicon-globe"></span> <span>文字列の逆転</span></h2></td>
-		<td align="right">
-			<a href="/">メインページへ</a></td>
-
-	</tr>
-</table>
-<hr style="margin-top: 0px" />
+{% include "header.html" %}
 	<form action="" method="post" enctype="application/x-www-form-urlencoded">
-		<p>文字列を入力すると、文字列が逆転して表示されます。</p><br />
-		<label>文字列</label><span>: </span>
+		<p>{% trans 'description.reverse.string' %}</p><br />
+		<label>{% trans 'label.string' %}</label><span>: </span>
 			<input type="text" name="string" size="100" maxlength="100" /><br />
-			<br /> <input type="submit" value="送信" /><br /><br />
-			<p>文字列を入力して下さい。</p><br />
+			<br /> <input type="submit" value="{% trans 'label.submit' %}" /><br /><br />
+			<p>{{ msg }}</p><br />
 		<div class="alert alert-info" role="alert">
 			<span class="glyphicon glyphicon-info-sign"></span>
-             名前に<code>>tpircs/<;)eikooc.tnemucod(trela>tpIrcs<</code>を入力すると、セッションIDが表示されます。
+             {% trans 'msg.note.xss' %}
 		</div>
 	</form>
 </body>
