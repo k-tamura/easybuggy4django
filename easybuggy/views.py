@@ -18,17 +18,17 @@ def redirectloop(request):
 
 
 def xss(request):
-    str = request.POST["string"]
-    if str is not None:
-        d = {
-            'title': _('title.xss.page'),
-            'msg': str[::-1],
-        }
-    else:
-        d = {
-            'title': _('title.xss.page'),
-            'msg': _('msg.enter.string'),
-        }
+    d = {
+        'title': _('title.xss.page'),
+        'msg': _('msg.enter.string'),
+    }
+    if request.method == 'POST':
+        str = request.POST["string"]
+        if str is not None:
+            d = {
+                'title': _('title.xss.page'),
+                'msg': str[::-1],
+            }
 
     return render(request, 'xss.html', d)
 
