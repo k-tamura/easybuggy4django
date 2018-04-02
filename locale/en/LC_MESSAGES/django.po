@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-29 13:27+0900\n"
+"POT-Creation-Date: 2018-04-02 21:23+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: easybuggy/views.py:19
+#: easybuggy/views.py:22 easybuggy/views.py:27
 msgid "title.xss.page"
 msgstr "Reverse String"
 
-#: easybuggy/views.py:20
+#: easybuggy/views.py:28
 msgid "msg.enter.string"
 msgstr "Please enter a string."
 
@@ -30,7 +30,7 @@ msgstr "Please enter a string."
 msgid "Sample Page"
 msgstr "Sample Page"
 
-#: templates/header.html:4
+#: templates/header.html:5
 msgid "label.go.to.main"
 msgstr "Go to main page"
 
@@ -57,35 +57,43 @@ msgstr "Infinite Loop"
 msgid "function.description.infinite.loop"
 msgstr "Infinite loop occurs if you click this link."
 
-#: templates/index.html:34
+#: templates/index.html:30
+msgid "function.name.redirect.loop"
+msgstr "Redirect Loop"
+
+#: templates/index.html:31
+msgid "function.description.redirect.loop"
+msgstr "Redirect loop occurs if you click this link."
+
+#: templates/index.html:38
 msgid "section.vulnerabilities"
 msgstr "Vulnerabilities"
 
-#: templates/index.html:36
+#: templates/index.html:40
 msgid "description.vulnerabilities"
 msgstr "XSS, SQL Injection, LDAP injection, and so on："
 
-#: templates/index.html:39
+#: templates/index.html:43
 msgid "function.name.xss"
 msgstr "XSS (Cross Site Scripting)"
 
-#: templates/index.html:40
+#: templates/index.html:44
 msgid "function.description.xss"
 msgstr "There is a cross site scripting vulnerability in this page."
 
-#: templates/xss.html:7
+#: templates/xss.html:8
 msgid "description.reverse.string"
 msgstr "If you enter a string, then the reversed string is shown."
 
-#: templates/xss.html:8
+#: templates/xss.html:9
 msgid "label.string"
 msgstr "String"
 
-#: templates/xss.html:10
+#: templates/xss.html:11
 msgid "label.submit"
 msgstr "Submit"
 
-#: templates/xss.html:14
+#: templates/xss.html:17
 msgid "msg.note.xss"
 msgstr ""
 "Session ID is shown if you enter name to <code>>tpircs/<;)eikooc."

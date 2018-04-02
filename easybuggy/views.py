@@ -1,6 +1,4 @@
-from django.shortcuts import render
-from django.http.response import HttpResponse
-from datetime import datetime
+from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
 
 def index(request):
@@ -13,6 +11,8 @@ def infiniteloop(request):
         i += 1
     return render(request, 'index.html')
 
+def redirectloop(request):
+    return redirect("/redirectloop")
 
 def xss(request):
     str = request.POST["string"]

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-29 13:27+0900\n"
+"POT-Creation-Date: 2018-04-02 21:23+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: easybuggy/views.py:19
+#: easybuggy/views.py:22 easybuggy/views.py:27
 msgid "title.xss.page"
 msgstr "文字列の逆転"
 
-#: easybuggy/views.py:20
+#: easybuggy/views.py:28
 msgid "msg.enter.string"
 msgstr "文字列を入力して下さい。"
 
@@ -30,7 +30,7 @@ msgstr "文字列を入力して下さい。"
 msgid "Sample Page"
 msgstr "サンプルページ"
 
-#: templates/header.html:4
+#: templates/header.html:5
 msgid "label.go.to.main"
 msgstr "メインページへ"
 
@@ -38,9 +38,8 @@ msgstr "メインページへ"
 msgid "description.all"
 msgstr ""
 "警告：一部のリンクは重大なメモリリークやCPU使用率の上昇を引き起こします。これ"
-"によりコンピュータの動作が不安定になる可能性があります。結果はPythonバー"
-"ジョン、OS、ハードウェア（メモリやCPU）などによって変わること"
-"があります。"
+"によりコンピュータの動作が不安定になる可能性があります。結果はPythonバージョ"
+"ン、OS、ハードウェア（メモリやCPU）などによって変わることがあります。"
 
 #: templates/index.html:21
 msgid "section.troubles"
@@ -58,35 +57,43 @@ msgstr "無限ループ"
 msgid "function.description.infinite.loop"
 msgstr "このリンクをクリックすると、無限ループが発生します。"
 
-#: templates/index.html:34
+#: templates/index.html:30
+msgid "function.name.redirect.loop"
+msgstr "リダイレクトループ"
+
+#: templates/index.html:31
+msgid "function.description.redirect.loop"
+msgstr "このリンクをクリックすると、リダイレクトループが発生します。"
+
+#: templates/index.html:38
 msgid "section.vulnerabilities"
 msgstr "脆弱性"
 
-#: templates/index.html:36
+#: templates/index.html:40
 msgid "description.vulnerabilities"
 msgstr "XSS、SQLインジェクション、LDAPインジェクションなど"
 
-#: templates/index.html:39
+#: templates/index.html:43
 msgid "function.name.xss"
 msgstr "XSS (クロスサイトスクリプティング)"
 
-#: templates/index.html:40
+#: templates/index.html:44
 msgid "function.description.xss"
 msgstr "このページにはXSSの脆弱性があります。"
 
-#: templates/xss.html:7
+#: templates/xss.html:8
 msgid "description.reverse.string"
 msgstr "文字列を入力すると、文字列が逆転して表示されます。"
 
-#: templates/xss.html:8
+#: templates/xss.html:9
 msgid "label.string"
 msgstr "文字列"
 
-#: templates/xss.html:10
+#: templates/xss.html:11
 msgid "label.submit"
 msgstr "送信"
 
-#: templates/xss.html:14
+#: templates/xss.html:17
 msgid "msg.note.xss"
 msgstr ""
 "名前に<code>>tpircs/<;)eikooc.tnemucod(trela>tpIrcs<</code>を入力すると、セッ"
