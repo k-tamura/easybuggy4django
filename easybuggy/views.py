@@ -4,7 +4,8 @@ from .models import User
 
 
 def index(request):
-    return render(request, 'index.html')
+    d = { 'title': 'EasyBuggy Django' }
+    return render(request, 'index.html', d)
 
 
 def infiniteloop(request):
