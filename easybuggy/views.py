@@ -8,6 +8,15 @@ def index(request):
     return render(request, 'index.html', d)
 
 
+def deadlock2(request):
+    d = {
+        'title': _('title.deadlock2.page'),
+        'note': _('msg.note.deadlock2'),
+    }
+    d['users'] = User.objects.raw("SELECT * FROM easybuggy_user WHERE ispublic = 'true' ORDER BY id")
+    return render(request, 'deadlock2.html', d)
+
+
 def infiniteloop(request):
     i = 1
     while 0 < i:

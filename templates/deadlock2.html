@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block body %}
+{% include "header.html" %}
+<p>{% trans 'msg.update.users' %}</p>
+<form action="" method="post">
+    {% csrf_token %}
+    <input type="submit" value="{% trans 'label.update' %}"/><br/><br/>
+    <table class="table table-striped table-bordered table-hover" style="font-size: small;">
+        <tr>
+            <th><a href='/deadlock2?order={{order}}'>
+            {% trans 'label.user.id' %}
+            {% if order is not "desc" %}
+            <span class="glyphicon glyphicon-triangle-top"></span>
+            {% else %}
+            <span class="glyphicon glyphicon-triangle-bottom"></span>
+            {% endif %}
+            </a></th>
+            <th>{% trans 'label.name' %}</th>
+            <th>{% trans 'label.phone' %}</th>
+            <th>{% trans 'label.mail' %}</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td><input type="hidden" name="uid_{{ forloop.counter }}" value="{{ user.id }}"/>{{ user.id }}</td>
+            <td><input type="text" name="{{ user.id }}_name" value="{{ user.name }}"/></td>
+            <td><input type="text" name="{{ user.id }}_phone" value="{{ user.phone|default_if_none:'' }}"/></td>
+            <td><input type="text" name="{{ user.id }}_mail" value="{{ user.mail|default_if_none:'' }}"/></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% include "messages.html" %}
+</form>
+{% endblock %}

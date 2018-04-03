@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-03 21:03+0900\n"
+"POT-Creation-Date: 2018-04-03 22:45+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,46 +18,82 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: easybuggy/views.py:23
+#: easybuggy/views.py:13
+msgid "title.deadlock2.page"
+msgstr "Batch Update of Users"
+
+#: easybuggy/views.py:14
+msgid "msg.note.deadlock2"
+msgstr ""
+"If you open two windows (or tabs) and sort in the ascending order of user ID "
+"and click the 'update' button on one window immediately after you sort in "
+"the descending order and click the 'update' button on the other, then "
+"deadlock occurs in database."
+
+#: easybuggy/views.py:32
 msgid "title.roundofferror.page"
 msgstr "Easy Subtraction"
 
-#: easybuggy/views.py:24
+#: easybuggy/views.py:33
 msgid "msg.note.roundofferror"
 msgstr "Round off error occurs if you enter 1."
 
-#: easybuggy/views.py:36
+#: easybuggy/views.py:45
 msgid "title.truncationerror.page"
 msgstr "Decimal Division"
 
-#: easybuggy/views.py:37
+#: easybuggy/views.py:46
 msgid "msg.note.truncationerror"
 msgstr "Truncation error occurs if you enter 3 or 7 or 9."
 
-#: easybuggy/views.py:49
+#: easybuggy/views.py:58
 msgid "title.xss.page"
 msgstr "Reverse String"
 
-#: easybuggy/views.py:50
+#: easybuggy/views.py:59
 msgid "msg.enter.string"
 msgstr "Please enter a string."
 
-#: easybuggy/views.py:51 templates/xss.html:16
+#: easybuggy/views.py:60 templates/xss.html:16
 msgid "msg.note.xss"
 msgstr ""
 "Session ID is shown if you enter name to <code>>tpircs/<;)eikooc."
 "tnemucod(trela>tpIrcs<</code>"
 
-#: easybuggy/views.py:63
+#: easybuggy/views.py:72
 msgid "title.sqlijc.page"
 msgstr "Search Your Secret Number"
 
-#: easybuggy/views.py:64
+#: easybuggy/views.py:73
 msgid "msg.note.sqlijc"
 msgstr ""
 "You can see a secret number if you enter <code>Mark</code> and "
 "<code>password</code>. You can see other users information if you enter "
 "password to <code>' OR '1'='1</code>"
+
+#: templates/deadlock2.html:5
+msgid "msg.update.users"
+msgstr "You can update users information."
+
+#: templates/deadlock2.html:8
+msgid "label.update"
+msgstr "Update"
+
+#: templates/deadlock2.html:12
+msgid "label.user.id"
+msgstr "User ID"
+
+#: templates/deadlock2.html:19 templates/sqlijc.html:8 templates/sqlijc.html:16
+msgid "label.name"
+msgstr "Name"
+
+#: templates/deadlock2.html:20
+msgid "label.phone"
+msgstr "Phone"
+
+#: templates/deadlock2.html:21
+msgid "label.mail"
+msgstr "Mail Address"
 
 #: templates/header.html:5
 msgid "label.go.to.main"
@@ -79,58 +115,66 @@ msgid "description.troubles"
 msgstr "Memory leak, infinite loop, deadlock, and so on:"
 
 #: templates/index.html:25
+msgid "function.name.dead.lock2"
+msgstr "Deadlock (SQL)"
+
+#: templates/index.html:26
+msgid "function.description.dead.lock2"
+msgstr "Deadlock (SQL) can occur."
+
+#: templates/index.html:29
 msgid "function.name.infinite.loop"
 msgstr "Infinite Loop"
 
-#: templates/index.html:26
+#: templates/index.html:30
 msgid "function.description.infinite.loop"
 msgstr "Infinite loop occurs if you click this link."
 
-#: templates/index.html:29
+#: templates/index.html:33
 msgid "function.name.redirect.loop"
 msgstr "Redirect Loop"
 
-#: templates/index.html:30
+#: templates/index.html:34
 msgid "function.description.redirect.loop"
 msgstr "Redirect loop occurs if you click this link."
 
-#: templates/index.html:33
+#: templates/index.html:37
 msgid "function.name.round.off.error"
 msgstr "Round Off Error"
 
-#: templates/index.html:34
+#: templates/index.html:38
 msgid "function.description.round.off.error"
 msgstr "Round off error can occur."
 
-#: templates/index.html:37
+#: templates/index.html:41
 msgid "function.name.truncation.error"
 msgstr "Truncation Error"
 
-#: templates/index.html:38
+#: templates/index.html:42
 msgid "function.description.truncation.error"
 msgstr "Truncation error can occur."
 
-#: templates/index.html:45
+#: templates/index.html:49
 msgid "section.vulnerabilities"
 msgstr "Vulnerabilities"
 
-#: templates/index.html:47
+#: templates/index.html:51
 msgid "description.vulnerabilities"
 msgstr "XSS, SQL Injection, LDAP injection, and so on："
 
-#: templates/index.html:50
+#: templates/index.html:54
 msgid "function.name.xss"
 msgstr "XSS (Cross Site Scripting)"
 
-#: templates/index.html:51
+#: templates/index.html:55
 msgid "function.description.xss"
 msgstr "There is a cross site scripting vulnerability in this page."
 
-#: templates/index.html:54
+#: templates/index.html:58
 msgid "function.name.sql.injection"
 msgstr "SQL Injection"
 
-#: templates/index.html:55
+#: templates/index.html:59
 msgid "function.description.sql.injection"
 msgstr "There is an SQL injection vulnerability in this page."
 
@@ -145,10 +189,6 @@ msgstr "Calculate"
 #: templates/sqlijc.html:7
 msgid "msg.enter.name.and.passwd"
 msgstr "If you enter your name and password, then your secret number is shown."
-
-#: templates/sqlijc.html:8 templates/sqlijc.html:16
-msgid "label.name"
-msgstr "Name"
 
 #: templates/sqlijc.html:10
 msgid "label.password"

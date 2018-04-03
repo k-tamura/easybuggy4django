@@ -21,6 +21,10 @@
 </h2>
 <p>{% trans 'description.troubles' %}</p>
 <ul>
+    <li><p><a href="{% url 'easybuggy:deadlock2' %}" target="_blank" shape="rect">
+        {% trans 'function.name.dead.lock2' %}</a>:
+        <span>{% trans 'function.description.dead.lock2' %}</span>
+    </p></li>
     <li><p><a href="{% url 'easybuggy:infiniteloop' %}" target="_blank" shape="rect">
         {% trans 'function.name.infinite.loop' %}</a>:
         <span>{% trans 'function.description.infinite.loop' %}</span>
