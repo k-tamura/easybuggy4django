@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-02 21:23+0900\n"
+"POT-Creation-Date: 2018-04-03 15:18+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,13 +18,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: easybuggy/views.py:22 easybuggy/views.py:27
+#: easybuggy/views.py:23 easybuggy/views.py:30
 msgid "title.xss.page"
 msgstr "文字列の逆転"
 
-#: easybuggy/views.py:28
+#: easybuggy/views.py:24 easybuggy/views.py:50
 msgid "msg.enter.string"
 msgstr "文字列を入力して下さい。"
+
+#: easybuggy/views.py:40 easybuggy/views.py:46
+msgid "title.sqlijc.page"
+msgstr "暗証番号検索"
+
+#: easybuggy/views.py:51
+msgid "msg.note.sqlijc"
+msgstr ""
+"<code>Mark</code>と<code>password</code>を入力すると、暗証番号が表示されま"
+"す。パスワードに<code>' OR '1'='1</code>を入力すると、他のユーザーの情報が表"
+"示できます。"
 
 #: templates/base.html:6
 msgid "Sample Page"
@@ -81,6 +92,34 @@ msgstr "XSS (クロスサイトスクリプティング)"
 msgid "function.description.xss"
 msgstr "このページにはXSSの脆弱性があります。"
 
+#: templates/index.html:46
+msgid "function.name.sql.injection"
+msgstr "SQLインジェクション"
+
+#: templates/index.html:47
+msgid "function.description.sql.injection"
+msgstr "このページにはSQLインジェクションの脆弱性があります。"
+
+#: templates/sqlijc.html:8
+msgid "msg.enter.name.and.passwd"
+msgstr "名前とパスワードを入力すると、暗証番号が表示されます。"
+
+#: templates/sqlijc.html:9 templates/sqlijc.html:18
+msgid "label.name"
+msgstr "名前"
+
+#: templates/sqlijc.html:11
+msgid "label.password"
+msgstr "パスワード"
+
+#: templates/sqlijc.html:14 templates/xss.html:11
+msgid "label.submit"
+msgstr "送信"
+
+#: templates/sqlijc.html:19
+msgid "label.secret"
+msgstr "暗証番号"
+
 #: templates/xss.html:8
 msgid "description.reverse.string"
 msgstr "文字列を入力すると、文字列が逆転して表示されます。"
@@ -88,10 +127,6 @@ msgstr "文字列を入力すると、文字列が逆転して表示されます
 #: templates/xss.html:9
 msgid "label.string"
 msgstr "文字列"
-
-#: templates/xss.html:11
-msgid "label.submit"
-msgstr "送信"
 
 #: templates/xss.html:17
 msgid "msg.note.xss"

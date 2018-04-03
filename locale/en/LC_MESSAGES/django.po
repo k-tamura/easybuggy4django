@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-02 21:23+0900\n"
+"POT-Creation-Date: 2018-04-03 15:18+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,13 +18,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: easybuggy/views.py:22 easybuggy/views.py:27
+#: easybuggy/views.py:23 easybuggy/views.py:30
 msgid "title.xss.page"
 msgstr "Reverse String"
 
-#: easybuggy/views.py:28
+#: easybuggy/views.py:24 easybuggy/views.py:50
 msgid "msg.enter.string"
 msgstr "Please enter a string."
+
+#: easybuggy/views.py:40 easybuggy/views.py:46
+msgid "title.sqlijc.page"
+msgstr "Search Your Secret Number"
+
+#: easybuggy/views.py:51
+msgid "msg.note.sqlijc"
+msgstr ""
+"You can see a secret number if you enter <code>Mark</code> and "
+"<code>password</code>. You can see other users information if you enter "
+"password to <code>' OR '1'='1</code>"
 
 #: templates/base.html:6
 msgid "Sample Page"
@@ -81,6 +92,34 @@ msgstr "XSS (Cross Site Scripting)"
 msgid "function.description.xss"
 msgstr "There is a cross site scripting vulnerability in this page."
 
+#: templates/index.html:46
+msgid "function.name.sql.injection"
+msgstr "SQL Injection"
+
+#: templates/index.html:47
+msgid "function.description.sql.injection"
+msgstr "There is an SQL injection vulnerability in this page."
+
+#: templates/sqlijc.html:8
+msgid "msg.enter.name.and.passwd"
+msgstr "If you enter your name and password, then your secret number is shown."
+
+#: templates/sqlijc.html:9 templates/sqlijc.html:18
+msgid "label.name"
+msgstr "Name"
+
+#: templates/sqlijc.html:11
+msgid "label.password"
+msgstr "Password"
+
+#: templates/sqlijc.html:14 templates/xss.html:11
+msgid "label.submit"
+msgstr "Submit"
+
+#: templates/sqlijc.html:19
+msgid "label.secret"
+msgstr "Secret"
+
 #: templates/xss.html:8
 msgid "description.reverse.string"
 msgstr "If you enter a string, then the reversed string is shown."
@@ -88,10 +127,6 @@ msgstr "If you enter a string, then the reversed string is shown."
 #: templates/xss.html:9
 msgid "label.string"
 msgstr "String"
-
-#: templates/xss.html:11
-msgid "label.submit"
-msgstr "Submit"
 
 #: templates/xss.html:17
 msgid "msg.note.xss"
