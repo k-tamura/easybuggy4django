@@ -1,9 +1,8 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block body %}
-<body style="margin-top: 20px; margin-left: 20px; margin-right: 20px;">
 <header>
-    <table style="width: 720px;">
+    <table style="margin-top: 20px; width: 720px;">
         <tr>
             <td rowspan="1" colspan="1">
                 <img src="/static/easybuggy.png" class="bounceInRight animated"/>
@@ -30,6 +29,10 @@
         {% trans 'function.name.redirect.loop' %}</a>:
         <span>{% trans 'function.description.redirect.loop' %}</span>
     </p></li>
+    <li><p><a href="{% url 'easybuggy:roe' %}" shape="rect">
+        {% trans 'function.name.round.off.error' %}</a>:
+        <span>{% trans 'function.description.round.off.error' %}</span>
+    </p></li>
 </ul>
 
 
@@ -41,15 +44,16 @@
 <ul>
     <li><p><a href="{% url 'easybuggy:xss' %}" shape="rect">
         {% trans 'function.name.xss' %}</a>:
-        <span>{% trans 'function.description.xss' %}</span></p></li>
+        <span>{% trans 'function.description.xss' %}</span>
+    </p></li>
     <li><p><a href="{% url 'easybuggy:sqlijc' %}" shape="rect">
         {% trans 'function.name.sql.injection' %}</a>:
-        <span>{% trans 'function.description.sql.injection' %}</span></p></li>
+        <span>{% trans 'function.description.sql.injection' %}</span>
+    </p></li>
 </ul>
 
 <hr/>
 <footer>
     <img src="/static/easybuggyL.png"/>Copyright &copy; 2018 T246 OSS Lab, all rights reserved.<br/><br/>
 </footer>
-</body>
 {% endblock %}

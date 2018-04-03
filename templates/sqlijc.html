@@ -1,32 +1,29 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block body %}
-<body style="margin-left: 20px; margin-right: 20px;">
-    {% include "header.html" %}
-    <form action="" method="post">
-        {% csrf_token %}
-        <p>{% trans 'msg.enter.name.and.passwd' %}</p><br/>
-        <label>{% trans 'label.name' %}</label> :
-        <input type="text" name="name" size="20" maxlength="20"/>
-        <label>{% trans 'label.password' %}</label> :
-        <input type="password" name="password" size="20" maxlength="20"
-                                                             autocomplete="off"/>
-        <br/><br/><input type="submit" value="{% trans 'label.submit' %}"/><br/><br/>
-        {% if users %}
-        <table class="table table-striped table-bordered table-hover" style="font-size: small;">
-            <tr>
-                <th>{% trans 'label.name' %}</th>
-                <th>{% trans 'label.secret' %}</th>
-            </tr>
-            {% for user in users %}
-            <tr>
-                <td>{{ user.name }}</td>
-                <td>{{ user.secret }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-        {% endif %}
-        {% include "messages.html" %}
-    </form>
-</body>
+{% include "header.html" %}
+<form action="" method="post">
+    {% csrf_token %}
+    <p>{% trans 'msg.enter.name.and.passwd' %}</p><br/>
+    <label>{% trans 'label.name' %}</label> :
+    <input type="text" name="name" size="20" maxlength="20"/>
+    <label>{% trans 'label.password' %}</label> :
+    <input type="password" name="password" size="20" maxlength="20" autocomplete="off"/>
+    <br/><br/><input type="submit" value="{% trans 'label.submit' %}"/><br/><br/>
+    {% if users %}
+    <table class="table table-striped table-bordered table-hover" style="font-size: small;">
+        <tr>
+            <th>{% trans 'label.name' %}</th>
+            <th>{% trans 'label.secret' %}</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.name }}</td>
+            <td>{{ user.secret }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    {% include "messages.html" %}
+</form>
 {% endblock %}

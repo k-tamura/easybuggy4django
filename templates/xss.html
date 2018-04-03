@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block body %}
-<body style="margin-left: 20px; margin-right: 20px;">
 {% include "header.html" %}
 <form action="" method="post" enctype="application/x-www-form-urlencoded">
     {% csrf_token %}
@@ -17,5 +16,4 @@
         {% trans 'msg.note.xss' %}
     </div>
 </form>
-</body>
 {% endblock %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-03 15:18+0900\n"
+"POT-Creation-Date: 2018-04-03 17:44+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,118 +18,141 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: easybuggy/views.py:23 easybuggy/views.py:30
+#: easybuggy/views.py:22
+msgid "title.roundofferror.page"
+msgstr "簡単な引き算"
+
+#: easybuggy/views.py:23
+msgid "msg.note.roundofferror"
+msgstr "1を入力すると、丸め誤差が発生します。"
+
+#: easybuggy/views.py:34
 msgid "title.xss.page"
 msgstr "文字列の逆転"
 
-#: easybuggy/views.py:24 easybuggy/views.py:50
+#: easybuggy/views.py:35
 msgid "msg.enter.string"
 msgstr "文字列を入力して下さい。"
 
-#: easybuggy/views.py:40 easybuggy/views.py:46
+#: easybuggy/views.py:36 templates/xss.html:16
+msgid "msg.note.xss"
+msgstr ""
+"名前に<code>>tpircs/<;)eikooc.tnemucod(trela>tpIrcs<</code>を入力すると、セッ"
+"ションIDが表示されます。"
+
+#: easybuggy/views.py:48
 msgid "title.sqlijc.page"
 msgstr "暗証番号検索"
 
-#: easybuggy/views.py:51
+#: easybuggy/views.py:49
 msgid "msg.note.sqlijc"
 msgstr ""
 "<code>Mark</code>と<code>password</code>を入力すると、暗証番号が表示されま"
 "す。パスワードに<code>' OR '1'='1</code>を入力すると、他のユーザーの情報が表"
 "示できます。"
 
-#: templates/base.html:6
-msgid "Sample Page"
-msgstr "サンプルページ"
-
 #: templates/header.html:5
 msgid "label.go.to.main"
 msgstr "メインページへ"
 
-#: templates/index.html:12
+#: templates/index.html:11
 msgid "description.all"
 msgstr ""
 "警告：一部のリンクは重大なメモリリークやCPU使用率の上昇を引き起こします。これ"
 "によりコンピュータの動作が不安定になる可能性があります。結果はPythonバージョ"
 "ン、OS、ハードウェア（メモリやCPU）などによって変わることがあります。"
 
-#: templates/index.html:21
+#: templates/index.html:20
 msgid "section.troubles"
 msgstr "障害"
 
-#: templates/index.html:23
+#: templates/index.html:22
 msgid "description.troubles"
 msgstr "メモリリーク、無限ループ、デッドロックなど"
 
-#: templates/index.html:26
+#: templates/index.html:25
 msgid "function.name.infinite.loop"
 msgstr "無限ループ"
 
-#: templates/index.html:27
+#: templates/index.html:26
 msgid "function.description.infinite.loop"
 msgstr "このリンクをクリックすると、無限ループが発生します。"
 
-#: templates/index.html:30
+#: templates/index.html:29
 msgid "function.name.redirect.loop"
 msgstr "リダイレクトループ"
 
-#: templates/index.html:31
+#: templates/index.html:30
 msgid "function.description.redirect.loop"
 msgstr "このリンクをクリックすると、リダイレクトループが発生します。"
 
-#: templates/index.html:38
+#: templates/index.html:33
+msgid "function.name.round.off.error"
+msgstr "丸め誤差"
+
+#: templates/index.html:34
+msgid "function.description.round.off.error"
+msgstr "丸め誤差を発生させることができます。"
+
+#: templates/index.html:41
 msgid "section.vulnerabilities"
 msgstr "脆弱性"
 
-#: templates/index.html:40
+#: templates/index.html:43
 msgid "description.vulnerabilities"
 msgstr "XSS、SQLインジェクション、LDAPインジェクションなど"
 
-#: templates/index.html:43
+#: templates/index.html:46
 msgid "function.name.xss"
 msgstr "XSS (クロスサイトスクリプティング)"
 
-#: templates/index.html:44
+#: templates/index.html:47
 msgid "function.description.xss"
 msgstr "このページにはXSSの脆弱性があります。"
 
-#: templates/index.html:46
+#: templates/index.html:50
 msgid "function.name.sql.injection"
 msgstr "SQLインジェクション"
 
-#: templates/index.html:47
+#: templates/index.html:51
 msgid "function.description.sql.injection"
 msgstr "このページにはSQLインジェクションの脆弱性があります。"
 
-#: templates/sqlijc.html:8
+#: templates/roundofferror.html:7
+msgid "msg.enter.positive.number"
+msgstr "正の整数を入力して下さい。"
+
+#: templates/roundofferror.html:10
+msgid "label.calculate"
+msgstr "計算する"
+
+#: templates/sqlijc.html:7
 msgid "msg.enter.name.and.passwd"
 msgstr "名前とパスワードを入力すると、暗証番号が表示されます。"
 
-#: templates/sqlijc.html:9 templates/sqlijc.html:18
+#: templates/sqlijc.html:8 templates/sqlijc.html:16
 msgid "label.name"
 msgstr "名前"
 
-#: templates/sqlijc.html:11
+#: templates/sqlijc.html:10
 msgid "label.password"
 msgstr "パスワード"
 
-#: templates/sqlijc.html:14 templates/xss.html:11
+#: templates/sqlijc.html:12 templates/xss.html:10
 msgid "label.submit"
 msgstr "送信"
 
-#: templates/sqlijc.html:19
+#: templates/sqlijc.html:17
 msgid "label.secret"
 msgstr "暗証番号"
 
-#: templates/xss.html:8
+#: templates/xss.html:7
 msgid "description.reverse.string"
 msgstr "文字列を入力すると、文字列が逆転して表示されます。"
 
-#: templates/xss.html:9
+#: templates/xss.html:8
 msgid "label.string"
 msgstr "文字列"
 
-#: templates/xss.html:17
-msgid "msg.note.xss"
-msgstr ""
-"名前に<code>>tpircs/<;)eikooc.tnemucod(trela>tpIrcs<</code>を入力すると、セッ"
-"ションIDが表示されます。"
+#~ msgid "Sample Page"
+#~ msgstr "サンプルページ"

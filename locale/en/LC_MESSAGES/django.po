@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-03 15:18+0900\n"
+"POT-Creation-Date: 2018-04-03 17:44+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,118 +18,141 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: easybuggy/views.py:23 easybuggy/views.py:30
+#: easybuggy/views.py:22
+msgid "title.roundofferror.page"
+msgstr "Easy Subtraction"
+
+#: easybuggy/views.py:23
+msgid "msg.note.roundofferror"
+msgstr "Round off error occurs if you enter 1."
+
+#: easybuggy/views.py:34
 msgid "title.xss.page"
 msgstr "Reverse String"
 
-#: easybuggy/views.py:24 easybuggy/views.py:50
+#: easybuggy/views.py:35
 msgid "msg.enter.string"
 msgstr "Please enter a string."
 
-#: easybuggy/views.py:40 easybuggy/views.py:46
+#: easybuggy/views.py:36 templates/xss.html:16
+msgid "msg.note.xss"
+msgstr ""
+"Session ID is shown if you enter name to <code>>tpircs/<;)eikooc."
+"tnemucod(trela>tpIrcs<</code>"
+
+#: easybuggy/views.py:48
 msgid "title.sqlijc.page"
 msgstr "Search Your Secret Number"
 
-#: easybuggy/views.py:51
+#: easybuggy/views.py:49
 msgid "msg.note.sqlijc"
 msgstr ""
 "You can see a secret number if you enter <code>Mark</code> and "
 "<code>password</code>. You can see other users information if you enter "
 "password to <code>' OR '1'='1</code>"
 
-#: templates/base.html:6
-msgid "Sample Page"
-msgstr "Sample Page"
-
 #: templates/header.html:5
 msgid "label.go.to.main"
 msgstr "Go to main page"
 
-#: templates/index.html:12
+#: templates/index.html:11
 msgid "description.all"
 msgstr ""
 "Warning: Several links cause severe memory leaks or increase a CPU usage "
 "rate. They can make your computer unstable. The result may change depending "
 "on Python version, OS, hardware (memory, CPU) or etc."
 
-#: templates/index.html:21
+#: templates/index.html:20
 msgid "section.troubles"
 msgstr "Troubles"
 
-#: templates/index.html:23
+#: templates/index.html:22
 msgid "description.troubles"
 msgstr "Memory leak, infinite loop, deadlock, and so on:"
 
-#: templates/index.html:26
+#: templates/index.html:25
 msgid "function.name.infinite.loop"
 msgstr "Infinite Loop"
 
-#: templates/index.html:27
+#: templates/index.html:26
 msgid "function.description.infinite.loop"
 msgstr "Infinite loop occurs if you click this link."
 
-#: templates/index.html:30
+#: templates/index.html:29
 msgid "function.name.redirect.loop"
 msgstr "Redirect Loop"
 
-#: templates/index.html:31
+#: templates/index.html:30
 msgid "function.description.redirect.loop"
 msgstr "Redirect loop occurs if you click this link."
 
-#: templates/index.html:38
+#: templates/index.html:33
+msgid "function.name.round.off.error"
+msgstr "Round Off Error"
+
+#: templates/index.html:34
+msgid "function.description.round.off.error"
+msgstr "Round off error can occur."
+
+#: templates/index.html:41
 msgid "section.vulnerabilities"
 msgstr "Vulnerabilities"
 
-#: templates/index.html:40
+#: templates/index.html:43
 msgid "description.vulnerabilities"
 msgstr "XSS, SQL Injection, LDAP injection, and so on："
 
-#: templates/index.html:43
+#: templates/index.html:46
 msgid "function.name.xss"
 msgstr "XSS (Cross Site Scripting)"
 
-#: templates/index.html:44
+#: templates/index.html:47
 msgid "function.description.xss"
 msgstr "There is a cross site scripting vulnerability in this page."
 
-#: templates/index.html:46
+#: templates/index.html:50
 msgid "function.name.sql.injection"
 msgstr "SQL Injection"
 
-#: templates/index.html:47
+#: templates/index.html:51
 msgid "function.description.sql.injection"
 msgstr "There is an SQL injection vulnerability in this page."
 
-#: templates/sqlijc.html:8
+#: templates/roundofferror.html:7
+msgid "msg.enter.positive.number"
+msgstr "Please enter a positive number."
+
+#: templates/roundofferror.html:10
+msgid "label.calculate"
+msgstr "Calculate"
+
+#: templates/sqlijc.html:7
 msgid "msg.enter.name.and.passwd"
 msgstr "If you enter your name and password, then your secret number is shown."
 
-#: templates/sqlijc.html:9 templates/sqlijc.html:18
+#: templates/sqlijc.html:8 templates/sqlijc.html:16
 msgid "label.name"
 msgstr "Name"
 
-#: templates/sqlijc.html:11
+#: templates/sqlijc.html:10
 msgid "label.password"
 msgstr "Password"
 
-#: templates/sqlijc.html:14 templates/xss.html:11
+#: templates/sqlijc.html:12 templates/xss.html:10
 msgid "label.submit"
 msgstr "Submit"
 
-#: templates/sqlijc.html:19
+#: templates/sqlijc.html:17
 msgid "label.secret"
 msgstr "Secret"
 
-#: templates/xss.html:8
+#: templates/xss.html:7
 msgid "description.reverse.string"
 msgstr "If you enter a string, then the reversed string is shown."
 
-#: templates/xss.html:9
+#: templates/xss.html:8
 msgid "label.string"
 msgstr "String"
 
-#: templates/xss.html:17
-msgid "msg.note.xss"
-msgstr ""
-"Session ID is shown if you enter name to <code>>tpircs/<;)eikooc."
-"tnemucod(trela>tpIrcs<</code>"
+#~ msgid "Sample Page"
+#~ msgstr "Sample Page"

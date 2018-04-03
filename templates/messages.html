@@ -1,17 +1,17 @@
-        {% if msg %}
-        <div>
-            <th>{{ msg }}</th><br />
-        </div>
-        {% endif %}
-        {% if errmsg %}
-        <div class="alert alert-danger" role="alert">
-            <span class="glyphicon glyphicon-warning-sign"></span>
-            <th>{{ errmsg }}</th><br />
-        </div>
-        {% endif %}
-        {% if note %}
-        <div class="alert alert-info" role="alert">
-            <span class="glyphicon glyphicon-info-sign"></span>
-            <th>{% autoescape off %}{{ note }}{% endautoescape %}</th><br />
-        </div>
-        {% endif %}
+{% if msg %}
+<div>
+    <th>{{ msg }}</th><br/>
+</div>
+{% endif %}
+{% if errmsg %}
+<div class="alert alert-danger" role="alert">
+    <span class="glyphicon glyphicon-warning-sign"></span>
+    <th>{{ errmsg }}</th><br/>
+</div>
+{% endif %}
+{% if note %}
+<div class="alert alert-info" role="alert">
+    <span class="glyphicon glyphicon-info-sign"></span>
+    <th>{% autoescape off %}{{ note }}{% endautoescape %}</th><br/>
+</div>
+{% endif %}
