@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-03 17:44+0900\n"
+"POT-Creation-Date: 2018-04-03 21:03+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,33 +18,41 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: easybuggy/views.py:22
+#: easybuggy/views.py:23
 msgid "title.roundofferror.page"
 msgstr "簡単な引き算"
 
-#: easybuggy/views.py:23
+#: easybuggy/views.py:24
 msgid "msg.note.roundofferror"
 msgstr "1を入力すると、丸め誤差が発生します。"
 
-#: easybuggy/views.py:34
+#: easybuggy/views.py:36
+msgid "title.truncationerror.page"
+msgstr "小数の割り算"
+
+#: easybuggy/views.py:37
+msgid "msg.note.truncationerror"
+msgstr "3、7、9を入力すると、打ち切り誤差が発生します。 "
+
+#: easybuggy/views.py:49
 msgid "title.xss.page"
 msgstr "文字列の逆転"
 
-#: easybuggy/views.py:35
+#: easybuggy/views.py:50
 msgid "msg.enter.string"
 msgstr "文字列を入力して下さい。"
 
-#: easybuggy/views.py:36 templates/xss.html:16
+#: easybuggy/views.py:51 templates/xss.html:16
 msgid "msg.note.xss"
 msgstr ""
 "名前に<code>>tpircs/<;)eikooc.tnemucod(trela>tpIrcs<</code>を入力すると、セッ"
 "ションIDが表示されます。"
 
-#: easybuggy/views.py:48
+#: easybuggy/views.py:63
 msgid "title.sqlijc.page"
 msgstr "暗証番号検索"
 
-#: easybuggy/views.py:49
+#: easybuggy/views.py:64
 msgid "msg.note.sqlijc"
 msgstr ""
 "<code>Mark</code>と<code>password</code>を入力すると、暗証番号が表示されま"
@@ -94,35 +102,43 @@ msgstr "丸め誤差"
 msgid "function.description.round.off.error"
 msgstr "丸め誤差を発生させることができます。"
 
-#: templates/index.html:41
+#: templates/index.html:37
+msgid "function.name.truncation.error"
+msgstr "打ち切り誤差"
+
+#: templates/index.html:38
+msgid "function.description.truncation.error"
+msgstr "打ち切り誤差を発生させることができます。"
+
+#: templates/index.html:45
 msgid "section.vulnerabilities"
 msgstr "脆弱性"
 
-#: templates/index.html:43
+#: templates/index.html:47
 msgid "description.vulnerabilities"
 msgstr "XSS、SQLインジェクション、LDAPインジェクションなど"
 
-#: templates/index.html:46
+#: templates/index.html:50
 msgid "function.name.xss"
 msgstr "XSS (クロスサイトスクリプティング)"
 
-#: templates/index.html:47
+#: templates/index.html:51
 msgid "function.description.xss"
 msgstr "このページにはXSSの脆弱性があります。"
 
-#: templates/index.html:50
+#: templates/index.html:54
 msgid "function.name.sql.injection"
 msgstr "SQLインジェクション"
 
-#: templates/index.html:51
+#: templates/index.html:55
 msgid "function.description.sql.injection"
 msgstr "このページにはSQLインジェクションの脆弱性があります。"
 
-#: templates/roundofferror.html:7
+#: templates/roundofferror.html:7 templates/truncationerror.html:7
 msgid "msg.enter.positive.number"
 msgstr "正の整数を入力して下さい。"
 
-#: templates/roundofferror.html:10
+#: templates/roundofferror.html:10 templates/truncationerror.html:11
 msgid "label.calculate"
 msgstr "計算する"
 
@@ -146,6 +162,10 @@ msgstr "送信"
 msgid "label.secret"
 msgstr "暗証番号"
 
+#: templates/truncationerror.html:8
+msgid "label.obelus"
+msgstr "÷"
+
 #: templates/xss.html:7
 msgid "description.reverse.string"
 msgstr "文字列を入力すると、文字列が逆転して表示されます。"
@@ -153,6 +173,3 @@ msgstr "文字列を入力すると、文字列が逆転して表示されます
 #: templates/xss.html:8
 msgid "label.string"
 msgstr "文字列"
-
-#~ msgid "Sample Page"
-#~ msgstr "サンプルページ"

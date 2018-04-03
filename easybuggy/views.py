@@ -31,6 +31,19 @@ def roe(request):
     return render(request, 'roundofferror.html', d)
 
 
+def te(request):
+    d = {
+        'title': _('title.truncationerror.page'),
+        'note': _('msg.note.truncationerror'),
+    }
+    if request.method == 'POST':
+        number = request.POST["number"]
+        d['number'] = number
+        if number is not None and number is not "0" and number.isdigit():
+            d['result'] = 10.0 / float(number)
+    return render(request, 'truncationerror.html', d)
+
+
 def xss(request):
     d = {
         'title': _('title.xss.page'),

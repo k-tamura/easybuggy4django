@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-03 17:44+0900\n"
+"POT-Creation-Date: 2018-04-03 21:03+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,33 +18,41 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: easybuggy/views.py:22
+#: easybuggy/views.py:23
 msgid "title.roundofferror.page"
 msgstr "Easy Subtraction"
 
-#: easybuggy/views.py:23
+#: easybuggy/views.py:24
 msgid "msg.note.roundofferror"
 msgstr "Round off error occurs if you enter 1."
 
-#: easybuggy/views.py:34
+#: easybuggy/views.py:36
+msgid "title.truncationerror.page"
+msgstr "Decimal Division"
+
+#: easybuggy/views.py:37
+msgid "msg.note.truncationerror"
+msgstr "Truncation error occurs if you enter 3 or 7 or 9."
+
+#: easybuggy/views.py:49
 msgid "title.xss.page"
 msgstr "Reverse String"
 
-#: easybuggy/views.py:35
+#: easybuggy/views.py:50
 msgid "msg.enter.string"
 msgstr "Please enter a string."
 
-#: easybuggy/views.py:36 templates/xss.html:16
+#: easybuggy/views.py:51 templates/xss.html:16
 msgid "msg.note.xss"
 msgstr ""
 "Session ID is shown if you enter name to <code>>tpircs/<;)eikooc."
 "tnemucod(trela>tpIrcs<</code>"
 
-#: easybuggy/views.py:48
+#: easybuggy/views.py:63
 msgid "title.sqlijc.page"
 msgstr "Search Your Secret Number"
 
-#: easybuggy/views.py:49
+#: easybuggy/views.py:64
 msgid "msg.note.sqlijc"
 msgstr ""
 "You can see a secret number if you enter <code>Mark</code> and "
@@ -94,35 +102,43 @@ msgstr "Round Off Error"
 msgid "function.description.round.off.error"
 msgstr "Round off error can occur."
 
-#: templates/index.html:41
+#: templates/index.html:37
+msgid "function.name.truncation.error"
+msgstr "Truncation Error"
+
+#: templates/index.html:38
+msgid "function.description.truncation.error"
+msgstr "Truncation error can occur."
+
+#: templates/index.html:45
 msgid "section.vulnerabilities"
 msgstr "Vulnerabilities"
 
-#: templates/index.html:43
+#: templates/index.html:47
 msgid "description.vulnerabilities"
 msgstr "XSS, SQL Injection, LDAP injection, and so on："
 
-#: templates/index.html:46
+#: templates/index.html:50
 msgid "function.name.xss"
 msgstr "XSS (Cross Site Scripting)"
 
-#: templates/index.html:47
+#: templates/index.html:51
 msgid "function.description.xss"
 msgstr "There is a cross site scripting vulnerability in this page."
 
-#: templates/index.html:50
+#: templates/index.html:54
 msgid "function.name.sql.injection"
 msgstr "SQL Injection"
 
-#: templates/index.html:51
+#: templates/index.html:55
 msgid "function.description.sql.injection"
 msgstr "There is an SQL injection vulnerability in this page."
 
-#: templates/roundofferror.html:7
+#: templates/roundofferror.html:7 templates/truncationerror.html:7
 msgid "msg.enter.positive.number"
 msgstr "Please enter a positive number."
 
-#: templates/roundofferror.html:10
+#: templates/roundofferror.html:10 templates/truncationerror.html:11
 msgid "label.calculate"
 msgstr "Calculate"
 
@@ -146,6 +162,10 @@ msgstr "Submit"
 msgid "label.secret"
 msgstr "Secret"
 
+#: templates/truncationerror.html:8
+msgid "label.obelus"
+msgstr "/"
+
 #: templates/xss.html:7
 msgid "description.reverse.string"
 msgstr "If you enter a string, then the reversed string is shown."
@@ -153,6 +173,3 @@ msgstr "If you enter a string, then the reversed string is shown."
 #: templates/xss.html:8
 msgid "label.string"
 msgstr "String"
-
-#~ msgid "Sample Page"
-#~ msgstr "Sample Page"
