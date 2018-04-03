@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
+from django.db import transaction
+from time import sleep
+
 from .models import User
 
 
 def index(request):
-    d = { 'title': 'EasyBuggy Django' }
+    d = {'title': 'EasyBuggy Django'}
     return render(request, 'index.html', d)
 
 
@@ -13,7 +16,24 @@ def deadlock2(request):
         'title': _('title.deadlock2.page'),
         'note': _('msg.note.deadlock2'),
     }
-    d['users'] = User.objects.raw("SELECT * FROM easybuggy_user WHERE ispublic = 'true' ORDER BY id")
+    order = getOrder(request)
+    if request.method == 'POST':
+        with transaction.atomic():
+            number = 0
+            while True:
+                number += 1
+                uid = request.POST.get("uid_" + str(number))
+                if uid is None:
+                    break
+                user = User.objects.get(id=uid)
+                user.name = request.POST.get(uid + "_name")
+                user.phone = request.POST.get(uid + "_phone")
+                user.mail = request.POST.get(uid + "_mail")
+                user.save()
+                sleep(1)
+
+    d['users'] = User.objects.raw("SELECT * FROM easybuggy_user WHERE ispublic = 'true' ORDER BY id " + order)
+    d['order'] = order
     return render(request, 'deadlock2.html', d)
 
 
@@ -79,3 +99,13 @@ def sqlijc(request):
                                       "' AND password='" + password + "' ORDER BY id")
 
     return render(request, 'sqlijc.html', d)
+
+
+# -------- private method
+def getOrder(request):
+    order = request.GET.get("order")
+    if order == 'asc':
+        order = 'desc'
+    else:
+        order = 'asc'
+    return order
