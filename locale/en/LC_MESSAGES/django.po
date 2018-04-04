@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-03 22:45+0900\n"
+"POT-Creation-Date: 2018-04-05 04:05+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,54 +18,63 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: easybuggy/views.py:13
+#: easybuggy/views.py:21
 msgid "title.deadlock2.page"
 msgstr "Batch Update of Users"
 
-#: easybuggy/views.py:14
+#: easybuggy/views.py:22
 msgid "msg.note.deadlock2"
 msgstr ""
 "If you open two windows (or tabs) and sort in the ascending order of user ID "
 "and click the 'update' button on one window immediately after you sort in "
 "the descending order and click the 'update' button on the other, then "
-"deadlock occurs in database. However, deadlock does not occur "
-"when using default DB (SQLite) that does not support row locking"
+"deadlock occurs in database. However, deadlock does not occur when using "
+"default DB (SQLite) that does not support row locking"
 
-#: easybuggy/views.py:32
+#: easybuggy/views.py:67
+msgid "title.memoryleak.page"
+msgstr "Memory Usage"
+
+#: easybuggy/views.py:68
+msgid "msg.note.memoryleak"
+msgstr "Memory leak occurs every time you load this page."
+# "If keeping on loading this page, OutOfMemoryError is finally thrown."
+
+#: easybuggy/views.py:74
 msgid "title.roundofferror.page"
 msgstr "Easy Subtraction"
 
-#: easybuggy/views.py:33
+#: easybuggy/views.py:75
 msgid "msg.note.roundofferror"
 msgstr "Round off error occurs if you enter 1."
 
-#: easybuggy/views.py:45
+#: easybuggy/views.py:87
 msgid "title.truncationerror.page"
 msgstr "Decimal Division"
 
-#: easybuggy/views.py:46
+#: easybuggy/views.py:88
 msgid "msg.note.truncationerror"
 msgstr "Truncation error occurs if you enter 3 or 7 or 9."
 
-#: easybuggy/views.py:58
+#: easybuggy/views.py:100
 msgid "title.xss.page"
 msgstr "Reverse String"
 
-#: easybuggy/views.py:59
+#: easybuggy/views.py:101
 msgid "msg.enter.string"
 msgstr "Please enter a string."
 
-#: easybuggy/views.py:60 templates/xss.html:16
+#: easybuggy/views.py:102 templates/xss.html:16
 msgid "msg.note.xss"
 msgstr ""
 "Session ID is shown if you enter name to <code>>tpircs/<;)eikooc."
 "tnemucod(trela>tpIrcs<</code>"
 
-#: easybuggy/views.py:72
+#: easybuggy/views.py:114
 msgid "title.sqlijc.page"
 msgstr "Search Your Secret Number"
 
-#: easybuggy/views.py:73
+#: easybuggy/views.py:115
 msgid "msg.note.sqlijc"
 msgstr ""
 "You can see a secret number if you enter <code>Mark</code> and "

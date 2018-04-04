@@ -1,9 +1,14 @@
+from time import sleep
+import time
+
+from django.db import transaction
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
-from django.db import transaction
-from time import sleep
 
 from .models import User
+
+
+a = []
 
 
 def index(request):
@@ -43,9 +48,26 @@ def infiniteloop(request):
         i += 1
 
 
+
 def redirectloop(request):
     return redirect("/redirectloop")
 
+
+def infiniteloop(request):
+    i = 1
+    while 0 < i:
+        i += 1
+
+
+def memoryleak(request):
+    global a
+    a = leakMemory(a)
+    sleep(1)
+    d = {
+        'title': _('title.memoryleak.page'),
+        'note': _('msg.note.memoryleak'),
+    }
+    return render(request, 'memoryleak.html', d)
 
 def roe(request):
     d = {
@@ -109,3 +131,9 @@ def getOrder(request):
     else:
         order = 'asc'
     return order
+
+
+def leakMemory(a=[]):
+    for i in range(100000):
+        a.append(time.time())
+    return a
