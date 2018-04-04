@@ -11,8 +11,6 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-# import pymysql
-# pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -87,14 +85,15 @@ DATABASES = {
 }
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
+#         'ENGINE': 'mysql.connector.django',
 #         'NAME': 'easybuggy',
-#         'USER': 'easybuggy',
+#         'USER': 'root',
 #         'PASSWORD': 'password',
-#         'HOST': '172.105.126.222',
+#         'HOST': '192.168.1.102',
 #         'PORT': '3306',
 #     }
 # }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators

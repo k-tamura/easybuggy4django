@@ -28,7 +28,8 @@ msgstr ""
 "If you open two windows (or tabs) and sort in the ascending order of user ID "
 "and click the 'update' button on one window immediately after you sort in "
 "the descending order and click the 'update' button on the other, then "
-"deadlock occurs in database."
+"deadlock occurs in database. However, deadlock does not occur "
+"when using default DB (SQLite) that does not support row locking"
 
 #: easybuggy/views.py:32
 msgid "title.roundofferror.page"
