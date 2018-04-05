@@ -2,6 +2,7 @@ import time
 import os
 import psutil
 import sys
+import numpy as np
 
 from time import sleep
 from django.db import transaction
@@ -108,11 +109,10 @@ def iof(request):
             multipleNumber = 1
             times = int(strTimes)
             if times >= 0:
-                for i in range(times):
-                    multipleNumber = multipleNumber * 2
-                thickness = float(multipleNumber) / 10 # mm
-                thicknessM = float(thickness) / 1000 # m
-                thicknessKm = float(thicknessM) / 1000 # km
+                # TODO Change a better way
+                thickness = int(np.array([2 ** times,], dtype=int)) / 10 # mm
+                thicknessM = int(thickness) / 1000 # m
+                thicknessKm = int(thicknessM) / 1000 # km
 
                 d['description'] = times + 1
 
