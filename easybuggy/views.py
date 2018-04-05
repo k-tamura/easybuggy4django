@@ -96,6 +96,45 @@ def memoryleak(request):
         pass
     return render(request, 'memoryleak.html', d)
 
+def iof(request):
+    d = {
+        'title': _('title.intoverflow.page'),
+        'note': _('msg.note.intoverflow'),
+    }
+    if request.method == 'POST':
+        strTimes = request.POST["times"]
+
+        if strTimes is not None:
+            multipleNumber = 1
+            times = int(strTimes)
+            if times >= 0:
+                for i in range(times):
+                    multipleNumber = multipleNumber * 2
+                thickness = float(multipleNumber) / 10 # mm
+                thicknessM = float(thickness) / 1000 # m
+                thicknessKm = float(thicknessM) / 1000 # km
+
+                d['description'] = times + 1
+
+                if times >= 0:
+                    d['times'] = strTimes
+                    description = thickness + " mm"
+                    if thicknessM is not None and thicknessKm is not None:
+                        if thicknessM >= 1 and thicknessKm < 1:
+                            description = " = " + thicknessM + " m"
+                        else:
+                            description = ""
+                        if thicknessKm >= 1:
+                            description = " = " + thicknessKm + " km"
+                        else:
+                            description = ""
+                    if times == 42:
+                        description = " : " + _('msg.answer.is.correct')
+                    d['description'] = description
+
+    return render(request, 'intoverflow.html', d)
+
+
 def lotd(request):
     d = {
         'title': _('title.lossoftrailingdigits.page'),

@@ -37,6 +37,10 @@
         {% trans 'function.name.memory.leak' %}</a>:
         <span>{% trans 'function.description.memory.leak' %}</span>
     </p></li>
+    <li><p><a href="{% url 'easybuggy:iof' %}" shape="rect">
+        {% trans 'function.name.int.overflow' %}</a>:
+        <span>{% trans 'function.description.int.overflow' %}</span>
+    </p></li>
     <li><p><a href="{% url 'easybuggy:roe' %}" shape="rect">
         {% trans 'function.name.round.off.error' %}</a>:
         <span>{% trans 'function.description.round.off.error' %}</span>

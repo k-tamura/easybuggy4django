@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-05 16:02+0900\n"
+"POT-Creation-Date: 2018-04-05 16:44+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,49 +40,62 @@ msgid "msg.note.memoryleak"
 msgstr "Memory leak occurs every time you load this page."
 
 #: easybuggy/views.py:101
+msgid "title.intoverflow.page"
+msgstr "The Distance from Earth to the Moon"
+
+#: easybuggy/views.py:102
+msgid "msg.note.intoverflow"
+msgstr ""
+"Integer overflow occurs if you enter a number greater than or equal to 63."
+
+#: easybuggy/views.py:132
+msgid "msg.answer.is.correct"
+msgstr ""
+
+#: easybuggy/views.py:140
 msgid "title.lossoftrailingdigits.page"
 msgstr "Decimal Addition"
 
-#: easybuggy/views.py:102
+#: easybuggy/views.py:141
 msgid "msg.note.lossoftrailingdigits"
 msgstr "Loss of trailing digits occurs if you enter 0.0000000000000001."
 
 # "If keeping on loading this page, OutOfMemoryError is finally thrown."
-#: easybuggy/views.py:114
+#: easybuggy/views.py:153
 msgid "title.roundofferror.page"
 msgstr "Easy Subtraction"
 
-#: easybuggy/views.py:115
+#: easybuggy/views.py:154
 msgid "msg.note.roundofferror"
 msgstr "Round off error occurs if you enter 1."
 
-#: easybuggy/views.py:127
+#: easybuggy/views.py:166
 msgid "title.truncationerror.page"
 msgstr "Decimal Division"
 
-#: easybuggy/views.py:128
+#: easybuggy/views.py:167
 msgid "msg.note.truncationerror"
 msgstr "Truncation error occurs if you enter 3 or 7 or 9."
 
-#: easybuggy/views.py:140
+#: easybuggy/views.py:179
 msgid "title.xss.page"
 msgstr "Reverse String"
 
-#: easybuggy/views.py:141
+#: easybuggy/views.py:180
 msgid "msg.enter.string"
 msgstr "Please enter a string."
 
-#: easybuggy/views.py:142 templates/xss.html:16
+#: easybuggy/views.py:181 templates/xss.html:16
 msgid "msg.note.xss"
 msgstr ""
 "Session ID is shown if you enter name to <code>>tpircs/<;)eikooc."
 "tnemucod(trela>tpIrcs<</code>"
 
-#: easybuggy/views.py:154
+#: easybuggy/views.py:193
 msgid "title.sqlijc.page"
 msgstr "Search Your Secret Number"
 
-#: easybuggy/views.py:155
+#: easybuggy/views.py:194
 msgid "msg.note.sqlijc"
 msgstr ""
 "You can see a secret number if you enter <code>Mark</code> and "
@@ -165,65 +178,73 @@ msgid "function.description.memory.leak"
 msgstr "Memory leak occurs every time you load this page."
 
 #: templates/index.html:41
+msgid "function.name.int.overflow"
+msgstr "Integer overflow"
+
+#: templates/index.html:42
+msgid "function.description.int.overflow"
+msgstr "Integer overflow can occur."
+
+#: templates/index.html:45
 msgid "function.name.round.off.error"
 msgstr "Round Off Error"
 
-#: templates/index.html:42
+#: templates/index.html:46
 msgid "function.description.round.off.error"
 msgstr "Round off error can occur."
 
-#: templates/index.html:45
+#: templates/index.html:49
 msgid "function.name.truncation.error"
 msgstr "Truncation Error"
 
-#: templates/index.html:46
+#: templates/index.html:50
 msgid "function.description.truncation.error"
 msgstr "Truncation error can occur."
 
-#: templates/index.html:49
+#: templates/index.html:53
 msgid "function.name.loss.of.trailing.digits"
 msgstr "Loss of Trailing Digits"
 
-#: templates/index.html:50
+#: templates/index.html:54
 msgid "function.description.loss.of.trailing.digits"
 msgstr "Loss of trailing digits can occur."
 
-#: templates/index.html:57
+#: templates/index.html:61
 msgid "section.vulnerabilities"
 msgstr "Vulnerabilities"
 
-#: templates/index.html:59
+#: templates/index.html:63
 msgid "description.vulnerabilities"
 msgstr "XSS, SQL Injection, LDAP injection, and so on："
 
-#: templates/index.html:62
+#: templates/index.html:66
 msgid "function.name.xss"
 msgstr "XSS (Cross Site Scripting)"
 
-#: templates/index.html:63
+#: templates/index.html:67
 msgid "function.description.xss"
 msgstr "There is a cross site scripting vulnerability in this page."
 
-#: templates/index.html:66
+#: templates/index.html:70
 msgid "function.name.sql.injection"
 msgstr "SQL Injection"
 
-#: templates/index.html:67
+#: templates/index.html:71
 msgid "function.description.sql.injection"
 msgstr "There is an SQL injection vulnerability in this page."
+
+#: templates/intoverflow.html:7
+msgid "msg.question.reach.the.moon"
+msgstr "How many times would you have to fold a piece of paper (thickness 0.1mm) for it to be thick enough to reach the moon (384,400 km)?"
+
+#: templates/intoverflow.html:10 templates/lossoftrailingdigits.html:10
+#: templates/roundofferror.html:10 templates/truncationerror.html:11
+msgid "label.calculate"
+msgstr "Calculate"
 
 #: templates/lossoftrailingdigits.html:7
 msgid "msg.enter.decimal.value"
 msgstr "Please enter the absolute value of a decimal number less than 1."
-
-#: templates/lossoftrailingdigits.html:8 templates/truncationerror.html:8
-msgid "label.obelus"
-msgstr "/"
-
-#: templates/lossoftrailingdigits.html:11 templates/roundofferror.html:10
-#: templates/truncationerror.html:11
-msgid "label.calculate"
-msgstr "Calculate"
 
 #: templates/memoryleak.html:5
 msgid "label.process.memory.info"
@@ -232,6 +253,10 @@ msgstr "Memory information about the process"
 #: templates/roundofferror.html:7 templates/truncationerror.html:7
 msgid "msg.enter.positive.number"
 msgstr "Please enter a positive number."
+
+#: templates/roundofferror.html:9
+msgid "label.times"
+msgstr "Times"
 
 #: templates/sqlijc.html:7
 msgid "msg.enter.name.and.passwd"
@@ -248,6 +273,10 @@ msgstr "Submit"
 #: templates/sqlijc.html:17
 msgid "label.secret"
 msgstr "Secret"
+
+#: templates/truncationerror.html:8
+msgid "label.obelus"
+msgstr "/"
 
 #: templates/xss.html:7
 msgid "description.reverse.string"

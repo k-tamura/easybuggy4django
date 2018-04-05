@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^infiniteloop/$', views.infiniteloop, name='infiniteloop'),
     url(r'^redirectloop/$', views.redirectloop, name='redirectloop'),
     url(r'^memoryleak/$', views.memoryleak, name='memoryleak'),
+    url(r'^iof/$', views.iof, name='iof'),
     url(r'^lotd/$', views.lotd, name='lotd'),
     url(r'^roe/$', views.roe, name='roe'),
     url(r'^te/$', views.te, name='te'),
