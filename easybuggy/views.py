@@ -1,6 +1,9 @@
-from time import sleep
 import time
+import os
+import psutil
+import sys
 
+from time import sleep
 from django.db import transaction
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
@@ -60,13 +63,37 @@ def infiniteloop(request):
 
 
 def memoryleak(request):
-    global a
-    a = leakMemory(a)
-    sleep(1)
+    leakMemory()
     d = {
         'title': _('title.memoryleak.page'),
         'note': _('msg.note.memoryleak'),
     }
+    try:
+        ps = psutil.Process(os.getpid())
+        mem = ps.memory_full_info()
+        d = {
+            'title': _('title.memoryleak.page'),
+            'note': _('msg.note.memoryleak'),
+            'pid': ps.pid,
+            'rss': convert_bytes(mem.rss),
+            'pcnt_rss': round(ps.memory_percent(memtype='rss') ,2),
+            # 'vms': mem.vms,
+            # 'shared': mem.shared,
+            # 'text': mem.text,
+            # 'lib': mem.lib,
+            # 'data': mem.data,
+            # 'dirty': mem.dirty,
+            'uss': convert_bytes(mem.uss),
+            'pcnt_uss': round(ps.memory_percent(memtype='uss') ,2),
+            'pss': convert_bytes(mem.pss),
+            'pcnt_pss': round(ps.memory_percent(memtype='pss') ,2),
+            'swap': convert_bytes(mem.swap),
+            'info': ps.as_dict(attrs=["cmdline", "username"]),
+        }
+    except psutil.AccessDenied:
+        pass
+    except psutil.NoSuchProcess:
+        pass
     return render(request, 'memoryleak.html', d)
 
 def roe(request):
@@ -133,7 +160,19 @@ def getOrder(request):
     return order
 
 
-def leakMemory(a=[]):
+def leakMemory():
+    global a
     for i in range(100000):
         a.append(time.time())
-    return a
+
+
+def convert_bytes(n):
+    symbols = ('K', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y')
+    prefix = {}
+    for i, s in enumerate(symbols):
+        prefix[s] = 1 << (i + 1) * 10
+    for s in reversed(symbols):
+        if n >= prefix[s]:
+            value = float(n) / prefix[s]
+            return '%.1f%s' % (value, s)
+    return "%sB" % n

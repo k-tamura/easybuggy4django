@@ -2,5 +2,40 @@
 {% load i18n %}
 {% block body %}
 {% include "header.html" %}
+    <label>{% trans 'label.process.memory.info' %}</label>
+    <table class="table table-striped table-bordered table-hover" style="font-size: small;">
+        <tr>
+            <th>PID</th>
+            <th>Cmdline</th>
+            <th>USS</th>
+            <th>PSS</th>
+            <th>Swap</th>
+            <th>RES</th>
+            <!--
+            <th>VIRT</th>
+            <th>SHR</th>
+            <th>CODE</th>
+            <th>DATA</th>
+            <th>lib</th>
+            <th>dirty</th>
+            -->
+        </tr>
+        <tr>
+            <td>{{ pid }}</td>
+            <td>{{ info }}</td>
+            <td>{{ uss }}<br />({{ pcnt_uss }} %)</td>
+            <td>{{ pss }}<br />({{ pcnt_pss }} %)</td>
+            <td>{{ swap }}</td>
+            <td>{{ rss }}<br />({{ pcnt_rss }} %)</td>
+            <!--
+            <td>{{ vms }}</td>
+            <td>{{ shared }}</td>
+            <td>{{ text }}</td>
+            <td>{{ data }}</td>
+            <td>{{ lib }}</td>
+            <td>{{ dirty }}</td>
+            -->
+        </tr>
+    </table>
 {% include "messages.html" %}
 {% endblock %}

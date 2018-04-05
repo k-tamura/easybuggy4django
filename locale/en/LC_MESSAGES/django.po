@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-05 04:05+0900\n"
+"POT-Creation-Date: 2018-04-05 13:32+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: easybuggy/views.py:21
+#: easybuggy/views.py:24
 msgid "title.deadlock2.page"
 msgstr "Batch Update of Users"
 
-#: easybuggy/views.py:22
+#: easybuggy/views.py:25
 msgid "msg.note.deadlock2"
 msgstr ""
 "If you open two windows (or tabs) and sort in the ascending order of user ID "
@@ -31,50 +31,50 @@ msgstr ""
 "deadlock occurs in database. However, deadlock does not occur when using "
 "default DB (SQLite) that does not support row locking"
 
-#: easybuggy/views.py:67
+#: easybuggy/views.py:68 easybuggy/views.py:75
 msgid "title.memoryleak.page"
 msgstr "Memory Usage"
 
-#: easybuggy/views.py:68
+#: easybuggy/views.py:69 easybuggy/views.py:76
 msgid "msg.note.memoryleak"
 msgstr "Memory leak occurs every time you load this page."
-# "If keeping on loading this page, OutOfMemoryError is finally thrown."
 
-#: easybuggy/views.py:74
+# "If keeping on loading this page, OutOfMemoryError is finally thrown."
+#: easybuggy/views.py:101
 msgid "title.roundofferror.page"
 msgstr "Easy Subtraction"
 
-#: easybuggy/views.py:75
+#: easybuggy/views.py:102
 msgid "msg.note.roundofferror"
 msgstr "Round off error occurs if you enter 1."
 
-#: easybuggy/views.py:87
+#: easybuggy/views.py:114
 msgid "title.truncationerror.page"
 msgstr "Decimal Division"
 
-#: easybuggy/views.py:88
+#: easybuggy/views.py:115
 msgid "msg.note.truncationerror"
 msgstr "Truncation error occurs if you enter 3 or 7 or 9."
 
-#: easybuggy/views.py:100
+#: easybuggy/views.py:127
 msgid "title.xss.page"
 msgstr "Reverse String"
 
-#: easybuggy/views.py:101
+#: easybuggy/views.py:128
 msgid "msg.enter.string"
 msgstr "Please enter a string."
 
-#: easybuggy/views.py:102 templates/xss.html:16
+#: easybuggy/views.py:129 templates/xss.html:16
 msgid "msg.note.xss"
 msgstr ""
 "Session ID is shown if you enter name to <code>>tpircs/<;)eikooc."
 "tnemucod(trela>tpIrcs<</code>"
 
-#: easybuggy/views.py:114
+#: easybuggy/views.py:141
 msgid "title.sqlijc.page"
 msgstr "Search Your Secret Number"
 
-#: easybuggy/views.py:115
+#: easybuggy/views.py:142
 msgid "msg.note.sqlijc"
 msgstr ""
 "You can see a secret number if you enter <code>Mark</code> and "
@@ -149,44 +149,56 @@ msgid "function.description.redirect.loop"
 msgstr "Redirect loop occurs if you click this link."
 
 #: templates/index.html:37
+msgid "function.name.memory.leak"
+msgstr "Memory Leak"
+
+#: templates/index.html:38
+msgid "function.description.memory.leak"
+msgstr "Memory leak occurs every time you load this page."
+
+#: templates/index.html:41
 msgid "function.name.round.off.error"
 msgstr "Round Off Error"
 
-#: templates/index.html:38
+#: templates/index.html:42
 msgid "function.description.round.off.error"
 msgstr "Round off error can occur."
 
-#: templates/index.html:41
+#: templates/index.html:45
 msgid "function.name.truncation.error"
 msgstr "Truncation Error"
 
-#: templates/index.html:42
+#: templates/index.html:46
 msgid "function.description.truncation.error"
 msgstr "Truncation error can occur."
 
-#: templates/index.html:49
+#: templates/index.html:53
 msgid "section.vulnerabilities"
 msgstr "Vulnerabilities"
 
-#: templates/index.html:51
+#: templates/index.html:55
 msgid "description.vulnerabilities"
 msgstr "XSS, SQL Injection, LDAP injection, and so on："
 
-#: templates/index.html:54
+#: templates/index.html:58
 msgid "function.name.xss"
 msgstr "XSS (Cross Site Scripting)"
 
-#: templates/index.html:55
+#: templates/index.html:59
 msgid "function.description.xss"
 msgstr "There is a cross site scripting vulnerability in this page."
 
-#: templates/index.html:58
+#: templates/index.html:62
 msgid "function.name.sql.injection"
 msgstr "SQL Injection"
 
-#: templates/index.html:59
+#: templates/index.html:63
 msgid "function.description.sql.injection"
 msgstr "There is an SQL injection vulnerability in this page."
+
+#: templates/memoryleak.html:5
+msgid "label.process.memory.info"
+msgstr "Memory information about the process"
 
 #: templates/roundofferror.html:7 templates/truncationerror.html:7
 msgid "msg.enter.positive.number"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-05 04:05+0900\n"
+"POT-Creation-Date: 2018-04-05 13:32+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: easybuggy/views.py:21
+#: easybuggy/views.py:24
 msgid "title.deadlock2.page"
 msgstr "ユーザーの一括登録"
 
-#: easybuggy/views.py:22
+#: easybuggy/views.py:25
 msgid "msg.note.deadlock2"
 msgstr ""
 "2つのウインドウまたはタブを開き、一方でユーザーIDを降順にソートして「更新」ボ"
@@ -30,50 +30,50 @@ msgstr ""
 "と、データベースでデッドロックが発生します。 ただし、行ロックをサポートしない"
 "デフォルトのDB(SQLite)では発生しません。"
 
-#: easybuggy/views.py:67
+#: easybuggy/views.py:68 easybuggy/views.py:75
 msgid "title.memoryleak.page"
 msgstr "メモリの使用量"
 
-#: easybuggy/views.py:68
+#: easybuggy/views.py:69 easybuggy/views.py:76
 msgid "msg.note.memoryleak"
 msgstr "このページを読み込むたびに、メモリリークが発生します。"
-# "画面をロードし続けると、最終的にOutOfMemoryErrorがスローされます。"
 
-#: easybuggy/views.py:74
+# "画面をロードし続けると、最終的にOutOfMemoryErrorがスローされます。"
+#: easybuggy/views.py:101
 msgid "title.roundofferror.page"
 msgstr "簡単な引き算"
 
-#: easybuggy/views.py:75
+#: easybuggy/views.py:102
 msgid "msg.note.roundofferror"
 msgstr "1を入力すると、丸め誤差が発生します。"
 
-#: easybuggy/views.py:87
+#: easybuggy/views.py:114
 msgid "title.truncationerror.page"
 msgstr "小数の割り算"
 
-#: easybuggy/views.py:88
+#: easybuggy/views.py:115
 msgid "msg.note.truncationerror"
 msgstr "3、7、9を入力すると、打ち切り誤差が発生します。 "
 
-#: easybuggy/views.py:100
+#: easybuggy/views.py:127
 msgid "title.xss.page"
 msgstr "文字列の逆転"
 
-#: easybuggy/views.py:101
+#: easybuggy/views.py:128
 msgid "msg.enter.string"
 msgstr "文字列を入力して下さい。"
 
-#: easybuggy/views.py:102 templates/xss.html:16
+#: easybuggy/views.py:129 templates/xss.html:16
 msgid "msg.note.xss"
 msgstr ""
 "名前に<code>>tpircs/<;)eikooc.tnemucod(trela>tpIrcs<</code>を入力すると、セッ"
 "ションIDが表示されます。"
 
-#: easybuggy/views.py:114
+#: easybuggy/views.py:141
 msgid "title.sqlijc.page"
 msgstr "暗証番号検索"
 
-#: easybuggy/views.py:115
+#: easybuggy/views.py:142
 msgid "msg.note.sqlijc"
 msgstr ""
 "<code>Mark</code>と<code>password</code>を入力すると、暗証番号が表示されま"
@@ -148,44 +148,56 @@ msgid "function.description.redirect.loop"
 msgstr "このリンクをクリックすると、リダイレクトループが発生します。"
 
 #: templates/index.html:37
+msgid "function.name.memory.leak"
+msgstr "メモリリーク"
+
+#: templates/index.html:38
+msgid "function.description.memory.leak"
+msgstr "このページをロードするたびに、メモリリークが発生します。"
+
+#: templates/index.html:41
 msgid "function.name.round.off.error"
 msgstr "丸め誤差"
 
-#: templates/index.html:38
+#: templates/index.html:42
 msgid "function.description.round.off.error"
 msgstr "丸め誤差を発生させることができます。"
 
-#: templates/index.html:41
+#: templates/index.html:45
 msgid "function.name.truncation.error"
 msgstr "打ち切り誤差"
 
-#: templates/index.html:42
+#: templates/index.html:46
 msgid "function.description.truncation.error"
 msgstr "打ち切り誤差を発生させることができます。"
 
-#: templates/index.html:49
+#: templates/index.html:53
 msgid "section.vulnerabilities"
 msgstr "脆弱性"
 
-#: templates/index.html:51
+#: templates/index.html:55
 msgid "description.vulnerabilities"
 msgstr "XSS、SQLインジェクション、LDAPインジェクションなど"
 
-#: templates/index.html:54
+#: templates/index.html:58
 msgid "function.name.xss"
 msgstr "XSS (クロスサイトスクリプティング)"
 
-#: templates/index.html:55
+#: templates/index.html:59
 msgid "function.description.xss"
 msgstr "このページにはXSSの脆弱性があります。"
 
-#: templates/index.html:58
+#: templates/index.html:62
 msgid "function.name.sql.injection"
 msgstr "SQLインジェクション"
 
-#: templates/index.html:59
+#: templates/index.html:63
 msgid "function.description.sql.injection"
 msgstr "このページにはSQLインジェクションの脆弱性があります。"
+
+#: templates/memoryleak.html:5
+msgid "label.process.memory.info"
+msgstr "プロセスに関するメモリ情報"
 
 #: templates/roundofferror.html:7 templates/truncationerror.html:7
 msgid "msg.enter.positive.number"
