@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-05 13:32+0900\n"
+"POT-Creation-Date: 2018-04-05 16:02+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,42 +39,50 @@ msgstr "Memory Usage"
 msgid "msg.note.memoryleak"
 msgstr "Memory leak occurs every time you load this page."
 
-# "If keeping on loading this page, OutOfMemoryError is finally thrown."
 #: easybuggy/views.py:101
+msgid "title.lossoftrailingdigits.page"
+msgstr "Decimal Addition"
+
+#: easybuggy/views.py:102
+msgid "msg.note.lossoftrailingdigits"
+msgstr "Loss of trailing digits occurs if you enter 0.0000000000000001."
+
+# "If keeping on loading this page, OutOfMemoryError is finally thrown."
+#: easybuggy/views.py:114
 msgid "title.roundofferror.page"
 msgstr "Easy Subtraction"
 
-#: easybuggy/views.py:102
+#: easybuggy/views.py:115
 msgid "msg.note.roundofferror"
 msgstr "Round off error occurs if you enter 1."
 
-#: easybuggy/views.py:114
+#: easybuggy/views.py:127
 msgid "title.truncationerror.page"
 msgstr "Decimal Division"
 
-#: easybuggy/views.py:115
+#: easybuggy/views.py:128
 msgid "msg.note.truncationerror"
 msgstr "Truncation error occurs if you enter 3 or 7 or 9."
 
-#: easybuggy/views.py:127
+#: easybuggy/views.py:140
 msgid "title.xss.page"
 msgstr "Reverse String"
 
-#: easybuggy/views.py:128
+#: easybuggy/views.py:141
 msgid "msg.enter.string"
 msgstr "Please enter a string."
 
-#: easybuggy/views.py:129 templates/xss.html:16
+#: easybuggy/views.py:142 templates/xss.html:16
 msgid "msg.note.xss"
 msgstr ""
 "Session ID is shown if you enter name to <code>>tpircs/<;)eikooc."
 "tnemucod(trela>tpIrcs<</code>"
 
-#: easybuggy/views.py:141
+#: easybuggy/views.py:154
 msgid "title.sqlijc.page"
 msgstr "Search Your Secret Number"
 
-#: easybuggy/views.py:142
+#: easybuggy/views.py:155
 msgid "msg.note.sqlijc"
 msgstr ""
 "You can see a secret number if you enter <code>Mark</code> and "
@@ -172,29 +180,50 @@ msgstr "Truncation Error"
 msgid "function.description.truncation.error"
 msgstr "Truncation error can occur."
 
-#: templates/index.html:53
+#: templates/index.html:49
+msgid "function.name.loss.of.trailing.digits"
+msgstr "Loss of Trailing Digits"
+
+#: templates/index.html:50
+msgid "function.description.loss.of.trailing.digits"
+msgstr "Loss of trailing digits can occur."
+
+#: templates/index.html:57
 msgid "section.vulnerabilities"
 msgstr "Vulnerabilities"
 
-#: templates/index.html:55
+#: templates/index.html:59
 msgid "description.vulnerabilities"
 msgstr "XSS, SQL Injection, LDAP injection, and so on："
 
-#: templates/index.html:58
+#: templates/index.html:62
 msgid "function.name.xss"
 msgstr "XSS (Cross Site Scripting)"
 
-#: templates/index.html:59
+#: templates/index.html:63
 msgid "function.description.xss"
 msgstr "There is a cross site scripting vulnerability in this page."
 
-#: templates/index.html:62
+#: templates/index.html:66
 msgid "function.name.sql.injection"
 msgstr "SQL Injection"
 
-#: templates/index.html:63
+#: templates/index.html:67
 msgid "function.description.sql.injection"
 msgstr "There is an SQL injection vulnerability in this page."
+
+#: templates/lossoftrailingdigits.html:7
+msgid "msg.enter.decimal.value"
+msgstr "Please enter the absolute value of a decimal number less than 1."
+
+#: templates/lossoftrailingdigits.html:8 templates/truncationerror.html:8
+msgid "label.obelus"
+msgstr "/"
+
+#: templates/lossoftrailingdigits.html:11 templates/roundofferror.html:10
+#: templates/truncationerror.html:11
+msgid "label.calculate"
+msgstr "Calculate"
 
 #: templates/memoryleak.html:5
 msgid "label.process.memory.info"
@@ -203,10 +232,6 @@ msgstr "Memory information about the process"
 #: templates/roundofferror.html:7 templates/truncationerror.html:7
 msgid "msg.enter.positive.number"
 msgstr "Please enter a positive number."
-
-#: templates/roundofferror.html:10 templates/truncationerror.html:11
-msgid "label.calculate"
-msgstr "Calculate"
 
 #: templates/sqlijc.html:7
 msgid "msg.enter.name.and.passwd"
@@ -223,10 +248,6 @@ msgstr "Submit"
 #: templates/sqlijc.html:17
 msgid "label.secret"
 msgstr "Secret"
-
-#: templates/truncationerror.html:8
-msgid "label.obelus"
-msgstr "/"
 
 #: templates/xss.html:7
 msgid "description.reverse.string"

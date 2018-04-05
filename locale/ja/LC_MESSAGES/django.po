@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-05 13:32+0900\n"
+"POT-Creation-Date: 2018-04-05 16:02+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,42 +38,50 @@ msgstr "メモリの使用量"
 msgid "msg.note.memoryleak"
 msgstr "このページを読み込むたびに、メモリリークが発生します。"
 
-# "画面をロードし続けると、最終的にOutOfMemoryErrorがスローされます。"
 #: easybuggy/views.py:101
+msgid "title.lossoftrailingdigits.page"
+msgstr "小数の足し算"
+
+#: easybuggy/views.py:102
+msgid "msg.note.lossoftrailingdigits"
+msgstr "0.0000000000000001を入力すると、情報欠落が発生します。"
+
+# "画面をロードし続けると、最終的にOutOfMemoryErrorがスローされます。"
+#: easybuggy/views.py:114
 msgid "title.roundofferror.page"
 msgstr "簡単な引き算"
 
-#: easybuggy/views.py:102
+#: easybuggy/views.py:115
 msgid "msg.note.roundofferror"
 msgstr "1を入力すると、丸め誤差が発生します。"
 
-#: easybuggy/views.py:114
+#: easybuggy/views.py:127
 msgid "title.truncationerror.page"
 msgstr "小数の割り算"
 
-#: easybuggy/views.py:115
+#: easybuggy/views.py:128
 msgid "msg.note.truncationerror"
 msgstr "3、7、9を入力すると、打ち切り誤差が発生します。 "
 
-#: easybuggy/views.py:127
+#: easybuggy/views.py:140
 msgid "title.xss.page"
 msgstr "文字列の逆転"
 
-#: easybuggy/views.py:128
+#: easybuggy/views.py:141
 msgid "msg.enter.string"
 msgstr "文字列を入力して下さい。"
 
-#: easybuggy/views.py:129 templates/xss.html:16
+#: easybuggy/views.py:142 templates/xss.html:16
 msgid "msg.note.xss"
 msgstr ""
 "名前に<code>>tpircs/<;)eikooc.tnemucod(trela>tpIrcs<</code>を入力すると、セッ"
 "ションIDが表示されます。"
 
-#: easybuggy/views.py:141
+#: easybuggy/views.py:154
 msgid "title.sqlijc.page"
 msgstr "暗証番号検索"
 
-#: easybuggy/views.py:142
+#: easybuggy/views.py:155
 msgid "msg.note.sqlijc"
 msgstr ""
 "<code>Mark</code>と<code>password</code>を入力すると、暗証番号が表示されま"
@@ -171,29 +179,50 @@ msgstr "打ち切り誤差"
 msgid "function.description.truncation.error"
 msgstr "打ち切り誤差を発生させることができます。"
 
-#: templates/index.html:53
+#: templates/index.html:49
+msgid "function.name.loss.of.trailing.digits"
+msgstr "情報落ち"
+
+#: templates/index.html:50
+msgid "function.description.loss.of.trailing.digits"
+msgstr "情報落ちを発生させることができます。 "
+
+#: templates/index.html:57
 msgid "section.vulnerabilities"
 msgstr "脆弱性"
 
-#: templates/index.html:55
+#: templates/index.html:59
 msgid "description.vulnerabilities"
 msgstr "XSS、SQLインジェクション、LDAPインジェクションなど"
 
-#: templates/index.html:58
+#: templates/index.html:62
 msgid "function.name.xss"
 msgstr "XSS (クロスサイトスクリプティング)"
 
-#: templates/index.html:59
+#: templates/index.html:63
 msgid "function.description.xss"
 msgstr "このページにはXSSの脆弱性があります。"
 
-#: templates/index.html:62
+#: templates/index.html:66
 msgid "function.name.sql.injection"
 msgstr "SQLインジェクション"
 
-#: templates/index.html:63
+#: templates/index.html:67
 msgid "function.description.sql.injection"
 msgstr "このページにはSQLインジェクションの脆弱性があります。"
+
+#: templates/lossoftrailingdigits.html:7
+msgid "msg.enter.decimal.value"
+msgstr "絶対値が1未満の小数を入力して下さい。"
+
+#: templates/lossoftrailingdigits.html:8 templates/truncationerror.html:8
+msgid "label.obelus"
+msgstr "÷"
+
+#: templates/lossoftrailingdigits.html:11 templates/roundofferror.html:10
+#: templates/truncationerror.html:11
+msgid "label.calculate"
+msgstr "計算する"
 
 #: templates/memoryleak.html:5
 msgid "label.process.memory.info"
@@ -202,10 +231,6 @@ msgstr "プロセスに関するメモリ情報"
 #: templates/roundofferror.html:7 templates/truncationerror.html:7
 msgid "msg.enter.positive.number"
 msgstr "正の整数を入力して下さい。"
-
-#: templates/roundofferror.html:10 templates/truncationerror.html:11
-msgid "label.calculate"
-msgstr "計算する"
 
 #: templates/sqlijc.html:7
 msgid "msg.enter.name.and.passwd"
@@ -222,10 +247,6 @@ msgstr "送信"
 #: templates/sqlijc.html:17
 msgid "label.secret"
 msgstr "暗証番号"
-
-#: templates/truncationerror.html:8
-msgid "label.obelus"
-msgstr "÷"
 
 #: templates/xss.html:7
 msgid "description.reverse.string"

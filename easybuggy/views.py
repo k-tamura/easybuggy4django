@@ -96,6 +96,19 @@ def memoryleak(request):
         pass
     return render(request, 'memoryleak.html', d)
 
+def lotd(request):
+    d = {
+        'title': _('title.lossoftrailingdigits.page'),
+        'note': _('msg.note.lossoftrailingdigits'),
+    }
+    if request.method == 'POST':
+        number = request.POST["number"]
+        d['number'] = number
+        if number is not None and -1 < float(number) and float(number) < 1:
+            d['result'] = float(number) + 1
+    return render(request, 'lossoftrailingdigits.html', d)
+
+
 def roe(request):
     d = {
         'title': _('title.roundofferror.page'),

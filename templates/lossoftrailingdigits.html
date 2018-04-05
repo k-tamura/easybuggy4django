@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block body %}
+{% include "header.html" %}
+<form action="" method="post">
+    {% csrf_token %}
+    <p>{% trans 'msg.enter.decimal.value' %}</p>
+    <input type="text" name="number" size="20" maxlength="18" value="{{number}}"/>
+    <span> + 1 = {{result}}</span><br/><br/>
+    <input type="submit" value="{% trans 'label.calculate' %}"/><br/><br/>
+    {% include "messages.html" %}
+</form>
+{% endblock %}
