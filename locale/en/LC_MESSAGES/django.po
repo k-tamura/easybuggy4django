@@ -50,7 +50,7 @@ msgstr ""
 
 #: easybuggy/views.py:132
 msgid "msg.answer.is.correct"
-msgstr ""
+msgstr "Your answer is correct!"
 
 #: easybuggy/views.py:140
 msgid "title.lossoftrailingdigits.page"

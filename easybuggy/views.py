@@ -102,9 +102,9 @@ def iof(request):
         'note': _('msg.note.intoverflow'),
     }
     if request.method == 'POST':
-        strTimes = request.POST["times"]
+        strTimes = request.POST.get("times")
 
-        if strTimes is not None:
+        if strTimes is not None and strTimes is not '':
             multipleNumber = 1
             times = int(strTimes)
             if times >= 0:
@@ -118,18 +118,14 @@ def iof(request):
 
                 if times >= 0:
                     d['times'] = strTimes
-                    description = thickness + " mm"
+                    description = str(thickness) + " mm"
                     if thicknessM is not None and thicknessKm is not None:
                         if thicknessM >= 1 and thicknessKm < 1:
-                            description = " = " + thicknessM + " m"
-                        else:
-                            description = ""
+                            description = description + " = " + str(thicknessM) + " m"
                         if thicknessKm >= 1:
-                            description = " = " + thicknessKm + " km"
-                        else:
-                            description = ""
+                            description = description + " = " + str(thicknessKm) + " km"
                     if times == 42:
-                        description = " : " + _('msg.answer.is.correct')
+                        description = description + " : " + _('msg.answer.is.correct')
                     d['description'] = description
 
     return render(request, 'intoverflow.html', d)

@@ -5,8 +5,8 @@
 <form action="" method="post">
     {% csrf_token %}
     <p>{% trans 'msg.question.reach.the.moon' %}</p>
-    <input type="text" name="number" size="1" maxlength="1" value="{{number}}"/>
-    <span>{{result}}</span><br/><br/>
+    <input type="text" name="times" size="2" maxlength="2" value="{{times}}"/>
+    <span>{% trans 'label.times' %} : {{description}}</span><br/><br/>
     <input type="submit" value="{% trans 'label.calculate' %}"/><br/><br/>
     {% include "messages.html" %}
 </form>

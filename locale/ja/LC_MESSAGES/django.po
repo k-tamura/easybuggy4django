@@ -48,7 +48,7 @@ msgstr "63以上の数を入力すると、整数オーバーフローが発生�
 
 #: easybuggy/views.py:132
 msgid "msg.answer.is.correct"
-msgstr ""
+msgstr "正解です。"
 
 #: easybuggy/views.py:140
 msgid "title.lossoftrailingdigits.page"
