@@ -1,7 +1,7 @@
 import time
 import os
 import psutil
-import sys
+import subprocess
 import numpy as np
 
 from time import sleep
@@ -57,12 +57,6 @@ def redirectloop(request):
     return redirect("/redirectloop")
 
 
-def infiniteloop(request):
-    i = 1
-    while 0 < i:
-        i += 1
-
-
 def memoryleak(request):
     leakMemory()
     d = {
@@ -96,6 +90,22 @@ def memoryleak(request):
     except psutil.NoSuchProcess:
         pass
     return render(request, 'memoryleak.html', d)
+
+
+def commandinjection(request):
+    d = {
+        'title': _('title.commandinjection.page'),
+        'note': _('msg.note.commandinjection'),
+    }
+    if request.method == 'POST':
+        address = request.POST.get("address")
+        cmd = 'echo "This is for testing." | mail -s "Test Mail" -r from@example.com ' + address
+        if os.system(cmd) == 0:
+            d['result'] = _('msg.send.mail.success')
+        else:
+            d['result'] = _('msg.send.mail.failure')
+    return render(request, 'commandinjection.html', d)
+
 
 def iof(request):
     d = {

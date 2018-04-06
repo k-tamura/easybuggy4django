@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-05 16:44+0900\n"
+"POT-Creation-Date: 2018-04-06 16:33+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: easybuggy/views.py:24
+#: easybuggy/views.py:25
 msgid "title.deadlock2.page"
 msgstr "Batch Update of Users"
 
-#: easybuggy/views.py:25
+#: easybuggy/views.py:26
 msgid "msg.note.deadlock2"
 msgstr ""
 "If you open two windows (or tabs) and sort in the ascending order of user ID "
@@ -31,76 +31,107 @@ msgstr ""
 "deadlock occurs in database. However, deadlock does not occur when using "
 "default DB (SQLite) that does not support row locking"
 
-#: easybuggy/views.py:68 easybuggy/views.py:75
+#: easybuggy/views.py:63 easybuggy/views.py:70
 msgid "title.memoryleak.page"
 msgstr "Memory Usage"
 
-#: easybuggy/views.py:69 easybuggy/views.py:76
+#: easybuggy/views.py:64 easybuggy/views.py:71
 msgid "msg.note.memoryleak"
 msgstr "Memory leak occurs every time you load this page."
 
-#: easybuggy/views.py:101
+#: easybuggy/views.py:97
+msgid "title.commandinjection.page"
+msgstr "Checking Your Mail Address"
+
+#: easybuggy/views.py:98
+msgid "msg.note.commandinjection"
+msgstr ""
+"<code>/important-dir/</code> directory will be removed on this server if you "
+"enter <code>test@gmail.com;rm -fr /important-dir/</code>."
+
+#: easybuggy/views.py:104
+msgid "msg.send.mail.success"
+msgstr "Sending an email failed due to any reason."
+
+#: easybuggy/views.py:106
+msgid "msg.send.mail.failure"
+msgstr ""
+"Please enter your email address. EasyBuggy will send you an email to confirm "
+"that you can accept it."
+
+#: easybuggy/views.py:112
 msgid "title.intoverflow.page"
 msgstr "The Distance from Earth to the Moon"
 
-#: easybuggy/views.py:102
+#: easybuggy/views.py:113
 msgid "msg.note.intoverflow"
 msgstr ""
 "Integer overflow occurs if you enter a number greater than or equal to 63."
 
-#: easybuggy/views.py:132
+#: easybuggy/views.py:138
 msgid "msg.answer.is.correct"
 msgstr "Your answer is correct!"
 
-#: easybuggy/views.py:140
+#: easybuggy/views.py:146
 msgid "title.lossoftrailingdigits.page"
 msgstr "Decimal Addition"
 
-#: easybuggy/views.py:141
+#: easybuggy/views.py:147
 msgid "msg.note.lossoftrailingdigits"
 msgstr "Loss of trailing digits occurs if you enter 0.0000000000000001."
 
 # "If keeping on loading this page, OutOfMemoryError is finally thrown."
-#: easybuggy/views.py:153
+#: easybuggy/views.py:159
 msgid "title.roundofferror.page"
 msgstr "Easy Subtraction"
 
-#: easybuggy/views.py:154
+#: easybuggy/views.py:160
 msgid "msg.note.roundofferror"
 msgstr "Round off error occurs if you enter 1."
 
-#: easybuggy/views.py:166
+#: easybuggy/views.py:172
 msgid "title.truncationerror.page"
 msgstr "Decimal Division"
 
-#: easybuggy/views.py:167
+#: easybuggy/views.py:173
 msgid "msg.note.truncationerror"
 msgstr "Truncation error occurs if you enter 3 or 7 or 9."
 
-#: easybuggy/views.py:179
+#: easybuggy/views.py:185
 msgid "title.xss.page"
 msgstr "Reverse String"
 
-#: easybuggy/views.py:180
+#: easybuggy/views.py:186
 msgid "msg.enter.string"
 msgstr "Please enter a string."
 
-#: easybuggy/views.py:181 templates/xss.html:16
+#: easybuggy/views.py:187 templates/xss.html:16
 msgid "msg.note.xss"
 msgstr ""
 "Session ID is shown if you enter name to <code>>tpircs/<;)eikooc."
 "tnemucod(trela>tpIrcs<</code>"
 
-#: easybuggy/views.py:193
+#: easybuggy/views.py:199
 msgid "title.sqlijc.page"
 msgstr "Search Your Secret Number"
 
-#: easybuggy/views.py:194
+#: easybuggy/views.py:200
 msgid "msg.note.sqlijc"
 msgstr ""
 "You can see a secret number if you enter <code>Mark</code> and "
 "<code>password</code>. You can see other users information if you enter "
 "password to <code>' OR '1'='1</code>"
+
+#: templates/commandinjection.html:7
+msgid "msg.enter.mail.address"
+msgstr ""
+"Please enter your email address. EasyBuggy will send you an email to confirm "
+"that you can accept it."
+
+#: templates/commandinjection.html:12 templates/sqlijc.html:12
+#: templates/xss.html:10
+msgid "label.submit"
+msgstr "Submit"
 
 #: templates/deadlock2.html:5
 msgid "msg.update.users"
@@ -233,9 +264,23 @@ msgstr "SQL Injection"
 msgid "function.description.sql.injection"
 msgstr "There is an SQL injection vulnerability in this page."
 
+#: templates/index.html:74
+msgid "function.name.os.command.injection"
+msgstr "OS command Injection"
+
+#: templates/index.html:75
+msgid "function.description.os.command.injection"
+msgstr "There is an OS command injection vulnerability in this page."
+
 #: templates/intoverflow.html:7
 msgid "msg.question.reach.the.moon"
-msgstr "How many times would you have to fold a piece of paper (thickness 0.1mm) for it to be thick enough to reach the moon (384,400 km)?"
+msgstr ""
+"How many times would you have to fold a piece of paper (thickness 0.1mm) for "
+"it to be thick enough to reach the moon (384,400 km)?"
+
+#: templates/intoverflow.html:9
+msgid "label.times"
+msgstr "Times"
 
 #: templates/intoverflow.html:10 templates/lossoftrailingdigits.html:10
 #: templates/roundofferror.html:10 templates/truncationerror.html:11
@@ -254,10 +299,6 @@ msgstr "Memory information about the process"
 msgid "msg.enter.positive.number"
 msgstr "Please enter a positive number."
 
-#: templates/roundofferror.html:9
-msgid "label.times"
-msgstr "Times"
-
 #: templates/sqlijc.html:7
 msgid "msg.enter.name.and.passwd"
 msgstr "If you enter your name and password, then your secret number is shown."
@@ -265,10 +306,6 @@ msgstr "If you enter your name and password, then your secret number is shown."
 #: templates/sqlijc.html:10
 msgid "label.password"
 msgstr "Password"
-
-#: templates/sqlijc.html:12 templates/xss.html:10
-msgid "label.submit"
-msgstr "Submit"
 
 #: templates/sqlijc.html:17
 msgid "label.secret"

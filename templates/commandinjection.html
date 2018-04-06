@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block body %}
+{% include "header.html" %}
+<form action="" method="post">
+    {% csrf_token %}
+    <p>{% trans 'msg.enter.mail.address' %}</p>
+    <input type="text" name="address" size="100" maxlength="100" value="{{address}}"/><br/><br/>
+    {% if result %}
+    <span>{{result}}</span><br/><br/>
+    {% endif %}
+    <input type="submit" value="{% trans 'label.submit' %}"/><br/><br/>
+    {% include "messages.html" %}
+</form>
+{% endblock %}

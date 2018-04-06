@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-05 16:44+0900\n"
+"POT-Creation-Date: 2018-04-06 16:33+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: easybuggy/views.py:24
+#: easybuggy/views.py:25
 msgid "title.deadlock2.page"
 msgstr "ユーザーの一括登録"
 
-#: easybuggy/views.py:25
+#: easybuggy/views.py:26
 msgid "msg.note.deadlock2"
 msgstr ""
 "2つのウインドウまたはタブを開き、一方でユーザーIDを降順にソートして「更新」ボ"
@@ -30,75 +30,104 @@ msgstr ""
 "と、データベースでデッドロックが発生します。 ただし、行ロックをサポートしない"
 "デフォルトのDB(SQLite)では発生しません。"
 
-#: easybuggy/views.py:68 easybuggy/views.py:75
+#: easybuggy/views.py:63 easybuggy/views.py:70
 msgid "title.memoryleak.page"
 msgstr "メモリの使用量"
 
-#: easybuggy/views.py:69 easybuggy/views.py:76
+#: easybuggy/views.py:64 easybuggy/views.py:71
 msgid "msg.note.memoryleak"
 msgstr "このページを読み込むたびに、メモリリークが発生します。"
 
-#: easybuggy/views.py:101
+#: easybuggy/views.py:97
+msgid "title.commandinjection.page"
+msgstr "メールアドレスの確認"
+
+#: easybuggy/views.py:98
+msgid "msg.note.commandinjection"
+msgstr ""
+"<code>test@gmail.com;rm -fr /important-dir/</code>を入力すると、サーバ上の重"
+"要なディレクトリが削除されます。 "
+
+#: easybuggy/views.py:104
+msgid "msg.send.mail.success"
+msgstr "メールの送信が完了しました。メールを確認して下さい。"
+
+#: easybuggy/views.py:106
+msgid "msg.send.mail.failure"
+msgstr "何らかの理由により、メールの送信が失敗しました。"
+
+#: easybuggy/views.py:112
 msgid "title.intoverflow.page"
 msgstr "月までの距離"
 
-#: easybuggy/views.py:102
+#: easybuggy/views.py:113
 msgid "msg.note.intoverflow"
 msgstr "63以上の数を入力すると、整数オーバーフローが発生します。"
 
-#: easybuggy/views.py:132
+#: easybuggy/views.py:138
 msgid "msg.answer.is.correct"
 msgstr "正解です。"
 
-#: easybuggy/views.py:140
+#: easybuggy/views.py:146
 msgid "title.lossoftrailingdigits.page"
 msgstr "小数の足し算"
 
-#: easybuggy/views.py:141
+#: easybuggy/views.py:147
 msgid "msg.note.lossoftrailingdigits"
 msgstr "0.0000000000000001を入力すると、情報欠落が発生します。"
 
 # "画面をロードし続けると、最終的にOutOfMemoryErrorがスローされます。"
-#: easybuggy/views.py:153
+#: easybuggy/views.py:159
 msgid "title.roundofferror.page"
 msgstr "簡単な引き算"
 
-#: easybuggy/views.py:154
+#: easybuggy/views.py:160
 msgid "msg.note.roundofferror"
 msgstr "1を入力すると、丸め誤差が発生します。"
 
-#: easybuggy/views.py:166
+#: easybuggy/views.py:172
 msgid "title.truncationerror.page"
 msgstr "小数の割り算"
 
-#: easybuggy/views.py:167
+#: easybuggy/views.py:173
 msgid "msg.note.truncationerror"
 msgstr "3、7、9を入力すると、打ち切り誤差が発生します。 "
 
-#: easybuggy/views.py:179
+#: easybuggy/views.py:185
 msgid "title.xss.page"
 msgstr "文字列の逆転"
 
-#: easybuggy/views.py:180
+#: easybuggy/views.py:186
 msgid "msg.enter.string"
 msgstr "文字列を入力して下さい。"
 
-#: easybuggy/views.py:181 templates/xss.html:16
+#: easybuggy/views.py:187 templates/xss.html:16
 msgid "msg.note.xss"
 msgstr ""
 "名前に<code>>tpircs/<;)eikooc.tnemucod(trela>tpIrcs<</code>を入力すると、セッ"
 "ションIDが表示されます。"
 
-#: easybuggy/views.py:193
+#: easybuggy/views.py:199
 msgid "title.sqlijc.page"
 msgstr "暗証番号検索"
 
-#: easybuggy/views.py:194
+#: easybuggy/views.py:200
 msgid "msg.note.sqlijc"
 msgstr ""
 "<code>Mark</code>と<code>password</code>を入力すると、暗証番号が表示されま"
 "す。パスワードに<code>' OR '1'='1</code>を入力すると、他のユーザーの情報が表"
 "示できます。"
+
+#: templates/commandinjection.html:7
+msgid "msg.enter.mail.address"
+msgstr ""
+"メールアドレスを入力して下さい。受信できることを確認するためメールを送信しま"
+"す。"
+
+#: templates/commandinjection.html:12 templates/sqlijc.html:12
+#: templates/xss.html:10
+msgid "label.submit"
+msgstr "送信"
 
 #: templates/deadlock2.html:5
 msgid "msg.update.users"
@@ -231,9 +260,23 @@ msgstr "SQLインジェクション"
 msgid "function.description.sql.injection"
 msgstr "このページにはSQLインジェクションの脆弱性があります。"
 
+#: templates/index.html:74
+msgid "function.name.os.command.injection"
+msgstr "OSコマンドインジェクション"
+
+#: templates/index.html:75
+msgid "function.description.os.command.injection"
+msgstr "このページにはOSコマンドインジェクションの脆弱性があります。"
+
 #: templates/intoverflow.html:7
 msgid "msg.question.reach.the.moon"
-msgstr "0.1mmの厚さの紙を何回折りたたむと、地球から月の距離(384,400km)に到達するでしょうか？"
+msgstr ""
+"0.1mmの厚さの紙を何回折りたたむと、地球から月の距離(384,400km)に到達するで"
+"しょうか？"
+
+#: templates/intoverflow.html:9
+msgid "label.times"
+msgstr "回数"
 
 #: templates/intoverflow.html:10 templates/lossoftrailingdigits.html:10
 #: templates/roundofferror.html:10 templates/truncationerror.html:11
@@ -252,10 +295,6 @@ msgstr "プロセスに関するメモリ情報"
 msgid "msg.enter.positive.number"
 msgstr "正の整数を入力して下さい。"
 
-#: templates/roundofferror.html:9
-msgid "label.times"
-msgstr "回数"
-
 #: templates/sqlijc.html:7
 msgid "msg.enter.name.and.passwd"
 msgstr "名前とパスワードを入力すると、暗証番号が表示されます。"
@@ -263,10 +302,6 @@ msgstr "名前とパスワードを入力すると、暗証番号が表示され
 #: templates/sqlijc.html:10
 msgid "label.password"
 msgstr "パスワード"
-
-#: templates/sqlijc.html:12 templates/xss.html:10
-msgid "label.submit"
-msgstr "送信"
 
 #: templates/sqlijc.html:17
 msgid "label.secret"

@@ -15,4 +15,5 @@ urlpatterns = [
     url(r'^te/$', views.te, name='te'),
     url(r'^xss/$', views.xss, name='xss'),
     url(r'^sqlijc/$', views.sqlijc, name='sqlijc'),
+    url(r'^commandinjection/$', views.commandinjection, name='commandinjection'),
 ]
