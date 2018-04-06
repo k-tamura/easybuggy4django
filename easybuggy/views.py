@@ -1,7 +1,6 @@
 import time
 import os
 import psutil
-import subprocess
 import numpy as np
 
 from time import sleep
@@ -25,7 +24,7 @@ def deadlock2(request):
         'title': _('title.deadlock2.page'),
         'note': _('msg.note.deadlock2'),
     }
-    order = getOrder(request)
+    order = get_order(request)
     if request.method == 'POST':
         with transaction.atomic():
             number = 0
@@ -52,13 +51,12 @@ def infiniteloop(request):
         i += 1
 
 
-
 def redirectloop(request):
     return redirect("/redirectloop")
 
 
 def memoryleak(request):
-    leakMemory()
+    leak_memory()
     d = {
         'title': _('title.memoryleak.page'),
         'note': _('msg.note.memoryleak'),
@@ -71,7 +69,7 @@ def memoryleak(request):
             'note': _('msg.note.memoryleak'),
             'pid': ps.pid,
             'rss': convert_bytes(mem.rss),
-            'pcnt_rss': round(ps.memory_percent(memtype='rss') ,2),
+            'pcnt_rss': round(ps.memory_percent(memtype='rss'), 2),
             # 'vms': mem.vms,
             # 'shared': mem.shared,
             # 'text': mem.text,
@@ -79,9 +77,9 @@ def memoryleak(request):
             # 'data': mem.data,
             # 'dirty': mem.dirty,
             'uss': convert_bytes(mem.uss),
-            'pcnt_uss': round(ps.memory_percent(memtype='uss') ,2),
+            'pcnt_uss': round(ps.memory_percent(memtype='uss'), 2),
             'pss': convert_bytes(mem.pss),
-            'pcnt_pss': round(ps.memory_percent(memtype='pss') ,2),
+            'pcnt_pss': round(ps.memory_percent(memtype='pss'), 2),
             'swap': convert_bytes(mem.swap),
             'info': ps.as_dict(attrs=["cmdline", "username"]),
         }
@@ -113,27 +111,26 @@ def iof(request):
         'note': _('msg.note.intoverflow'),
     }
     if request.method == 'POST':
-        strTimes = request.POST.get("times")
+        str_times = request.POST.get("times")
 
-        if strTimes is not None and strTimes is not '':
-            multipleNumber = 1
-            times = int(strTimes)
+        if str_times is not None and str_times is not '':
+            times = int(str_times)
             if times >= 0:
                 # TODO Change a better way
-                thickness = int(np.array([2 ** times,], dtype=int)) / 10 # mm
-                thicknessM = int(thickness) / 1000 # m
-                thicknessKm = int(thicknessM) / 1000 # km
+                thickness = int(np.array([2 ** times, ], dtype=int)) / 10  # mm
+                thickness_m = int(thickness) / 1000  # m
+                thickness_km = int(thickness_m) / 1000  # km
 
                 d['description'] = times + 1
 
                 if times >= 0:
-                    d['times'] = strTimes
+                    d['times'] = str_times
                     description = str(thickness) + " mm"
-                    if thicknessM is not None and thicknessKm is not None:
-                        if thicknessM >= 1 and thicknessKm < 1:
-                            description = description + " = " + str(thicknessM) + " m"
-                        if thicknessKm >= 1:
-                            description = description + " = " + str(thicknessKm) + " km"
+                    if thickness_m is not None and thickness_km is not None:
+                        if thickness_m >= 1 and thickness_km < 1:
+                            description = description + " = " + str(thickness_m) + " m"
+                        if thickness_km >= 1:
+                            description = description + " = " + str(thickness_km) + " km"
                     if times == 42:
                         description = description + " : " + _('msg.answer.is.correct')
                     d['description'] = description
@@ -149,7 +146,7 @@ def lotd(request):
     if request.method == 'POST':
         number = request.POST["number"]
         d['number'] = number
-        if number is not None and -1 < float(number) and float(number) < 1:
+        if number is not None and -1 < float(number) < 1:
             d['result'] = float(number) + 1
     return render(request, 'lossoftrailingdigits.html', d)
 
@@ -187,9 +184,9 @@ def xss(request):
         'note': _('msg.note.xss'),
     }
     if request.method == 'POST':
-        str = request.POST["string"]
-        if str is not None:
-            d['msg'] = str[::-1]
+        input_str = request.POST["string"]
+        if input_str is not None:
+            d['msg'] = input_str[::-1]
 
     return render(request, 'xss.html', d)
 
@@ -209,7 +206,7 @@ def sqlijc(request):
 
 
 # -------- private method
-def getOrder(request):
+def get_order(request):
     order = request.GET.get("order")
     if order == 'asc':
         order = 'desc'
@@ -218,7 +215,7 @@ def getOrder(request):
     return order
 
 
-def leakMemory():
+def leak_memory():
     global a
     for i in range(100000):
         a.append(time.time())
