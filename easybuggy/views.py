@@ -4,7 +4,7 @@ import psutil
 import numpy as np
 
 from time import sleep
-from django.db import transaction
+from django.db import transaction, connection
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
 
@@ -88,6 +88,17 @@ def memoryleak(request):
     except psutil.NoSuchProcess:
         pass
     return render(request, 'memoryleak.html', d)
+
+
+def dbconnectionleak(request):
+    d = {
+        'title': _('title.dbconnectionleak.page'),
+        'note': _('msg.note.dbconnectionleak'),
+    }
+    c = connection.cursor()
+    c.execute("SELECT id, name, phone, mail FROM easybuggy_user WHERE ispublic = 'true' ORDER BY id asc")
+    d['users'] = c.fetchall()
+    return render(request, 'dbconnectionleak.html', d)
 
 
 def commandinjection(request):

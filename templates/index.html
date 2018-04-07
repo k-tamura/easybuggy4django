@@ -37,6 +37,10 @@
         {% trans 'function.name.memory.leak' %}</a>:
         <span>{% trans 'function.description.memory.leak' %}</span>
     </p></li>
+    <li><p><a href="{% url 'easybuggy:dbconnectionleak' %}" shape="rect">
+        {% trans 'function.name.database.connection.leak' %}</a>:
+        <span>{% trans 'function.description.database.connection.leak' %}</span>
+    </p></li>
     <li><p><a href="{% url 'easybuggy:iof' %}" shape="rect">
         {% trans 'function.name.int.overflow' %}</a>:
         <span>{% trans 'function.description.int.overflow' %}</span>
