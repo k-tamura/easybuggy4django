@@ -90,14 +90,20 @@ def memoryleak(request):
     return render(request, 'memoryleak.html', d)
 
 
+# TODO This function cannot leak connections
+# See also: https://stackoverflow.com/questions/24661754/necessity-of-explicit-cursor-close
 def dbconnectionleak(request):
     d = {
         'title': _('title.dbconnectionleak.page'),
         'note': _('msg.note.dbconnectionleak'),
     }
     c = connection.cursor()
-    c.execute("SELECT id, name, phone, mail FROM easybuggy_user WHERE ispublic = 'true' ORDER BY id asc")
-    d['users'] = c.fetchall()
+    try:
+        c.execute("SELECT id, name, phone, mail FROM easybuggy_user WHERE ispublic = 'true' ORDER BY id asc")
+        d['users'] = c.fetchall()
+    finally:
+        #c.close()
+        pass
     return render(request, 'dbconnectionleak.html', d)
 
 
