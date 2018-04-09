@@ -2,5 +2,21 @@
 {% load i18n %}
 {% block body %}
 {% include "header.html" %}
+<p>{% trans 'description.access.history' %}<p/>
+<table class="table table-striped table-bordered table-hover" style="font-size: small;">
+    <tr>
+        <th>{% trans 'label.access.time' %}</th>
+        <th>{% trans 'label.ip.address' %}</th>
+        <th>{% trans 'label.session.id' %}</th>
+    </tr>
+    {% for access in history %}
+    <tr>
+        <td>{{ access.0 }}</td>
+        <td>{{ access.1 }}</td>
+        <td>{{ access.2 }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
 {% include "messages.html" %}
 {% endblock %}

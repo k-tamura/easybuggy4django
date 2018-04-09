@@ -45,6 +45,10 @@
         {% trans 'function.name.database.connection.leak' %}</a>:
         <span>{% trans 'function.description.database.connection.leak' %}</span>
     </p></li>
+    <li><p><a href="{% url 'easybuggy:filedescriptorleak' %}" shape="rect">
+        {% trans 'function.name.file.descriptor.leak' %}</a>:
+        <span>{% trans 'function.description.file.descriptor.leak' %}</span>
+    </p></li>
     <li><p><a href="{% url 'easybuggy:iof' %}" shape="rect">
         {% trans 'function.name.int.overflow' %}</a>:
         <span>{% trans 'function.description.int.overflow' %}</span>

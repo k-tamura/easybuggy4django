@@ -1,20 +1,17 @@
-import time
+import datetime
 import os
-from typing import TextIO
-
-import psutil
-import numpy as np
-import threading
 import tempfile
-
-
+import threading
+import time
 from time import sleep
+
+import numpy as np
+import psutil
 from django.db import transaction, connection
 from django.shortcuts import render, redirect
 from django.utils.translation import ugettext as _
 
 from .models import User
-
 
 a = []
 
@@ -152,10 +149,22 @@ def filedescriptorleak(request):
         'note': _('msg.note.filedescriptorleak'),
     }
     global file_refs
-    tempFile = os.path.join(tempfile._get_default_tempdir(), 'history.csv')
+    temp_file = os.path.join(tempfile._get_default_tempdir(), 'history.csv')
     try:
-        f = open(tempFile, 'a')
-        f.write('hoge\n')
+        f = open(temp_file, 'a')
+        f.write(str(datetime.datetime.now()) + ',' + get_client_ip(request) + ',' + request.session.session_key + '\n')
+        f.flush()
+    finally:
+        f.close()
+    try:
+        f = open(temp_file, 'r')
+        history = []
+        i = 0
+        for row in f:
+            i += 1
+            history.append(row.split(','))
+        del history[:len(history) - 15]
+        d['history'] = reversed(history)
         file_refs.append(f)  # TODO remove if possible
     finally:
         # f.close()
@@ -304,3 +313,12 @@ def convert_bytes(n):
             value = float(n) / prefix[s]
             return '%.1f%s' % (value, s)
     return "%sB" % n
+
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
