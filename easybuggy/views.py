@@ -1,8 +1,12 @@
 import time
 import os
+from typing import TextIO
+
 import psutil
 import numpy as np
 import threading
+import tempfile
+
 
 from time import sleep
 from django.db import transaction, connection
@@ -16,9 +20,9 @@ a = []
 
 a_lock = threading.Lock()
 b_lock = threading.Lock()
-
 switch_flag = True
 
+file_refs = []
 
 def index(request):
     d = {'title': 'EasyBuggy Django'}
@@ -140,6 +144,23 @@ def dbconnectionleak(request):
         # c.close()
         pass
     return render(request, 'dbconnectionleak.html', d)
+
+
+def filedescriptorleak(request):
+    d = {
+        'title': _('title.filedescriptorleak.page'),
+        'note': _('msg.note.filedescriptorleak'),
+    }
+    global file_refs
+    tempFile = os.path.join(tempfile._get_default_tempdir(), 'history.csv')
+    try:
+        f = open(tempFile, 'a')
+        f.write('hoge\n')
+        file_refs.append(f)  # TODO remove if possible
+    finally:
+        # f.close()
+        pass
+    return render(request, 'filedescriptorleak.html', d)
 
 
 def commandinjection(request):

@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^redirectloop/$', views.redirectloop, name='redirectloop'),
     url(r'^memoryleak/$', views.memoryleak, name='memoryleak'),
     url(r'^dbconnectionleak/$', views.dbconnectionleak, name='dbconnectionleak'),
+    url(r'^filedescriptorleak/$', views.filedescriptorleak, name='filedescriptorleak'),
     url(r'^iof/$', views.iof, name='iof'),
     url(r'^lotd/$', views.lotd, name='lotd'),
     url(r'^roe/$', views.roe, name='roe'),
