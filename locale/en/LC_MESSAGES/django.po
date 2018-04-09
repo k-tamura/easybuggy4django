@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-08 05:53+0900\n"
+"POT-Creation-Date: 2018-04-09 13:47+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: easybuggy/views.py:24
+#: easybuggy/views.py:32
+msgid "title.deadlock.page"
+msgstr "Detect Deadlock"
+
+#: easybuggy/views.py:33
+msgid "msg.dead.lock.not.occur"
+msgstr "Deadlock has not occurred yet."
+
+#: easybuggy/views.py:34
+msgid "msg.note.deadlock"
+msgstr "Deadlock occurs after continuously loading this page few times."
+
+#: easybuggy/views.py:59
 msgid "title.deadlock2.page"
 msgstr "Batch Update of Users"
 
-#: easybuggy/views.py:25
+#: easybuggy/views.py:60
 msgid "msg.note.deadlock2"
 msgstr ""
 "If you open two windows (or tabs) and sort in the ascending order of user ID "
@@ -31,101 +43,101 @@ msgstr ""
 "deadlock occurs in database. However, deadlock does not occur when using "
 "default DB (SQLite) that does not support row locking"
 
-#: easybuggy/views.py:61 easybuggy/views.py:68
+#: easybuggy/views.py:96 easybuggy/views.py:103
 msgid "title.memoryleak.page"
 msgstr "Memory Usage"
 
-#: easybuggy/views.py:62 easybuggy/views.py:69
+#: easybuggy/views.py:97 easybuggy/views.py:104
 msgid "msg.note.memoryleak"
 msgstr "Memory leak occurs every time you load this page."
 
-#: easybuggy/views.py:95
+#: easybuggy/views.py:132
 msgid "title.dbconnectionleak.page"
 msgstr "User List"
 
-#: easybuggy/views.py:96
+#: easybuggy/views.py:133
 msgid "msg.note.dbconnectionleak"
 msgstr ""
 "Database connection leak occurs if using an external RDBMS such as MySQL. "
 "Please edit <code>settings.py</code> if using an external RDBMS."
 
-#: easybuggy/views.py:106
+#: easybuggy/views.py:147
 msgid "title.commandinjection.page"
 msgstr "Checking Your Mail Address"
 
-#: easybuggy/views.py:107
+#: easybuggy/views.py:148
 msgid "msg.note.commandinjection"
 msgstr ""
 "<code>/important-dir/</code> directory will be removed on this server if you "
 "enter <code>test@gmail.com;rm -fr /important-dir/</code>."
 
-#: easybuggy/views.py:113
+#: easybuggy/views.py:154
 msgid "msg.send.mail.success"
 msgstr "Sending an email failed due to any reason."
 
-#: easybuggy/views.py:115
+#: easybuggy/views.py:156
 msgid "msg.send.mail.failure"
 msgstr ""
 "Please enter your email address. EasyBuggy will send you an email to confirm "
 "that you can accept it."
 
-#: easybuggy/views.py:121
+#: easybuggy/views.py:162
 msgid "title.intoverflow.page"
 msgstr "The Distance from Earth to the Moon"
 
-#: easybuggy/views.py:122
+#: easybuggy/views.py:163
 msgid "msg.note.intoverflow"
 msgstr ""
 "Integer overflow occurs if you enter a number greater than or equal to 63."
 
-#: easybuggy/views.py:146
+#: easybuggy/views.py:187
 msgid "msg.answer.is.correct"
 msgstr "Your answer is correct!"
 
-#: easybuggy/views.py:154
+#: easybuggy/views.py:195
 msgid "title.lossoftrailingdigits.page"
 msgstr "Decimal Addition"
 
-#: easybuggy/views.py:155
+#: easybuggy/views.py:196
 msgid "msg.note.lossoftrailingdigits"
 msgstr "Loss of trailing digits occurs if you enter 0.0000000000000001."
 
 # "If keeping on loading this page, OutOfMemoryError is finally thrown."
-#: easybuggy/views.py:167
+#: easybuggy/views.py:208
 msgid "title.roundofferror.page"
 msgstr "Easy Subtraction"
 
-#: easybuggy/views.py:168
+#: easybuggy/views.py:209
 msgid "msg.note.roundofferror"
 msgstr "Round off error occurs if you enter 1."
 
-#: easybuggy/views.py:180
+#: easybuggy/views.py:221
 msgid "title.truncationerror.page"
 msgstr "Decimal Division"
 
-#: easybuggy/views.py:181
+#: easybuggy/views.py:222
 msgid "msg.note.truncationerror"
 msgstr "Truncation error occurs if you enter 3 or 7 or 9."
 
-#: easybuggy/views.py:193
+#: easybuggy/views.py:234
 msgid "title.xss.page"
 msgstr "Reverse String"
 
-#: easybuggy/views.py:194
+#: easybuggy/views.py:235
 msgid "msg.enter.string"
 msgstr "Please enter a string."
 
-#: easybuggy/views.py:195 templates/xss.html:16
+#: easybuggy/views.py:236 templates/xss.html:16
 msgid "msg.note.xss"
 msgstr ""
 "Session ID is shown if you enter name to <code>>tpircs/<;)eikooc."
 "tnemucod(trela>tpIrcs<</code>"
 
-#: easybuggy/views.py:207
+#: easybuggy/views.py:248
 msgid "title.sqlijc.page"
 msgstr "Search Your Secret Number"
 
-#: easybuggy/views.py:208
+#: easybuggy/views.py:249
 msgid "msg.note.sqlijc"
 msgstr ""
 "You can see a secret number if you enter <code>Mark</code> and "
@@ -188,106 +200,114 @@ msgid "description.troubles"
 msgstr "Memory leak, infinite loop, deadlock, and so on:"
 
 #: templates/index.html:25
+msgid "function.name.dead.lock"
+msgstr "Deadlock (Python)"
+
+#: templates/index.html:26
+msgid "function.description.dead.lock"
+msgstr "Deadlock (Python) can occur."
+
+#: templates/index.html:29
 msgid "function.name.dead.lock2"
 msgstr "Deadlock (SQL)"
 
-#: templates/index.html:26
+#: templates/index.html:30
 msgid "function.description.dead.lock2"
 msgstr "Deadlock (SQL) can occur."
 
-#: templates/index.html:29
+#: templates/index.html:33
 msgid "function.name.infinite.loop"
 msgstr "Infinite Loop"
 
-#: templates/index.html:30
+#: templates/index.html:34
 msgid "function.description.infinite.loop"
 msgstr "Infinite loop occurs if you click this link."
 
-#: templates/index.html:33
+#: templates/index.html:37
 msgid "function.name.redirect.loop"
 msgstr "Redirect Loop"
 
-#: templates/index.html:34
+#: templates/index.html:38
 msgid "function.description.redirect.loop"
 msgstr "Redirect loop occurs if you click this link."
 
-#: templates/index.html:37
+#: templates/index.html:41
 msgid "function.name.memory.leak"
 msgstr "Memory Leak"
 
-#: templates/index.html:38
+#: templates/index.html:42
 msgid "function.description.memory.leak"
 msgstr "Memory leak occurs every time you load this page."
 
-#: templates/index.html:41
+#: templates/index.html:45
 msgid "function.name.database.connection.leak"
 msgstr "Database Connection Leak"
 
-#: templates/index.html:42
+#: templates/index.html:46
 msgid "function.description.database.connection.leak"
 msgstr "Database connection leak occurs every time you load the page."
 
-#: templates/index.html:45
+#: templates/index.html:49
 msgid "function.name.int.overflow"
 msgstr "Integer overflow"
 
-#: templates/index.html:46
+#: templates/index.html:50
 msgid "function.description.int.overflow"
 msgstr "Integer overflow can occur."
 
-#: templates/index.html:49
+#: templates/index.html:53
 msgid "function.name.round.off.error"
 msgstr "Round Off Error"
 
-#: templates/index.html:50
+#: templates/index.html:54
 msgid "function.description.round.off.error"
 msgstr "Round off error can occur."
 
-#: templates/index.html:53
+#: templates/index.html:57
 msgid "function.name.truncation.error"
 msgstr "Truncation Error"
 
-#: templates/index.html:54
+#: templates/index.html:58
 msgid "function.description.truncation.error"
 msgstr "Truncation error can occur."
 
-#: templates/index.html:57
+#: templates/index.html:61
 msgid "function.name.loss.of.trailing.digits"
 msgstr "Loss of Trailing Digits"
 
-#: templates/index.html:58
+#: templates/index.html:62
 msgid "function.description.loss.of.trailing.digits"
 msgstr "Loss of trailing digits can occur."
 
-#: templates/index.html:65
+#: templates/index.html:69
 msgid "section.vulnerabilities"
 msgstr "Vulnerabilities"
 
-#: templates/index.html:67
+#: templates/index.html:71
 msgid "description.vulnerabilities"
 msgstr "XSS, SQL Injection, LDAP injection, and so on："
 
-#: templates/index.html:70
+#: templates/index.html:74
 msgid "function.name.xss"
 msgstr "XSS (Cross Site Scripting)"
 
-#: templates/index.html:71
+#: templates/index.html:75
 msgid "function.description.xss"
 msgstr "There is a cross site scripting vulnerability in this page."
 
-#: templates/index.html:74
+#: templates/index.html:78
 msgid "function.name.sql.injection"
 msgstr "SQL Injection"
 
-#: templates/index.html:75
+#: templates/index.html:79
 msgid "function.description.sql.injection"
 msgstr "There is an SQL injection vulnerability in this page."
 
-#: templates/index.html:78
+#: templates/index.html:82
 msgid "function.name.os.command.injection"
 msgstr "OS command Injection"
 
-#: templates/index.html:79
+#: templates/index.html:83
 msgid "function.description.os.command.injection"
 msgstr "There is an OS command injection vulnerability in this page."
 

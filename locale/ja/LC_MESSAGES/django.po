@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-08 05:53+0900\n"
+"POT-Creation-Date: 2018-04-09 13:47+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: easybuggy/views.py:24
+#: easybuggy/views.py:32
+msgid "title.deadlock.page"
+msgstr "デッドロックの検知"
+
+#: easybuggy/views.py:33
+msgid "msg.dead.lock.not.occur"
+msgstr "デッドロックは発生していません。"
+
+#: easybuggy/views.py:34
+msgid "msg.note.deadlock"
+msgstr "このページを連続で数回ロードすると、デッドロックが発生します。"
+
+#: easybuggy/views.py:59
 msgid "title.deadlock2.page"
 msgstr "ユーザーの一括登録"
 
-#: easybuggy/views.py:25
+#: easybuggy/views.py:60
 msgid "msg.note.deadlock2"
 msgstr ""
 "2つのウインドウまたはタブを開き、一方でユーザーIDを降順にソートして「更新」ボ"
@@ -30,99 +42,99 @@ msgstr ""
 "と、データベースでデッドロックが発生します。 ただし、行ロックをサポートしない"
 "デフォルトのDB(SQLite)では発生しません。"
 
-#: easybuggy/views.py:61 easybuggy/views.py:68
+#: easybuggy/views.py:96 easybuggy/views.py:103
 msgid "title.memoryleak.page"
 msgstr "メモリの使用量"
 
-#: easybuggy/views.py:62 easybuggy/views.py:69
+#: easybuggy/views.py:97 easybuggy/views.py:104
 msgid "msg.note.memoryleak"
 msgstr "このページを読み込むたびに、メモリリークが発生します。"
 
-#: easybuggy/views.py:95
+#: easybuggy/views.py:132
 msgid "title.dbconnectionleak.page"
 msgstr "ユーザー一覧"
 
-#: easybuggy/views.py:96
+#: easybuggy/views.py:133
 msgid "msg.note.dbconnectionleak"
 msgstr ""
 "データベースコネクションリークは、MySQLなどの外部RDBMSを使用する場合にのみ発"
 "生します。外部RDBMSを使用する場合は、<code>settings.py</code>を編集して下さ"
 "い。"
 
-#: easybuggy/views.py:106
+#: easybuggy/views.py:147
 msgid "title.commandinjection.page"
 msgstr "メールアドレスの確認"
 
-#: easybuggy/views.py:107
+#: easybuggy/views.py:148
 msgid "msg.note.commandinjection"
 msgstr ""
 "<code>test@gmail.com;rm -fr /important-dir/</code>を入力すると、サーバ上の重"
 "要なディレクトリが削除されます。 "
 
-#: easybuggy/views.py:113
+#: easybuggy/views.py:154
 msgid "msg.send.mail.success"
 msgstr "メールの送信が完了しました。メールを確認して下さい。"
 
-#: easybuggy/views.py:115
+#: easybuggy/views.py:156
 msgid "msg.send.mail.failure"
 msgstr "何らかの理由により、メールの送信が失敗しました。"
 
-#: easybuggy/views.py:121
+#: easybuggy/views.py:162
 msgid "title.intoverflow.page"
 msgstr "月までの距離"
 
-#: easybuggy/views.py:122
+#: easybuggy/views.py:163
 msgid "msg.note.intoverflow"
 msgstr "63以上の数を入力すると、整数オーバーフローが発生します。"
 
-#: easybuggy/views.py:146
+#: easybuggy/views.py:187
 msgid "msg.answer.is.correct"
 msgstr "正解です。"
 
-#: easybuggy/views.py:154
+#: easybuggy/views.py:195
 msgid "title.lossoftrailingdigits.page"
 msgstr "小数の足し算"
 
-#: easybuggy/views.py:155
+#: easybuggy/views.py:196
 msgid "msg.note.lossoftrailingdigits"
 msgstr "0.0000000000000001を入力すると、情報欠落が発生します。"
 
 # "画面をロードし続けると、最終的にOutOfMemoryErrorがスローされます。"
-#: easybuggy/views.py:167
+#: easybuggy/views.py:208
 msgid "title.roundofferror.page"
 msgstr "簡単な引き算"
 
-#: easybuggy/views.py:168
+#: easybuggy/views.py:209
 msgid "msg.note.roundofferror"
 msgstr "1を入力すると、丸め誤差が発生します。"
 
-#: easybuggy/views.py:180
+#: easybuggy/views.py:221
 msgid "title.truncationerror.page"
 msgstr "小数の割り算"
 
-#: easybuggy/views.py:181
+#: easybuggy/views.py:222
 msgid "msg.note.truncationerror"
 msgstr "3、7、9を入力すると、打ち切り誤差が発生します。 "
 
-#: easybuggy/views.py:193
+#: easybuggy/views.py:234
 msgid "title.xss.page"
 msgstr "文字列の逆転"
 
-#: easybuggy/views.py:194
+#: easybuggy/views.py:235
 msgid "msg.enter.string"
 msgstr "文字列を入力して下さい。"
 
-#: easybuggy/views.py:195 templates/xss.html:16
+#: easybuggy/views.py:236 templates/xss.html:16
 msgid "msg.note.xss"
 msgstr ""
 "名前に<code>>tpircs/<;)eikooc.tnemucod(trela>tpIrcs<</code>を入力すると、セッ"
 "ションIDが表示されます。"
 
-#: easybuggy/views.py:207
+#: easybuggy/views.py:248
 msgid "title.sqlijc.page"
 msgstr "暗証番号検索"
 
-#: easybuggy/views.py:208
+#: easybuggy/views.py:249
 msgid "msg.note.sqlijc"
 msgstr ""
 "<code>Mark</code>と<code>password</code>を入力すると、暗証番号が表示されま"
@@ -185,106 +197,115 @@ msgid "description.troubles"
 msgstr "メモリリーク、無限ループ、デッドロックなど"
 
 #: templates/index.html:25
+msgid "function.name.dead.lock"
+msgstr "デッドロック(Python)"
+
+#: templates/index.html:26
+msgid "function.description.dead.lock"
+msgstr "デッドロック(Python)を発生させることができます。"
+
+#: templates/index.html:29
 msgid "function.name.dead.lock2"
 msgstr "デッドロック(SQL)"
 
-#: templates/index.html:26
+#: templates/index.html:30
 msgid "function.description.dead.lock2"
 msgstr "デッドロック(SQL)を発生させることができます。"
 
-#: templates/index.html:29
+#: templates/index.html:33
 msgid "function.name.infinite.loop"
 msgstr "無限ループ"
 
-#: templates/index.html:30
+#: templates/index.html:34
 msgid "function.description.infinite.loop"
 msgstr "このリンクをクリックすると、無限ループが発生します。"
 
-#: templates/index.html:33
+#: templates/index.html:37
 msgid "function.name.redirect.loop"
 msgstr "リダイレクトループ"
 
-#: templates/index.html:34
+#: templates/index.html:38
 msgid "function.description.redirect.loop"
 msgstr "このリンクをクリックすると、リダイレクトループが発生します。"
 
-#: templates/index.html:37
+#: templates/index.html:41
 msgid "function.name.memory.leak"
 msgstr "メモリリーク"
 
-#: templates/index.html:38
+#: templates/index.html:42
 msgid "function.description.memory.leak"
 msgstr "このページをロードするたびに、メモリリークが発生します。"
 
-#: templates/index.html:41
+#: templates/index.html:45
 msgid "function.name.database.connection.leak"
 msgstr "データベースコネクションリーク"
 
-#: templates/index.html:42
+#: templates/index.html:46
 msgid "function.description.database.connection.leak"
-msgstr " このページをロードするたびに、データベースコネクションリークが発生します。 "
+msgstr ""
+" このページをロードするたびに、データベースコネクションリークが発生します。 "
 
-#: templates/index.html:45
+#: templates/index.html:49
 msgid "function.name.int.overflow"
 msgstr "整数オーバーフロー"
 
-#: templates/index.html:46
+#: templates/index.html:50
 msgid "function.description.int.overflow"
 msgstr "整数オーバーフローを発生させることができます。 "
 
-#: templates/index.html:49
+#: templates/index.html:53
 msgid "function.name.round.off.error"
 msgstr "丸め誤差"
 
-#: templates/index.html:50
+#: templates/index.html:54
 msgid "function.description.round.off.error"
 msgstr "丸め誤差を発生させることができます。"
 
-#: templates/index.html:53
+#: templates/index.html:57
 msgid "function.name.truncation.error"
 msgstr "打ち切り誤差"
 
-#: templates/index.html:54
+#: templates/index.html:58
 msgid "function.description.truncation.error"
 msgstr "打ち切り誤差を発生させることができます。"
 
-#: templates/index.html:57
+#: templates/index.html:61
 msgid "function.name.loss.of.trailing.digits"
 msgstr "情報落ち"
 
-#: templates/index.html:58
+#: templates/index.html:62
 msgid "function.description.loss.of.trailing.digits"
 msgstr "情報落ちを発生させることができます。 "
 
-#: templates/index.html:65
+#: templates/index.html:69
 msgid "section.vulnerabilities"
 msgstr "脆弱性"
 
-#: templates/index.html:67
+#: templates/index.html:71
 msgid "description.vulnerabilities"
 msgstr "XSS、SQLインジェクション、LDAPインジェクションなど"
 
-#: templates/index.html:70
+#: templates/index.html:74
 msgid "function.name.xss"
 msgstr "XSS (クロスサイトスクリプティング)"
 
-#: templates/index.html:71
+#: templates/index.html:75
 msgid "function.description.xss"
 msgstr "このページにはXSSの脆弱性があります。"
 
-#: templates/index.html:74
+#: templates/index.html:78
 msgid "function.name.sql.injection"
 msgstr "SQLインジェクション"
 
-#: templates/index.html:75
+#: templates/index.html:79
 msgid "function.description.sql.injection"
 msgstr "このページにはSQLインジェクションの脆弱性があります。"
 
-#: templates/index.html:78
+#: templates/index.html:82
 msgid "function.name.os.command.injection"
 msgstr "OSコマンドインジェクション"
 
-#: templates/index.html:79
+#: templates/index.html:83
 msgid "function.description.os.command.injection"
 msgstr "このページにはOSコマンドインジェクションの脆弱性があります。"
 

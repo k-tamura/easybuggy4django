@@ -2,6 +2,7 @@ import time
 import os
 import psutil
 import numpy as np
+import threading
 
 from time import sleep
 from django.db import transaction, connection
@@ -13,10 +14,44 @@ from .models import User
 
 a = []
 
+a_lock = threading.Lock()
+b_lock = threading.Lock()
+
+switch_flag = True
+
 
 def index(request):
     d = {'title': 'EasyBuggy Django'}
+    if 'dlpinit' in request.session:
+        del request.session['dlpinit']
     return render(request, 'index.html', d)
+
+
+def deadlock(request):
+    d = {
+        'title': _('title.deadlock.page'),
+        'msg': _('msg.dead.lock.not.occur'),
+        'note': _('msg.note.deadlock'),
+    }
+    if 'dlpinit' not in request.session:
+        request.session['dlpinit'] = "True"
+    else:
+        global switch_flag
+        if switch_flag:
+            with a_lock:
+                print("Locked a_lock.")
+                switch_flag = False
+                sleep(5)
+                with b_lock:
+                    print("Locked a_lock. -> Locked b_lock.")
+        else:
+            with b_lock:
+                print("Locked b_lock.")
+                switch_flag = True
+                sleep(5)
+                with a_lock:
+                    print("Locked b_lock. -> Locked a_lock.")
+    return render(request, 'deadlock.html', d)
 
 
 def deadlock2(request):
@@ -102,7 +137,7 @@ def dbconnectionleak(request):
         c.execute("SELECT id, name, phone, mail FROM easybuggy_user WHERE ispublic = 'true' ORDER BY id asc")
         d['users'] = c.fetchall()
     finally:
-        #c.close()
+        # c.close()
         pass
     return render(request, 'dbconnectionleak.html', d)
 
@@ -145,11 +180,11 @@ def iof(request):
                     description = str(thickness) + " mm"
                     if thickness_m is not None and thickness_km is not None:
                         if thickness_m >= 1 and thickness_km < 1:
-                            description = description + " = " + str(thickness_m) + " m"
+                            description += " = " + str(thickness_m) + " m"
                         if thickness_km >= 1:
-                            description = description + " = " + str(thickness_km) + " km"
+                            description += " = " + str(thickness_km) + " km"
                     if times == 42:
-                        description = description + " : " + _('msg.answer.is.correct')
+                        description += " : " + _('msg.answer.is.correct')
                     d['description'] = description
 
     return render(request, 'intoverflow.html', d)

@@ -5,6 +5,7 @@ app_name = "easybuggy"
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^deadlock/$', views.deadlock, name='deadlock'),
     url(r'^deadlock2/$', views.deadlock2, name='deadlock2'),
     url(r'^infiniteloop/$', views.infiniteloop, name='infiniteloop'),
     url(r'^redirectloop/$', views.redirectloop, name='redirectloop'),
