@@ -6,10 +6,9 @@ import time
 from time import sleep
 from django.template.defaultfilters import filesizeformat
 
-import PIL.ImageOps
 import numpy as np
 import psutil
-from PIL import Image
+from PIL import Image, ImageOps
 from django import forms
 from django.conf import settings
 from django.db import transaction, connection
@@ -302,15 +301,17 @@ def unrestrictedsizeupload(request):
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
             uploaded_file = request.FILES['file']
-            d['file_path'] = handle_uploaded_file(uploaded_file)
-            invert(uploaded_file)
+            handle_uploaded_file(uploaded_file)
             content_type = uploaded_file.content_type.split('/')[0]
             if content_type in settings.CONTENT_TYPES:
+                # TODO This check is too late
                 if uploaded_file._size > settings.MAX_UPLOAD_SIZE:
                     raise forms.ValidationError(_('Please keep filesize under %s. Current filesize %s') % (
                     filesizeformat(settings.MAX_UPLOAD_SIZE), filesizeformat(uploaded_file._size)))
+                invert(uploaded_file)
+                d['file_path'] = os.path.join("static", "uploadfiles", uploaded_file.name)
             else:
-                raise forms.ValidationError(_('File type is not supported'))
+                d['errmsg'] = _('msg.not.image.file')
     else:
         form = UploadFileForm()
     d['form'] = form
@@ -356,15 +357,18 @@ def get_client_ip(request):
 
 def handle_uploaded_file(f):
     # TODO change directory from "static" to another
-    temp_file = os.path.join(settings.BASE_DIR, "static", "uploadfiles", f.name)
+    upload_dirs = os.path.join(settings.BASE_DIR, "static", "uploadfiles")
+    if not os.path.exists(upload_dirs):
+        os.mkdir(upload_dirs)
+    temp_file = os.path.join(upload_dirs, f.name)
     with open(temp_file, 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
-    return os.path.join("static", "uploadfiles", f.name)
 
 
 def invert(f):
     temp_file = os.path.join(settings.BASE_DIR, "static", "uploadfiles", f.name)
     im = Image.open(f).convert('RGB')
-    im_invert = PIL.ImageOps.invert(im)
+    im_invert = ImageOps.invert(im)
     im_invert.save(temp_file, quality=95)
+
