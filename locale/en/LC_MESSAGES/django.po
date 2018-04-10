@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-09 22:15+0900\n"
+"POT-Creation-Date: 2018-04-10 17:11+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,23 +18,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: easybuggy/views.py:33
+#: easybuggy/views.py:35
 msgid "title.deadlock.page"
 msgstr "Detect Deadlock"
 
-#: easybuggy/views.py:34
+#: easybuggy/views.py:36
 msgid "msg.dead.lock.not.occur"
 msgstr "Deadlock has not occurred yet."
 
-#: easybuggy/views.py:35
+#: easybuggy/views.py:37
 msgid "msg.note.deadlock"
 msgstr "Deadlock occurs after continuously loading this page few times."
 
-#: easybuggy/views.py:60
+#: easybuggy/views.py:62
 msgid "title.deadlock2.page"
 msgstr "Batch Update of Users"
 
-#: easybuggy/views.py:61
+#: easybuggy/views.py:63
 msgid "msg.note.deadlock2"
 msgstr ""
 "If you open two windows (or tabs) and sort in the ascending order of user ID "
@@ -43,114 +43,124 @@ msgstr ""
 "deadlock occurs in database. However, deadlock does not occur when using "
 "default DB (SQLite) that does not support row locking"
 
-#: easybuggy/views.py:97 easybuggy/views.py:104
+#: easybuggy/views.py:99 easybuggy/views.py:106
 msgid "title.memoryleak.page"
 msgstr "Memory Usage"
 
-#: easybuggy/views.py:98 easybuggy/views.py:105
+#: easybuggy/views.py:100 easybuggy/views.py:107
 msgid "msg.note.memoryleak"
 msgstr "Memory leak occurs every time you load this page."
 
-#: easybuggy/views.py:133
+#: easybuggy/views.py:135
 msgid "title.dbconnectionleak.page"
 msgstr "User List"
 
-#: easybuggy/views.py:134
+#: easybuggy/views.py:136
 msgid "msg.note.dbconnectionleak"
 msgstr ""
 "Database connection leak occurs if using an external RDBMS such as MySQL. "
 "Please edit <code>settings.py</code> if using an external RDBMS."
 
-#: easybuggy/views.py:148
+#: easybuggy/views.py:150
 msgid "title.filedescriptorleak.page"
 msgstr "Access History"
 
-#: easybuggy/views.py:149
+#: easybuggy/views.py:151
 msgid "msg.note.filedescriptorleak"
 msgstr "File descriptor leak occurs every time you load this page."
 
-#: easybuggy/views.py:177
+#: easybuggy/views.py:179
 msgid "title.commandinjection.page"
 msgstr "Checking Your Mail Address"
 
-#: easybuggy/views.py:178
+#: easybuggy/views.py:180
 msgid "msg.note.commandinjection"
 msgstr ""
 "<code>/important-dir/</code> directory will be removed on this server if you "
 "enter <code>test@gmail.com;rm -fr /important-dir/</code>."
 
-#: easybuggy/views.py:184
+#: easybuggy/views.py:186
 msgid "msg.send.mail.success"
 msgstr "Sending an email failed due to any reason."
 
-#: easybuggy/views.py:186
+#: easybuggy/views.py:188
 msgid "msg.send.mail.failure"
 msgstr ""
 "Please enter your email address. EasyBuggy will send you an email to confirm "
 "that you can accept it."
 
-#: easybuggy/views.py:192
+#: easybuggy/views.py:194
 msgid "title.intoverflow.page"
 msgstr "The Distance from Earth to the Moon"
 
-#: easybuggy/views.py:193
+#: easybuggy/views.py:195
 msgid "msg.note.intoverflow"
 msgstr ""
 "Integer overflow occurs if you enter a number greater than or equal to 63."
 
-#: easybuggy/views.py:217
+#: easybuggy/views.py:219
 msgid "msg.answer.is.correct"
 msgstr "Your answer is correct!"
 
-#: easybuggy/views.py:225
+#: easybuggy/views.py:227
 msgid "title.lossoftrailingdigits.page"
 msgstr "Decimal Addition"
 
-#: easybuggy/views.py:226
+#: easybuggy/views.py:228
 msgid "msg.note.lossoftrailingdigits"
 msgstr "Loss of trailing digits occurs if you enter 0.0000000000000001."
 
 # "If keeping on loading this page, OutOfMemoryError is finally thrown."
-#: easybuggy/views.py:238
+#: easybuggy/views.py:240
 msgid "title.roundofferror.page"
 msgstr "Easy Subtraction"
 
-#: easybuggy/views.py:239
+#: easybuggy/views.py:241
 msgid "msg.note.roundofferror"
 msgstr "Round off error occurs if you enter 1."
 
-#: easybuggy/views.py:251
+#: easybuggy/views.py:253
 msgid "title.truncationerror.page"
 msgstr "Decimal Division"
 
-#: easybuggy/views.py:252
+#: easybuggy/views.py:254
 msgid "msg.note.truncationerror"
 msgstr "Truncation error occurs if you enter 3 or 7 or 9."
 
-#: easybuggy/views.py:264
+#: easybuggy/views.py:266
 msgid "title.xss.page"
 msgstr "Reverse String"
 
-#: easybuggy/views.py:265
+#: easybuggy/views.py:267
 msgid "msg.enter.string"
 msgstr "Please enter a string."
 
-#: easybuggy/views.py:266 templates/xss.html:16
+#: easybuggy/views.py:268 templates/xss.html:16
 msgid "msg.note.xss"
 msgstr ""
 "Session ID is shown if you enter name to <code>>tpircs/<;)eikooc."
 "tnemucod(trela>tpIrcs<</code>"
 
-#: easybuggy/views.py:278
+#: easybuggy/views.py:280
 msgid "title.sqlijc.page"
 msgstr "Search Your Secret Number"
 
-#: easybuggy/views.py:279
+#: easybuggy/views.py:281
 msgid "msg.note.sqlijc"
 msgstr ""
 "You can see a secret number if you enter <code>Mark</code> and "
 "<code>password</code>. You can see other users information if you enter "
 "password to <code>' OR '1'='1</code>"
+
+#: easybuggy/views.py:294
+msgid "title.unrestrictedsizeupload.page"
+msgstr "Reverse Color of Image File"
+
+#: easybuggy/views.py:295
+msgid "msg.note.unrestrictedsizeupload"
+msgstr ""
+"This page is vulnerable for attacks such as DoS because there are no "
+"limitation for uploading file size."
 
 #: templates/commandinjection.html:7
 msgid "msg.enter.mail.address"
@@ -385,6 +395,22 @@ msgstr "Secret"
 #: templates/truncationerror.html:8
 msgid "label.obelus"
 msgstr "/"
+
+#: templates/unrestrictedsizeupload.html:7
+msgid "label.history.back"
+msgstr "Back"
+
+#: templates/unrestrictedsizeupload.html:11
+msgid "msg.reverse.color"
+msgstr "You can reverse the color of an image file."
+
+#: templates/unrestrictedsizeupload.html:13
+msgid "msg.select.upload.file"
+msgstr "Select a file to upload."
+
+#: templates/unrestrictedsizeupload.html:14
+msgid "label.upload"
+msgstr "Upload"
 
 #: templates/xss.html:7
 msgid "description.reverse.string"

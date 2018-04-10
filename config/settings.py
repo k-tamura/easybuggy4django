@@ -142,3 +142,6 @@ STATICFILES_DIRS = (
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
+
+CONTENT_TYPES = ['image', ]
+MAX_UPLOAD_SIZE = 5242880
