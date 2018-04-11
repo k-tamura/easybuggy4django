@@ -4,7 +4,6 @@ import tempfile
 import threading
 import time
 from time import sleep
-from django.template.defaultfilters import filesizeformat
 
 import numpy as np
 import psutil
@@ -13,8 +12,11 @@ from django import forms
 from django.conf import settings
 from django.db import transaction, connection
 from django.shortcuts import render, redirect
+from django.template.defaultfilters import filesizeformat
 from django.utils.translation import ugettext as _
+from django.views.decorators.csrf import csrf_exempt
 
+from easybuggy4django.easybuggy.uploadhandler import QuotaUploadHandler
 from .forms import UploadFileForm
 from .models import User
 
@@ -25,6 +27,7 @@ b_lock = threading.Lock()
 switch_flag = True
 
 file_refs = []
+
 
 def index(request):
     d = {'title': 'EasyBuggy Django'}
@@ -292,6 +295,27 @@ def sqlijc(request):
     return render(request, 'sqlijc.html', d)
 
 
+@csrf_exempt
+def unrestrictedextupload(request):
+    request.upload_handlers.insert(0, QuotaUploadHandler())
+    d = {
+        'title': _('title.unrestrictedextupload.page'),
+        'note': _('msg.note.unrestrictedextupload'),
+    }
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            uploaded_file = request.FILES['file']
+            handle_uploaded_file(uploaded_file)
+            content_type = uploaded_file.content_type.split('/')[0]
+            convertGrayScale(uploaded_file)
+            d['file_path'] = os.path.join("static", "uploadfiles", uploaded_file.name)
+    else:
+        form = UploadFileForm()
+    d['form'] = form
+    return render(request, 'unrestrictedextupload.html', d)
+
+
 def unrestrictedsizeupload(request):
     d = {
         'title': _('title.unrestrictedsizeupload.page'),
@@ -304,10 +328,10 @@ def unrestrictedsizeupload(request):
             handle_uploaded_file(uploaded_file)
             content_type = uploaded_file.content_type.split('/')[0]
             if content_type in settings.CONTENT_TYPES:
-                # TODO This check is too late
+                # This size check is too late
                 if uploaded_file._size > settings.MAX_UPLOAD_SIZE:
-                    raise forms.ValidationError(_('Please keep filesize under %s. Current filesize %s') % (
-                    filesizeformat(settings.MAX_UPLOAD_SIZE), filesizeformat(uploaded_file._size)))
+                    raise forms.ValidationError('Please keep filesize under %s. Current filesize %s' % (
+                        filesizeformat(settings.MAX_UPLOAD_SIZE), filesizeformat(uploaded_file._size)))
                 invert(uploaded_file)
                 d['file_path'] = os.path.join("static", "uploadfiles", uploaded_file.name)
             else:
@@ -370,5 +394,10 @@ def invert(f):
     temp_file = os.path.join(settings.BASE_DIR, "static", "uploadfiles", f.name)
     im = Image.open(f).convert('RGB')
     im_invert = ImageOps.invert(im)
-    im_invert.save(temp_file, quality=95)
+    im_invert.save(temp_file)
 
+def convertGrayScale(f):
+    temp_file = os.path.join(settings.BASE_DIR, "static", "uploadfiles", f.name)
+    im = Image.open(f)
+    im_convert = ImageOps.grayscale(im)
+    im_convert.save(temp_file)

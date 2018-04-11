@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'^sqlijc/$', views.sqlijc, name='sqlijc'),
     url(r'^commandinjection/$', views.commandinjection, name='commandinjection'),
     url(r'^unrestrictedsizeupload/$', views.unrestrictedsizeupload, name='unrestrictedsizeupload'),
+    url(r'^unrestrictedextupload/$', views.unrestrictedextupload, name='unrestrictedextupload'),
 ]

