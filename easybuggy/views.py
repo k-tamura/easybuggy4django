@@ -155,15 +155,15 @@ def netsocketleak(request):
     try:
         req = urllib.request.Request(ping_url)
         res = urllib.request.urlopen(req)
-        d['response_code'] = res.getcode()
-        d['ping_url'] = ping_url
-        d['response_time'] = datetime.datetime.now() - start
+        try:
+            d['response_code'] = res.getcode()
+            d['ping_url'] = ping_url
+            d['response_time'] = datetime.datetime.now() - start
+        finally:
+            # res.close()
+            pass
     except Exception as e:
-        # TODO プレースホルダ、例外処理、ロギング
-        d['errmsg'] = _('msg.unknown.exception.occur')
-    finally:
-        # res.close()
-        pass
+        d['errmsg'] = _('msg.unknown.exception.occur') + ": " + str(e)
     return render(request, 'netsocketleak.html', d)
 
 

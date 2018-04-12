@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-12 23:42+0900\n"
+"POT-Creation-Date: 2018-04-13 04:21+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,133 +59,133 @@ msgstr "Measure Response Time"
 msgid "msg.note.netsocketleak"
 msgstr "Network socket leak occurs every time you load this page."
 
-#: easybuggy/views.py:162
+#: easybuggy/views.py:163
 msgid "msg.unknown.exception.occur"
-msgstr "Unknown exception occurs : {0}"
+msgstr "Unknown exception occurs."
 
-#: easybuggy/views.py:173
+#: easybuggy/views.py:174
 msgid "title.dbconnectionleak.page"
 msgstr "User List"
 
-#: easybuggy/views.py:174
+#: easybuggy/views.py:175
 msgid "msg.note.dbconnectionleak"
 msgstr ""
 "Database connection leak occurs if using an external RDBMS such as MySQL. "
 "Please edit <code>settings.py</code> if using an external RDBMS."
 
-#: easybuggy/views.py:188
+#: easybuggy/views.py:189
 msgid "title.filedescriptorleak.page"
 msgstr "Access History"
 
-#: easybuggy/views.py:189
+#: easybuggy/views.py:190
 msgid "msg.note.filedescriptorleak"
 msgstr "File descriptor leak occurs every time you load this page."
 
-#: easybuggy/views.py:217
+#: easybuggy/views.py:218
 msgid "title.commandinjection.page"
 msgstr "Checking Your Mail Address"
 
-#: easybuggy/views.py:218
+#: easybuggy/views.py:219
 msgid "msg.note.commandinjection"
 msgstr ""
 "<code>/important-dir/</code> directory will be removed on this server if you "
 "enter <code>test@gmail.com;rm -fr /important-dir/</code>."
 
-#: easybuggy/views.py:224
+#: easybuggy/views.py:225
 msgid "msg.send.mail.success"
 msgstr "Sending an email failed due to any reason."
 
-#: easybuggy/views.py:226
+#: easybuggy/views.py:227
 msgid "msg.send.mail.failure"
 msgstr ""
 "Please enter your email address. EasyBuggy will send you an email to confirm "
 "that you can accept it."
 
-#: easybuggy/views.py:232
+#: easybuggy/views.py:233
 msgid "title.intoverflow.page"
 msgstr "The Distance from Earth to the Moon"
 
-#: easybuggy/views.py:233
+#: easybuggy/views.py:234
 msgid "msg.note.intoverflow"
 msgstr ""
 "Integer overflow occurs if you enter a number greater than or equal to 63."
 
-#: easybuggy/views.py:257
+#: easybuggy/views.py:258
 msgid "msg.answer.is.correct"
 msgstr "Your answer is correct!"
 
-#: easybuggy/views.py:265
+#: easybuggy/views.py:266
 msgid "title.lossoftrailingdigits.page"
 msgstr "Decimal Addition"
 
-#: easybuggy/views.py:266
+#: easybuggy/views.py:267
 msgid "msg.note.lossoftrailingdigits"
 msgstr "Loss of trailing digits occurs if you enter 0.0000000000000001."
 
 # "If keeping on loading this page, OutOfMemoryError is finally thrown."
-#: easybuggy/views.py:278
+#: easybuggy/views.py:279
 msgid "title.roundofferror.page"
 msgstr "Easy Subtraction"
 
-#: easybuggy/views.py:279
+#: easybuggy/views.py:280
 msgid "msg.note.roundofferror"
 msgstr "Round off error occurs if you enter 1."
 
-#: easybuggy/views.py:291
+#: easybuggy/views.py:292
 msgid "title.truncationerror.page"
 msgstr "Decimal Division"
 
-#: easybuggy/views.py:292
+#: easybuggy/views.py:293
 msgid "msg.note.truncationerror"
 msgstr "Truncation error occurs if you enter 3 or 7 or 9."
 
-#: easybuggy/views.py:304
+#: easybuggy/views.py:305
 msgid "title.xss.page"
 msgstr "Reverse String"
 
-#: easybuggy/views.py:305
+#: easybuggy/views.py:306
 msgid "msg.enter.string"
 msgstr "Please enter a string."
 
-#: easybuggy/views.py:306 templates/xss.html:16
+#: easybuggy/views.py:307 templates/xss.html:16
 msgid "msg.note.xss"
 msgstr ""
 "Session ID is shown if you enter name to <code>>tpircs/<;)eikooc."
 "tnemucod(trela>tpIrcs<</code>"
 
-#: easybuggy/views.py:318
+#: easybuggy/views.py:319
 msgid "title.sqlijc.page"
 msgstr "Search Your Secret Number"
 
-#: easybuggy/views.py:319
+#: easybuggy/views.py:320
 msgid "msg.note.sqlijc"
 msgstr ""
 "You can see a secret number if you enter <code>Mark</code> and "
 "<code>password</code>. You can see other users information if you enter "
 "password to <code>' OR '1'='1</code>"
 
-#: easybuggy/views.py:334
+#: easybuggy/views.py:335
 msgid "title.unrestrictedextupload.page"
 msgstr "Convert Gray Scale of Image File"
 
-#: easybuggy/views.py:335
+#: easybuggy/views.py:336
 msgid "msg.note.unrestrictedextupload"
 msgstr ""
 "If you upload HTML file (named index.html) including the following code and "
 "make a user access http://localhost:8080/static/uploadfiles/index.html, then "
 "the user's cookie is sent to attacker's site."
 
-#: easybuggy/views.py:353
+#: easybuggy/views.py:354
 msgid "title.unrestrictedsizeupload.page"
 msgstr "Reverse Color of Image File"
 
-#: easybuggy/views.py:354
+#: easybuggy/views.py:355
 msgid "msg.note.unrestrictedsizeupload"
 msgstr ""
 "This page is vulnerable for attacks such as DoS because there are no "
 "limitation for uploading file size."
 
-#: easybuggy/views.py:370
+#: easybuggy/views.py:371
 msgid "msg.not.image.file"
 msgstr "The chosen file is not an image file."
 
@@ -432,28 +432,20 @@ msgid "label.process.memory.info"
 msgstr "Memory information about the process"
 
 #: templates/netsocketleak.html:5
-#, fuzzy
-#| msgid "description.reverse.string"
 msgid "description.response.time"
-msgstr "If you enter a string, then the reversed string is shown."
+msgstr "If you add pingurl=[a URL] to query string, the response code and time from the url is shown."
 
 #: templates/netsocketleak.html:8
-#, fuzzy
-#| msgid "label.string"
 msgid "label.ping.url"
-msgstr "String"
+msgstr "Ping URL"
 
 #: templates/netsocketleak.html:12
-#, fuzzy
-#| msgid "label.session.id"
 msgid "label.response.code"
-msgstr "Session ID"
+msgstr "Response Code"
 
 #: templates/netsocketleak.html:16
-#, fuzzy
-#| msgid "label.access.time"
 msgid "label.response.time"
-msgstr "Access Time"
+msgstr "Response Time"
 
 #: templates/roundofferror.html:7 templates/truncationerror.html:7
 msgid "msg.enter.positive.number"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-12 23:42+0900\n"
+"POT-Creation-Date: 2018-04-13 04:21+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,131 +58,131 @@ msgstr "応答時間の測定"
 msgid "msg.note.netsocketleak"
 msgstr "このページを読み込むたびに、ネットワークソケットリークが発生します。"
 
-#: easybuggy/views.py:162
+#: easybuggy/views.py:163
 msgid "msg.unknown.exception.occur"
-msgstr "何らかの例外が発生しました。 : {0}"
+msgstr "何らかの例外が発生しました。"
 
-#: easybuggy/views.py:173
+#: easybuggy/views.py:174
 msgid "title.dbconnectionleak.page"
 msgstr "ユーザー一覧"
 
-#: easybuggy/views.py:174
+#: easybuggy/views.py:175
 msgid "msg.note.dbconnectionleak"
 msgstr ""
 "データベースコネクションリークは、MySQLなどの外部RDBMSを使用する場合にのみ発"
 "生します。外部RDBMSを使用する場合は、<code>settings.py</code>を編集して下さ"
 "い。"
 
-#: easybuggy/views.py:188
+#: easybuggy/views.py:189
 msgid "title.filedescriptorleak.page"
 msgstr "アクセス履歴"
 
-#: easybuggy/views.py:189
+#: easybuggy/views.py:190
 msgid "msg.note.filedescriptorleak"
 msgstr "このページを読み込むたびに、ファイルディスクリプタリークが発生します。"
 
-#: easybuggy/views.py:217
+#: easybuggy/views.py:218
 msgid "title.commandinjection.page"
 msgstr "メールアドレスの確認"
 
-#: easybuggy/views.py:218
+#: easybuggy/views.py:219
 msgid "msg.note.commandinjection"
 msgstr ""
 "<code>test@gmail.com;rm -fr /important-dir/</code>を入力すると、サーバ上の重"
 "要なディレクトリが削除されます。 "
 
-#: easybuggy/views.py:224
+#: easybuggy/views.py:225
 msgid "msg.send.mail.success"
 msgstr "メールの送信が完了しました。メールを確認して下さい。"
 
-#: easybuggy/views.py:226
+#: easybuggy/views.py:227
 msgid "msg.send.mail.failure"
 msgstr "何らかの理由により、メールの送信が失敗しました。"
 
-#: easybuggy/views.py:232
+#: easybuggy/views.py:233
 msgid "title.intoverflow.page"
 msgstr "月までの距離"
 
-#: easybuggy/views.py:233
+#: easybuggy/views.py:234
 msgid "msg.note.intoverflow"
 msgstr "63以上の数を入力すると、整数オーバーフローが発生します。"
 
-#: easybuggy/views.py:257
+#: easybuggy/views.py:258
 msgid "msg.answer.is.correct"
 msgstr "正解です。"
 
-#: easybuggy/views.py:265
+#: easybuggy/views.py:266
 msgid "title.lossoftrailingdigits.page"
 msgstr "小数の足し算"
 
-#: easybuggy/views.py:266
+#: easybuggy/views.py:267
 msgid "msg.note.lossoftrailingdigits"
 msgstr "0.0000000000000001を入力すると、情報欠落が発生します。"
 
 # "画面をロードし続けると、最終的にOutOfMemoryErrorがスローされます。"
-#: easybuggy/views.py:278
+#: easybuggy/views.py:279
 msgid "title.roundofferror.page"
 msgstr "簡単な引き算"
 
-#: easybuggy/views.py:279
+#: easybuggy/views.py:280
 msgid "msg.note.roundofferror"
 msgstr "1を入力すると、丸め誤差が発生します。"
 
-#: easybuggy/views.py:291
+#: easybuggy/views.py:292
 msgid "title.truncationerror.page"
 msgstr "小数の割り算"
 
-#: easybuggy/views.py:292
+#: easybuggy/views.py:293
 msgid "msg.note.truncationerror"
 msgstr "3、7、9を入力すると、打ち切り誤差が発生します。 "
 
-#: easybuggy/views.py:304
+#: easybuggy/views.py:305
 msgid "title.xss.page"
 msgstr "文字列の逆転"
 
-#: easybuggy/views.py:305
+#: easybuggy/views.py:306
 msgid "msg.enter.string"
 msgstr "文字列を入力して下さい。"
 
-#: easybuggy/views.py:306 templates/xss.html:16
+#: easybuggy/views.py:307 templates/xss.html:16
 msgid "msg.note.xss"
 msgstr ""
 "名前に<code>>tpircs/<;)eikooc.tnemucod(trela>tpIrcs<</code>を入力すると、セッ"
 "ションIDが表示されます。"
 
-#: easybuggy/views.py:318
+#: easybuggy/views.py:319
 msgid "title.sqlijc.page"
 msgstr "暗証番号検索"
 
-#: easybuggy/views.py:319
+#: easybuggy/views.py:320
 msgid "msg.note.sqlijc"
 msgstr ""
 "<code>Mark</code>と<code>password</code>を入力すると、暗証番号が表示されま"
 "す。パスワードに<code>' OR '1'='1</code>を入力すると、他のユーザーの情報が表"
 "示できます。"
 
-#: easybuggy/views.py:334
+#: easybuggy/views.py:335
 msgid "title.unrestrictedextupload.page"
 msgstr "画像ファイルのグレースケール変換"
 
-#: easybuggy/views.py:335
+#: easybuggy/views.py:336
 msgid "msg.note.unrestrictedextupload"
 msgstr ""
 "以下の内容を書いたHTMLファイル(ファイル名：index.html)をアップロードして、"
 "http://localhost:8080/static/uploadfiles/index.htmlにユーザーをアクセスさせる"
 "と、そのユーザーのCookieが攻撃者のサイトに送信されます。"
 
-#: easybuggy/views.py:353
+#: easybuggy/views.py:354
 msgid "title.unrestrictedsizeupload.page"
 msgstr "画像ファイルの色反転"
 
-#: easybuggy/views.py:354
+#: easybuggy/views.py:355
 msgid "msg.note.unrestrictedsizeupload"
 msgstr ""
 "アップロード可能なファイルサイズの制限が無いため、DoS攻撃などに対して脆弱で"
 "す。"
 
-#: easybuggy/views.py:370
+#: easybuggy/views.py:371
 msgid "msg.not.image.file"
 msgstr "画像ファイルではありません。"
 
@@ -432,28 +432,20 @@ msgid "label.process.memory.info"
 msgstr "プロセスに関するメモリ情報"
 
 #: templates/netsocketleak.html:5
-#, fuzzy
-#| msgid "description.reverse.string"
 msgid "description.response.time"
-msgstr "文字列を入力すると、文字列が逆転して表示されます。"
+msgstr "クエリ文字列にpingurl=[任意URL]を追加すると、そのURLからの応答コードと時間が表示されます。"
 
 #: templates/netsocketleak.html:8
-#, fuzzy
-#| msgid "label.string"
 msgid "label.ping.url"
-msgstr "文字列"
+msgstr "PingするURL"
 
 #: templates/netsocketleak.html:12
-#, fuzzy
-#| msgid "label.session.id"
 msgid "label.response.code"
-msgstr "セッションID"
+msgstr "応答コード"
 
 #: templates/netsocketleak.html:16
-#, fuzzy
-#| msgid "label.access.time"
 msgid "label.response.time"
-msgstr "アクセス時刻"
+msgstr "応答時間"
 
 #: templates/roundofferror.html:7 templates/truncationerror.html:7
 msgid "msg.enter.positive.number"
