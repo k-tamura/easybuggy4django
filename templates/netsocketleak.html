@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block body %}
+{% include "header.html" %}
+<p>{% trans 'description.response.time' %}</p>
+<table class="table table-striped table-bordered table-hover" style="font-size: small;">
+    <tr>
+        <td>{% trans 'label.ping.url' %}</td>
+        <td>{{ping_url}}</td>
+    </tr>
+    <tr>
+        <td>{% trans 'label.response.code' %}</td>
+        <td>{{response_code}}</td>
+    </tr>
+    <tr>
+        <td>{% trans 'label.response.time' %}</td>
+        <td>{{response_time}}</td>
+    </tr>
+</table>
+{% include "messages.html" %}
+{% endblock %}

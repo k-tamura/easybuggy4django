@@ -1,4 +1,5 @@
 import datetime
+import urllib.request
 import os
 import tempfile
 import threading
@@ -9,6 +10,7 @@ import numpy as np
 import psutil
 from PIL import Image, ImageOps
 from django import forms
+from django.http import HttpResponse
 from django.conf import settings
 from django.db import transaction, connection
 from django.shortcuts import render, redirect
@@ -37,6 +39,10 @@ def index(request):
     if 'dlpinit' in request.session:
         del request.session['dlpinit']
     return render(request, 'index.html', d)
+
+
+def ping(request):
+    return HttpResponse("It works!")
 
 
 def deadlock(request):
@@ -135,6 +141,30 @@ def memoryleak(request):
     except psutil.NoSuchProcess:
         pass
     return render(request, 'memoryleak.html', d)
+
+
+def netsocketleak(request):
+    d = {
+        'title': _('title.netsocketleak.page'),
+        'note': _('msg.note.netsocketleak'),
+    }
+    start = datetime.datetime.now()
+    ping_url = request.GET.get("pingurl")
+    if ping_url is None:
+        ping_url = request.scheme + "://" + request.get_host() + "/ping"
+    try:
+        req = urllib.request.Request(ping_url)
+        res = urllib.request.urlopen(req)
+        d['response_code'] = res.getcode()
+        d['ping_url'] = ping_url
+        d['response_time'] = datetime.datetime.now() - start
+    except Exception as e:
+        # TODO プレースホルダ、例外処理、ロギング
+        d['errmsg'] = _('msg.unknown.exception.occur')
+    finally:
+        # res.close()
+        pass
+    return render(request, 'netsocketleak.html', d)
 
 
 # TODO This function cannot leak connections

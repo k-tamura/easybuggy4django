@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-11 15:05+0900\n"
+"POT-Creation-Date: 2018-04-12 23:42+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,23 +18,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: easybuggy/views.py:41
+#: easybuggy/views.py:50
 msgid "title.deadlock.page"
 msgstr "Detect Deadlock"
 
-#: easybuggy/views.py:42
+#: easybuggy/views.py:51
 msgid "msg.dead.lock.not.occur"
 msgstr "Deadlock has not occurred yet."
 
-#: easybuggy/views.py:43
+#: easybuggy/views.py:52
 msgid "msg.note.deadlock"
 msgstr "Deadlock occurs after continuously loading this page few times."
 
-#: easybuggy/views.py:68
+#: easybuggy/views.py:77
 msgid "title.deadlock2.page"
 msgstr "Batch Update of Users"
 
-#: easybuggy/views.py:69
+#: easybuggy/views.py:78
 msgid "msg.note.deadlock2"
 msgstr ""
 "If you open two windows (or tabs) and sort in the ascending order of user ID "
@@ -43,135 +43,149 @@ msgstr ""
 "deadlock occurs in database. However, deadlock does not occur when using "
 "default DB (SQLite) that does not support row locking"
 
-#: easybuggy/views.py:105 easybuggy/views.py:112
+#: easybuggy/views.py:114 easybuggy/views.py:121
 msgid "title.memoryleak.page"
 msgstr "Memory Usage"
 
-#: easybuggy/views.py:106 easybuggy/views.py:113
+#: easybuggy/views.py:115 easybuggy/views.py:122
 msgid "msg.note.memoryleak"
 msgstr "Memory leak occurs every time you load this page."
 
-#: easybuggy/views.py:141
+#: easybuggy/views.py:148
+msgid "title.netsocketleak.page"
+msgstr "Measure Response Time"
+
+#: easybuggy/views.py:149
+msgid "msg.note.netsocketleak"
+msgstr "Network socket leak occurs every time you load this page."
+
+#: easybuggy/views.py:162
+msgid "msg.unknown.exception.occur"
+msgstr "Unknown exception occurs : {0}"
+
+#: easybuggy/views.py:173
 msgid "title.dbconnectionleak.page"
 msgstr "User List"
 
-#: easybuggy/views.py:142
+#: easybuggy/views.py:174
 msgid "msg.note.dbconnectionleak"
 msgstr ""
 "Database connection leak occurs if using an external RDBMS such as MySQL. "
 "Please edit <code>settings.py</code> if using an external RDBMS."
 
-#: easybuggy/views.py:156
+#: easybuggy/views.py:188
 msgid "title.filedescriptorleak.page"
 msgstr "Access History"
 
-#: easybuggy/views.py:157
+#: easybuggy/views.py:189
 msgid "msg.note.filedescriptorleak"
 msgstr "File descriptor leak occurs every time you load this page."
 
-#: easybuggy/views.py:185
+#: easybuggy/views.py:217
 msgid "title.commandinjection.page"
 msgstr "Checking Your Mail Address"
 
-#: easybuggy/views.py:186
+#: easybuggy/views.py:218
 msgid "msg.note.commandinjection"
 msgstr ""
 "<code>/important-dir/</code> directory will be removed on this server if you "
 "enter <code>test@gmail.com;rm -fr /important-dir/</code>."
 
-#: easybuggy/views.py:192
+#: easybuggy/views.py:224
 msgid "msg.send.mail.success"
 msgstr "Sending an email failed due to any reason."
 
-#: easybuggy/views.py:194
+#: easybuggy/views.py:226
 msgid "msg.send.mail.failure"
 msgstr ""
 "Please enter your email address. EasyBuggy will send you an email to confirm "
 "that you can accept it."
 
-#: easybuggy/views.py:200
+#: easybuggy/views.py:232
 msgid "title.intoverflow.page"
 msgstr "The Distance from Earth to the Moon"
 
-#: easybuggy/views.py:201
+#: easybuggy/views.py:233
 msgid "msg.note.intoverflow"
 msgstr ""
 "Integer overflow occurs if you enter a number greater than or equal to 63."
 
-#: easybuggy/views.py:225
+#: easybuggy/views.py:257
 msgid "msg.answer.is.correct"
 msgstr "Your answer is correct!"
 
-#: easybuggy/views.py:233
+#: easybuggy/views.py:265
 msgid "title.lossoftrailingdigits.page"
 msgstr "Decimal Addition"
 
-#: easybuggy/views.py:234
+#: easybuggy/views.py:266
 msgid "msg.note.lossoftrailingdigits"
 msgstr "Loss of trailing digits occurs if you enter 0.0000000000000001."
 
 # "If keeping on loading this page, OutOfMemoryError is finally thrown."
-#: easybuggy/views.py:246
+#: easybuggy/views.py:278
 msgid "title.roundofferror.page"
 msgstr "Easy Subtraction"
 
-#: easybuggy/views.py:247
+#: easybuggy/views.py:279
 msgid "msg.note.roundofferror"
 msgstr "Round off error occurs if you enter 1."
 
-#: easybuggy/views.py:259
+#: easybuggy/views.py:291
 msgid "title.truncationerror.page"
 msgstr "Decimal Division"
 
-#: easybuggy/views.py:260
+#: easybuggy/views.py:292
 msgid "msg.note.truncationerror"
 msgstr "Truncation error occurs if you enter 3 or 7 or 9."
 
-#: easybuggy/views.py:272
+#: easybuggy/views.py:304
 msgid "title.xss.page"
 msgstr "Reverse String"
 
-#: easybuggy/views.py:273
+#: easybuggy/views.py:305
 msgid "msg.enter.string"
 msgstr "Please enter a string."
 
-#: easybuggy/views.py:274 templates/xss.html:16
+#: easybuggy/views.py:306 templates/xss.html:16
 msgid "msg.note.xss"
 msgstr ""
 "Session ID is shown if you enter name to <code>>tpircs/<;)eikooc."
 "tnemucod(trela>tpIrcs<</code>"
 
-#: easybuggy/views.py:286
+#: easybuggy/views.py:318
 msgid "title.sqlijc.page"
 msgstr "Search Your Secret Number"
 
-#: easybuggy/views.py:287
+#: easybuggy/views.py:319
 msgid "msg.note.sqlijc"
 msgstr ""
 "You can see a secret number if you enter <code>Mark</code> and "
 "<code>password</code>. You can see other users information if you enter "
 "password to <code>' OR '1'='1</code>"
 
-#: easybuggy/views.py:302
+#: easybuggy/views.py:334
 msgid "title.unrestrictedextupload.page"
 msgstr "Convert Gray Scale of Image File"
 
-#: easybuggy/views.py:303
+#: easybuggy/views.py:335
 msgid "msg.note.unrestrictedextupload"
 msgstr ""
-"If you upload HTML file (named index.html) including the following code and make a user access http://localhost:8080/static/uploadfiles/index.html, then the user's cookie is sent to attacker's site."
+"If you upload HTML file (named index.html) including the following code and "
+"make a user access http://localhost:8080/static/uploadfiles/index.html, then "
+"the user's cookie is sent to attacker's site."
 
-#: easybuggy/views.py:321
+#: easybuggy/views.py:353
 msgid "title.unrestrictedsizeupload.page"
 msgstr "Reverse Color of Image File"
 
-#: easybuggy/views.py:322
+#: easybuggy/views.py:354
 msgid "msg.note.unrestrictedsizeupload"
 msgstr ""
 "This page is vulnerable for attacks such as DoS because there are no "
 "limitation for uploading file size."
 
-#: easybuggy/views.py:338
+#: easybuggy/views.py:370
 msgid "msg.not.image.file"
 msgstr "The chosen file is not an image file."
 
@@ -287,102 +301,112 @@ msgid "function.description.memory.leak"
 msgstr "Memory leak occurs every time you load this page."
 
 #: templates/index.html:45
+msgid "function.name.network.socket.leak"
+msgstr "Network Socket Leak"
+
+#: templates/index.html:46
+msgid "function.description.network.socket.leak"
+msgstr "Network socket leak occurs every time you load this page."
+
+#: templates/index.html:49
 msgid "function.name.database.connection.leak"
 msgstr "Database Connection Leak"
 
-#: templates/index.html:46
+#: templates/index.html:50
 msgid "function.description.database.connection.leak"
 msgstr "Database connection leak occurs every time you load the page."
 
-#: templates/index.html:49
+#: templates/index.html:53
 msgid "function.name.file.descriptor.leak"
 msgstr "File Descriptor Leak"
 
-#: templates/index.html:50
+#: templates/index.html:54
 msgid "function.description.file.descriptor.leak"
 msgstr "File Descriptor Leak occurs every time you load this page."
 
-#: templates/index.html:53
+#: templates/index.html:57
 msgid "function.name.int.overflow"
 msgstr "Integer overflow"
 
-#: templates/index.html:54
+#: templates/index.html:58
 msgid "function.description.int.overflow"
 msgstr "Integer overflow can occur."
 
-#: templates/index.html:57
+#: templates/index.html:61
 msgid "function.name.round.off.error"
 msgstr "Round Off Error"
 
-#: templates/index.html:58
+#: templates/index.html:62
 msgid "function.description.round.off.error"
 msgstr "Round off error can occur."
 
-#: templates/index.html:61
+#: templates/index.html:65
 msgid "function.name.truncation.error"
 msgstr "Truncation Error"
 
-#: templates/index.html:62
+#: templates/index.html:66
 msgid "function.description.truncation.error"
 msgstr "Truncation error can occur."
 
-#: templates/index.html:65
+#: templates/index.html:69
 msgid "function.name.loss.of.trailing.digits"
 msgstr "Loss of Trailing Digits"
 
-#: templates/index.html:66
+#: templates/index.html:70
 msgid "function.description.loss.of.trailing.digits"
 msgstr "Loss of trailing digits can occur."
 
-#: templates/index.html:73
+#: templates/index.html:77
 msgid "section.vulnerabilities"
 msgstr "Vulnerabilities"
 
-#: templates/index.html:75
+#: templates/index.html:79
 msgid "description.vulnerabilities"
 msgstr "XSS, SQL Injection, LDAP injection, and so on："
 
-#: templates/index.html:78
+#: templates/index.html:82
 msgid "function.name.xss"
 msgstr "XSS (Cross Site Scripting)"
 
-#: templates/index.html:79
+#: templates/index.html:83
 msgid "function.description.xss"
 msgstr "There is a cross site scripting vulnerability in this page."
 
-#: templates/index.html:82
+#: templates/index.html:86
 msgid "function.name.sql.injection"
 msgstr "SQL Injection"
 
-#: templates/index.html:83
+#: templates/index.html:87
 msgid "function.description.sql.injection"
 msgstr "There is an SQL injection vulnerability in this page."
 
-#: templates/index.html:86
+#: templates/index.html:90
 msgid "function.name.os.command.injection"
 msgstr "OS command Injection"
 
-#: templates/index.html:87
+#: templates/index.html:91
 msgid "function.description.os.command.injection"
 msgstr "There is an OS command injection vulnerability in this page."
 
-#: templates/index.html:90
+#: templates/index.html:94
 msgid "function.name.unrestricted.size.upload"
 msgstr "Size Unrestricted File Upload"
 
-#: templates/index.html:91
+#: templates/index.html:95
 msgid "function.description.unrestricted.size.upload"
 msgstr ""
 "This page is vulnerable for attacks such as DoS because there are no "
 "limitation for uploading file size."
 
-#: templates/index.html:94
+#: templates/index.html:98
 msgid "function.name.unrestricted.ext.upload"
 msgstr "Extension Unrestricted File Upload"
 
-#: templates/index.html:95
+#: templates/index.html:99
 msgid "function.description.unrestricted.ext.upload"
-msgstr "This page is vulnerable for attacks such as code injection because there are no limitation for uploading file extension."
+msgstr ""
+"This page is vulnerable for attacks such as code injection because there are "
+"no limitation for uploading file extension."
 
 #: templates/intoverflow.html:7
 msgid "msg.question.reach.the.moon"
@@ -406,6 +430,30 @@ msgstr "Please enter the absolute value of a decimal number less than 1."
 #: templates/memoryleak.html:5
 msgid "label.process.memory.info"
 msgstr "Memory information about the process"
+
+#: templates/netsocketleak.html:5
+#, fuzzy
+#| msgid "description.reverse.string"
+msgid "description.response.time"
+msgstr "If you enter a string, then the reversed string is shown."
+
+#: templates/netsocketleak.html:8
+#, fuzzy
+#| msgid "label.string"
+msgid "label.ping.url"
+msgstr "String"
+
+#: templates/netsocketleak.html:12
+#, fuzzy
+#| msgid "label.session.id"
+msgid "label.response.code"
+msgstr "Session ID"
+
+#: templates/netsocketleak.html:16
+#, fuzzy
+#| msgid "label.access.time"
+msgid "label.response.time"
+msgstr "Access Time"
 
 #: templates/roundofferror.html:7 templates/truncationerror.html:7
 msgid "msg.enter.positive.number"
