@@ -20,6 +20,9 @@ from easybuggy4django.easybuggy.uploadhandler import QuotaUploadHandler
 from .forms import UploadFileForm
 from .models import User
 
+# TODO change directory from "static" to another
+UPLOAD_DIR = os.path.join(settings.BASE_DIR, "static", "uploadfiles")
+
 a = []
 
 a_lock = threading.Lock()
@@ -308,7 +311,7 @@ def unrestrictedextupload(request):
             uploaded_file = request.FILES['file']
             handle_uploaded_file(uploaded_file)
             content_type = uploaded_file.content_type.split('/')[0]
-            convertGrayScale(uploaded_file)
+            grayscale(uploaded_file)
             d['file_path'] = os.path.join("static", "uploadfiles", uploaded_file.name)
     else:
         form = UploadFileForm()
@@ -380,24 +383,24 @@ def get_client_ip(request):
 
 
 def handle_uploaded_file(f):
-    # TODO change directory from "static" to another
-    upload_dirs = os.path.join(settings.BASE_DIR, "static", "uploadfiles")
-    if not os.path.exists(upload_dirs):
-        os.mkdir(upload_dirs)
-    temp_file = os.path.join(upload_dirs, f.name)
-    with open(temp_file, 'wb+') as destination:
+    with open(get_uploaded_file(f), 'wb+') as destination:
         for chunk in f.chunks():
             destination.write(chunk)
 
 
+def get_uploaded_file(f):
+    if not os.path.exists(UPLOAD_DIR):
+        os.mkdir(UPLOAD_DIR)
+    return os.path.join(UPLOAD_DIR, f.name)
+
+
 def invert(f):
-    temp_file = os.path.join(settings.BASE_DIR, "static", "uploadfiles", f.name)
     im = Image.open(f).convert('RGB')
     im_invert = ImageOps.invert(im)
-    im_invert.save(temp_file)
+    im_invert.save(get_uploaded_file(f))
 
-def convertGrayScale(f):
-    temp_file = os.path.join(settings.BASE_DIR, "static", "uploadfiles", f.name)
+
+def grayscale(f):
     im = Image.open(f)
     im_convert = ImageOps.grayscale(im)
-    im_convert.save(temp_file)
+    im_convert.save(get_uploaded_file(f))
