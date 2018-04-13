@@ -1,5 +1,5 @@
 import datetime
-import urllib.request
+# import urllib.request
 import os
 import tempfile
 import threading
@@ -8,11 +8,12 @@ from time import sleep
 
 import numpy as np
 import psutil
+import requests
 from PIL import Image, ImageOps
 from django import forms
-from django.http import HttpResponse
 from django.conf import settings
 from django.db import transaction, connection
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template.defaultfilters import filesizeformat
 from django.utils.translation import ugettext as _
@@ -32,6 +33,7 @@ b_lock = threading.Lock()
 switch_flag = True
 
 file_refs = []
+netsockets_refs = []
 
 
 def index(request):
@@ -151,16 +153,20 @@ def netsocketleak(request):
     start = datetime.datetime.now()
     ping_url = request.GET.get("pingurl")
     if ping_url is None:
-        ping_url = request.scheme + "://" + request.get_host() + "/ping"
+        ping_url = request.scheme + "://localhost:" + request.META['SERVER_PORT'] + "/ping"
     try:
-        req = urllib.request.Request(ping_url)
-        res = urllib.request.urlopen(req)
+        response = requests.get(ping_url)
+        # req = urllib.request.Request(ping_url, headers={'Connection': 'KeepAlive'})
+        # res = urllib.request.urlopen(req)
         try:
-            d['response_code'] = res.getcode()
+            # d['response_code'] = res.getcode()
+            d['response_code'] = response.status_code
             d['ping_url'] = ping_url
             d['response_time'] = datetime.datetime.now() - start
+            netsockets_refs.append(response)  # TODO remove if possible
         finally:
             # res.close()
+            # response.close() # This line may not work if using requests 2.1.0 or earlier due to https://github.com/requests/requests/issues/1973
             pass
     except Exception as e:
         d['errmsg'] = _('msg.unknown.exception.occur') + ": " + str(e)
@@ -189,14 +195,18 @@ def filedescriptorleak(request):
         'title': _('title.filedescriptorleak.page'),
         'note': _('msg.note.filedescriptorleak'),
     }
-    global file_refs
+
     temp_file = os.path.join(tempfile._get_default_tempdir(), 'history.csv')
     try:
         f = open(temp_file, 'a')
-        f.write(str(datetime.datetime.now()) + ',' + get_client_ip(request) + ',' + request.session.session_key + '\n')
-        f.flush()
+        try:
+            f.write(
+                str(datetime.datetime.now()) + ',' + get_client_ip(request) + ',' + request.session.session_key + '\n')
+            f.flush()
+        finally:
+            f.close()
     finally:
-        f.close()
+        pass
     try:
         f = open(temp_file, 'r')
         history = []
@@ -310,7 +320,6 @@ def xss(request):
         input_str = request.POST["string"]
         if input_str is not None:
             d['msg'] = input_str[::-1]
-
     return render(request, 'xss.html', d)
 
 
@@ -324,7 +333,6 @@ def sqlijc(request):
         password = request.POST["password"]
         d['users'] = User.objects.raw("SELECT * FROM easybuggy_user WHERE ispublic = 'true' AND name='" + name +
                                       "' AND password='" + password + "' ORDER BY id")
-
     return render(request, 'sqlijc.html', d)
 
 
@@ -386,7 +394,6 @@ def get_order(request):
 
 
 def leak_memory():
-    global a
     for i in range(100000):
         a.append(time.time())
 
