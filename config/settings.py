@@ -145,3 +145,39 @@ LOCALE_PATHS = (
 
 CONTENT_TYPES = ['image', ]
 MAX_UPLOAD_SIZE = 5242880
+
+
+LOGGING = {
+    'version': 1,
+    'formatters': {
+        'all': {
+            'format': '\t'.join([
+                "[%(levelname)s]",
+                "asctime:%(asctime)s",
+                "process:%(process)d",
+                "thread:%(thread)d",
+                "module:%(module)s",
+                "message:%(message)s",
+            ])
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'django.log'),
+            'formatter': 'all',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'all'
+        },
+    },
+    'loggers': {
+        'easybuggy': {
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG',
+        },
+    },
+}

@@ -5,7 +5,7 @@ import tempfile
 import threading
 import time
 from time import sleep
-
+import logging
 import numpy as np
 import psutil
 import requests
@@ -22,6 +22,8 @@ from django.views.decorators.csrf import csrf_exempt
 from easybuggy4django.easybuggy.uploadhandler import QuotaUploadHandler
 from .forms import UploadFileForm
 from .models import User
+
+logger = logging.getLogger('easybuggy')
 
 # TODO change directory from "static" to another
 UPLOAD_DIR = os.path.join(settings.BASE_DIR, "static", "uploadfiles")
@@ -59,18 +61,18 @@ def deadlock(request):
         global switch_flag
         if switch_flag:
             with a_lock:
-                print("Locked a_lock.")
+                logger.info("Locked a_lock.")
                 switch_flag = False
                 sleep(5)
                 with b_lock:
-                    print("Locked a_lock. -> Locked b_lock.")
+                    logger.info("Locked a_lock. -> Locked b_lock.")
         else:
             with b_lock:
-                print("Locked b_lock.")
+                logger.info("Locked b_lock.")
                 switch_flag = True
                 sleep(5)
                 with a_lock:
-                    print("Locked b_lock. -> Locked a_lock.")
+                    logger.info("Locked b_lock. -> Locked a_lock.")
     return render(request, 'deadlock.html', d)
 
 
@@ -236,7 +238,7 @@ def threadleak(request):
 
 def active_threads_count():
     while True:
-        print("Current thread count: " + str(threading.active_count()))
+        logger.info("Current thread count: " + str(threading.active_count()))
         sleep(100)
 
 
