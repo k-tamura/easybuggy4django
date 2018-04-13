@@ -48,11 +48,8 @@ def ping(request):
 
 
 def deadlock(request):
-    d = {
-        'title': _('title.deadlock.page'),
-        'msg': _('msg.dead.lock.not.occur'),
-        'note': _('msg.note.deadlock'),
-    }
+    context, html = get_context_and_html('deadlock')
+    context['msg'] = _('msg.dead.lock.not.occur')
     if 'dlpinit' not in request.session:
         request.session['dlpinit'] = "True"
     else:
@@ -71,14 +68,11 @@ def deadlock(request):
                 sleep(5)
                 with a_lock:
                     print("Locked b_lock. -> Locked a_lock.")
-    return render(request, 'deadlock.html', d)
+    return render(request, html, context)
 
 
 def deadlock2(request):
-    d = {
-        'title': _('title.deadlock2.page'),
-        'note': _('msg.note.deadlock2'),
-    }
+    context, html = get_context_and_html('deadlock2')
     order = get_order(request)
     if request.method == 'POST':
         with transaction.atomic():
@@ -95,9 +89,9 @@ def deadlock2(request):
                 user.save()
                 sleep(1)
 
-    d['users'] = User.objects.raw("SELECT * FROM easybuggy_user WHERE ispublic = 'true' ORDER BY id " + order)
-    d['order'] = order
-    return render(request, 'deadlock2.html', d)
+    context['users'] = User.objects.raw("SELECT * FROM easybuggy_user WHERE ispublic = 'true' ORDER BY id " + order)
+    context['order'] = order
+    return render(request, html, context)
 
 
 def infiniteloop(request):
@@ -112,14 +106,11 @@ def redirectloop(request):
 
 def memoryleak(request):
     leak_memory()
-    d = {
-        'title': _('title.memoryleak.page'),
-        'note': _('msg.note.memoryleak'),
-    }
+    context, html = get_context_and_html('memoryleak')
     try:
         ps = psutil.Process(os.getpid())
         mem = ps.memory_full_info()
-        d = {
+        context = {
             'title': _('title.memoryleak.page'),
             'note': _('msg.note.memoryleak'),
             'pid': ps.pid,
@@ -142,14 +133,11 @@ def memoryleak(request):
         pass
     except psutil.NoSuchProcess:
         pass
-    return render(request, 'memoryleak.html', d)
+    return render(request, html, context)
 
 
 def netsocketleak(request):
-    d = {
-        'title': _('title.netsocketleak.page'),
-        'note': _('msg.note.netsocketleak'),
-    }
+    context, html = get_context_and_html('netsocketleak')
     start = datetime.datetime.now()
     ping_url = request.GET.get("pingurl")
     if ping_url is None:
@@ -159,43 +147,36 @@ def netsocketleak(request):
         # req = urllib.request.Request(ping_url, headers={'Connection': 'KeepAlive'})
         # res = urllib.request.urlopen(req)
         try:
-            # d['response_code'] = res.getcode()
-            d['response_code'] = response.status_code
-            d['ping_url'] = ping_url
-            d['response_time'] = datetime.datetime.now() - start
+            # context['response_code'] = res.getcode()
+            context['response_code'] = response.status_code
+            context['ping_url'] = ping_url
+            context['response_time'] = datetime.datetime.now() - start
             netsockets_refs.append(response)  # TODO remove if possible
         finally:
             # res.close()
             # response.close() # This line may not work if using requests 2.1.0 or earlier due to https://github.com/requests/requests/issues/1973
             pass
     except Exception as e:
-        d['errmsg'] = _('msg.unknown.exception.occur') + ": " + str(e)
-    return render(request, 'netsocketleak.html', d)
+        context['errmsg'] = _('msg.unknown.exception.occur') + ": " + str(e)
+    return render(request, html, context)
 
 
 # TODO This function cannot leak connections
 # See also: https://stackoverflow.com/questions/24661754/necessity-of-explicit-cursor-close
 def dbconnectionleak(request):
-    d = {
-        'title': _('title.dbconnectionleak.page'),
-        'note': _('msg.note.dbconnectionleak'),
-    }
+    context, html = get_context_and_html('dbconnectionleak')
     c = connection.cursor()
     try:
         c.execute("SELECT id, name, phone, mail FROM easybuggy_user WHERE ispublic = 'true' ORDER BY id asc")
-        d['users'] = c.fetchall()
+        context['users'] = c.fetchall()
     finally:
         # c.close()
         pass
-    return render(request, 'dbconnectionleak.html', d)
+    return render(request, html, context)
 
 
 def filedescriptorleak(request):
-    d = {
-        'title': _('title.filedescriptorleak.page'),
-        'note': _('msg.note.filedescriptorleak'),
-    }
-
+    context, html = get_context_and_html('filedescriptorleak')
     temp_file = os.path.join(tempfile._get_default_tempdir(), 'history.csv')
     try:
         f = open(temp_file, 'a')
@@ -215,34 +196,28 @@ def filedescriptorleak(request):
             i += 1
             history.append(row.split(','))
         del history[:len(history) - 15]
-        d['history'] = reversed(history)
+        context['history'] = reversed(history)
         file_refs.append(f)  # TODO remove if possible
     finally:
         # f.close()
         pass
-    return render(request, 'filedescriptorleak.html', d)
+    return render(request, html, context)
 
 
 def commandinjection(request):
-    d = {
-        'title': _('title.commandinjection.page'),
-        'note': _('msg.note.commandinjection'),
-    }
+    context, html = get_context_and_html('commandinjection')
     if request.method == 'POST':
         address = request.POST.get("address")
         cmd = 'echo "This is for testing." | mail -s "Test Mail" -r from@example.com ' + address
         if os.system(cmd) == 0:
-            d['result'] = _('msg.send.mail.success')
+            context['result'] = _('msg.send.mail.success')
         else:
-            d['result'] = _('msg.send.mail.failure')
-    return render(request, 'commandinjection.html', d)
+            context['result'] = _('msg.send.mail.failure')
+    return render(request, html, context)
 
 
 def iof(request):
-    d = {
-        'title': _('title.intoverflow.page'),
-        'note': _('msg.note.intoverflow'),
-    }
+    context, html = get_context_and_html('intoverflow')
     if request.method == 'POST':
         str_times = request.POST.get("times")
 
@@ -254,10 +229,8 @@ def iof(request):
                 thickness_m = int(thickness) / 1000  # m
                 thickness_km = int(thickness_m) / 1000  # km
 
-                d['description'] = times + 1
-
                 if times >= 0:
-                    d['times'] = str_times
+                    context['times'] = str_times
                     description = str(thickness) + " mm"
                     if thickness_m is not None and thickness_km is not None:
                         if thickness_m >= 1 and thickness_km < 1:
@@ -266,83 +239,65 @@ def iof(request):
                             description += " = " + str(thickness_km) + " km"
                     if times == 42:
                         description += " : " + _('msg.answer.is.correct')
-                    d['description'] = description
+                    context['description'] = description
 
-    return render(request, 'intoverflow.html', d)
+    return render(request, html, context)
 
 
 def lotd(request):
-    d = {
-        'title': _('title.lossoftrailingdigits.page'),
-        'note': _('msg.note.lossoftrailingdigits'),
-    }
+    context, html = get_context_and_html('lossoftrailingdigits')
     if request.method == 'POST':
         number = request.POST["number"]
-        d['number'] = number
+        context['number'] = number
         if number is not None and -1 < float(number) < 1:
-            d['result'] = float(number) + 1
-    return render(request, 'lossoftrailingdigits.html', d)
+            context['result'] = float(number) + 1
+    return render(request, html, context)
 
 
 def roe(request):
-    d = {
-        'title': _('title.roundofferror.page'),
-        'note': _('msg.note.roundofferror'),
-    }
+    context, html = get_context_and_html('roundofferror')
     if request.method == 'POST':
         number = request.POST["number"]
-        d['number'] = number
+        context['number'] = number
         if number is not None and number is not "0" and number.isdigit():
-            d['result'] = float(number) - 0.9
-    return render(request, 'roundofferror.html', d)
+            context['result'] = float(number) - 0.9
+    return render(request, html, context)
 
 
 def te(request):
-    d = {
-        'title': _('title.truncationerror.page'),
-        'note': _('msg.note.truncationerror'),
-    }
+    context, html = get_context_and_html('truncationerror')
     if request.method == 'POST':
         number = request.POST["number"]
-        d['number'] = number
+        context['number'] = number
         if number is not None and number is not "0" and number.isdigit():
-            d['result'] = 10.0 / float(number)
-    return render(request, 'truncationerror.html', d)
+            context['result'] = 10.0 / float(number)
+    return render(request, html, context)
 
 
 def xss(request):
-    d = {
-        'title': _('title.xss.page'),
-        'msg': _('msg.enter.string'),
-        'note': _('msg.note.xss'),
-    }
+    context, html = get_context_and_html('xss')
+    context['msg'] = _('msg.enter.string')
     if request.method == 'POST':
         input_str = request.POST["string"]
         if input_str is not None:
-            d['msg'] = input_str[::-1]
-    return render(request, 'xss.html', d)
+            context['msg'] = input_str[::-1]
+    return render(request, html, context)
 
 
 def sqlijc(request):
-    d = {
-        'title': _('title.sqlijc.page'),
-        'note': _('msg.note.sqlijc'),
-    }
+    context, html = get_context_and_html('sqlijc')
     if request.method == 'POST':
         name = request.POST["name"]
         password = request.POST["password"]
-        d['users'] = User.objects.raw("SELECT * FROM easybuggy_user WHERE ispublic = 'true' AND name='" + name +
-                                      "' AND password='" + password + "' ORDER BY id")
-    return render(request, 'sqlijc.html', d)
+        context['users'] = User.objects.raw("SELECT * FROM easybuggy_user WHERE ispublic = 'true' AND name='" + name +
+                                            "' AND password='" + password + "' ORDER BY id")
+    return render(request, html, context)
 
 
 @csrf_exempt
 def unrestrictedextupload(request):
     request.upload_handlers.insert(0, QuotaUploadHandler())
-    d = {
-        'title': _('title.unrestrictedextupload.page'),
-        'note': _('msg.note.unrestrictedextupload'),
-    }
+    context, html = get_context_and_html('unrestrictedextupload')
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
@@ -350,18 +305,15 @@ def unrestrictedextupload(request):
             handle_uploaded_file(uploaded_file)
             content_type = uploaded_file.content_type.split('/')[0]
             grayscale(uploaded_file)
-            d['file_path'] = os.path.join("static", "uploadfiles", uploaded_file.name)
+            context['file_path'] = os.path.join("static", "uploadfiles", uploaded_file.name)
     else:
         form = UploadFileForm()
-    d['form'] = form
-    return render(request, 'unrestrictedextupload.html', d)
+    context['form'] = form
+    return render(request, html, context)
 
 
 def unrestrictedsizeupload(request):
-    d = {
-        'title': _('title.unrestrictedsizeupload.page'),
-        'note': _('msg.note.unrestrictedsizeupload'),
-    }
+    context, html = get_context_and_html('unrestrictedsizeupload')
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
@@ -374,16 +326,24 @@ def unrestrictedsizeupload(request):
                     raise forms.ValidationError('Please keep filesize under %s. Current filesize %s' % (
                         filesizeformat(settings.MAX_UPLOAD_SIZE), filesizeformat(uploaded_file._size)))
                 invert(uploaded_file)
-                d['file_path'] = os.path.join("static", "uploadfiles", uploaded_file.name)
+                context['file_path'] = os.path.join("static", "uploadfiles", uploaded_file.name)
             else:
-                d['errmsg'] = _('msg.not.image.file')
+                context['errmsg'] = _('msg.not.image.file')
     else:
         form = UploadFileForm()
-    d['form'] = form
-    return render(request, 'unrestrictedsizeupload.html', d)
+    context['form'] = form
+    return render(request, html, context)
 
 
 # -------- private method
+def get_context_and_html(feature_name):
+    context = {
+        'title': _('title.' + feature_name + '.page'),
+        'note': _('msg.note.' + feature_name),
+    }
+    return context, feature_name + '.html'
+
+
 def get_order(request):
     order = request.GET.get("order")
     if order == 'asc':
