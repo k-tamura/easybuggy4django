@@ -1,18 +1,19 @@
 import datetime
+import logging
 # import urllib.request
 import os
 import tempfile
 import threading
 import time
 from time import sleep
-import logging
+
 import numpy as np
 import psutil
 import requests
 from PIL import Image, ImageOps
 from django import forms
 from django.conf import settings
-from django.db import transaction, connection
+from django.db import transaction, connection, DatabaseError
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template.defaultfilters import filesizeformat
@@ -84,18 +85,26 @@ def deadlock2(request):
     order = get_order(request)
     if request.method == 'POST':
         with transaction.atomic():
-            number = 0
-            while True:
-                number += 1
-                uid = request.POST.get("uid_" + str(number))
-                if uid is None:
-                    break
-                user = User.objects.get(id=uid)
-                user.name = request.POST.get(uid + "_name")
-                user.phone = request.POST.get(uid + "_phone")
-                user.mail = request.POST.get(uid + "_mail")
-                user.save()
-                sleep(1)
+            try:
+                number = 0
+                while True:
+                    number += 1
+                    uid = request.POST.get("uid_" + str(number))
+                    if uid is None:
+                        break
+                    user = User.objects.get(id=uid)
+                    user.name = request.POST.get(uid + "_name")
+                    user.phone = request.POST.get(uid + "_phone")
+                    user.mail = request.POST.get(uid + "_mail")
+                    user.save()
+                    logger.info(uid + " is updated.")
+                    sleep(1)
+            except DatabaseError as db_err:
+                logger.exception('DatabaseError occurs: %s', db_err)
+                raise db_err
+            except Exception as e:
+                logger.exception('Exception occurs: %s', e)
+                raise e
 
     d['users'] = User.objects.raw("SELECT * FROM easybuggy_user WHERE ispublic = 'true' ORDER BY id " + order)
     d['order'] = order
@@ -171,6 +180,7 @@ def netsocketleak(request):
             # response.close() # This line may not work if using requests 2.1.0 or earlier due to https://github.com/requests/requests/issues/1973
             pass
     except Exception as e:
+        logger.exception('Exception occurs: %s', e)
         d['errmsg'] = _('msg.unknown.exception.occur') + ": " + str(e)
     return render(request, 'netsocketleak.html', d)
 
@@ -186,6 +196,8 @@ def dbconnectionleak(request):
     try:
         c.execute("SELECT id, name, phone, mail FROM easybuggy_user WHERE ispublic = 'true' ORDER BY id asc")
         d['users'] = c.fetchall()
+    except Exception as e:
+        logger.exception('Exception occurs: %s', e)
     finally:
         # c.close()
         pass
@@ -207,6 +219,8 @@ def filedescriptorleak(request):
             f.flush()
         finally:
             f.close()
+    except Exception as e:
+        logger.exception('Exception occurs: %s', e)
     finally:
         pass
     try:
@@ -219,6 +233,8 @@ def filedescriptorleak(request):
         del history[:len(history) - 15]
         d['history'] = reversed(history)
         file_refs.append(f)  # TODO remove if possible
+    except Exception as e:
+        logger.exception('Exception occurs: %s', e)
     finally:
         # f.close()
         pass
