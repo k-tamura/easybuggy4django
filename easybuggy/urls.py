@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^netsocketleak/$', views.netsocketleak, name='netsocketleak'),
     url(r'^dbconnectionleak/$', views.dbconnectionleak, name='dbconnectionleak'),
     url(r'^filedescriptorleak/$', views.filedescriptorleak, name='filedescriptorleak'),
+    url(r'^threadleak/$', views.threadleak, name='threadleak'),
     url(r'^iof/$', views.iof, name='iof'),
     url(r'^lotd/$', views.lotd, name='lotd'),
     url(r'^roe/$', views.roe, name='roe'),

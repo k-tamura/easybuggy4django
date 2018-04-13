@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block body %}
+{% include "header.html" %}
+<span>{% trans 'label.current.thread.count' %}: {{count}}</span><br/><br/>
+{% include "messages.html" %}
+{% endblock %}
