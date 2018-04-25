@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-25 15:09+0900\n"
+"POT-Creation-Date: 2018-04-25 17:53+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,15 +23,17 @@ msgid "title.adminmain.page"
 msgstr "管理者向けメインページ"
 
 #: easybuggy/views.py:99 easybuggy/views.py:136 easybuggy/views.py:165
+#: easybuggy/views.py:206
 msgid "title.login.page"
 msgstr "管理者ログインページ"
 
-#: easybuggy/views.py:108 easybuggy/views.py:175
+#: easybuggy/views.py:108 easybuggy/views.py:175 easybuggy/views.py:216
 msgid "msg.account.locked"
 msgstr ""
-"ログイン連続失敗回数が%(count)s回を超えたため、アカウントがロックされています。"
+"ログイン連続失敗回数が%(count)s回を超えたため、アカウントがロックされていま"
+"す。"
 
-#: easybuggy/views.py:123 easybuggy/views.py:155
+#: easybuggy/views.py:123 easybuggy/views.py:155 easybuggy/views.py:193
 msgid "msg.authentication.fail"
 msgstr "認証に失敗しました。再度ログインして下さい。"
 
@@ -42,41 +44,45 @@ msgstr ""
 "ページにはログイン試行回数の制限が無いため、ブルートフォース攻撃が可能です。"
 
 #: easybuggy/views.py:166
+msgid "msg.note.open.redirect"
+msgstr "<code>admin</code>と<code>password</code>を入力すると、ログインできます。クエリストリングに<code>goto=[悪意のあるサイトのURL]</code>を付加すると、チェックせずに悪意のあるサイトのURLにリダイレクトします。"
+
+#: easybuggy/views.py:207
 msgid "msg.note.verbose.errror.message"
 msgstr ""
 "<code>admin</code>と<code>password</code>を入力すると、ログインできます。この"
 "画面での認証エラーのメッセージは詳細過ぎるため、ログイン可能なアカウントが推"
 "測しやすくなっています。"
 
-#: easybuggy/views.py:177
+#: easybuggy/views.py:218
 msgid "msg.user.not.exist"
 msgstr "ユーザーが存在しません。"
 
-#: easybuggy/views.py:179
+#: easybuggy/views.py:220
 msgid "msg.low.alphnum8"
 msgstr "パスワードは8桁の英数字です。"
 
-#: easybuggy/views.py:194
+#: easybuggy/views.py:235
 msgid "msg.password.not.match"
 msgstr "パスワードが一致しません。"
 
-#: easybuggy/views.py:204
+#: easybuggy/views.py:245
 msgid "title.deadlock.page"
 msgstr "デッドロックの検知"
 
-#: easybuggy/views.py:205
+#: easybuggy/views.py:246
 msgid "msg.dead.lock.not.occur"
 msgstr "デッドロックは発生していません。"
 
-#: easybuggy/views.py:206
+#: easybuggy/views.py:247
 msgid "msg.note.deadlock"
 msgstr "このページを連続で数回ロードすると、デッドロックが発生します。"
 
-#: easybuggy/views.py:231
+#: easybuggy/views.py:272
 msgid "title.deadlock2.page"
 msgstr "ユーザーの一括登録"
 
-#: easybuggy/views.py:232
+#: easybuggy/views.py:273
 msgid "msg.note.deadlock2"
 msgstr ""
 "2つのウインドウまたはタブを開き、一方でユーザーIDを降順にソートして「更新」ボ"
@@ -84,163 +90,163 @@ msgstr ""
 "と、データベースでデッドロックが発生します。 ただし、行ロックをサポートしない"
 "デフォルトのDB(SQLite)では発生しません。"
 
-#: easybuggy/views.py:276 easybuggy/views.py:283
+#: easybuggy/views.py:317 easybuggy/views.py:324
 msgid "title.memoryleak.page"
 msgstr "メモリの使用量"
 
-#: easybuggy/views.py:277 easybuggy/views.py:284
+#: easybuggy/views.py:318 easybuggy/views.py:325
 msgid "msg.note.memoryleak"
 msgstr "このページを読み込むたびに、メモリリークが発生します。"
 
-#: easybuggy/views.py:310
+#: easybuggy/views.py:351
 msgid "title.netsocketleak.page"
 msgstr "応答時間の測定"
 
-#: easybuggy/views.py:311
+#: easybuggy/views.py:352
 msgid "msg.note.netsocketleak"
 msgstr "このページを読み込むたびに、ネットワークソケットリークが発生します。"
 
-#: easybuggy/views.py:333
+#: easybuggy/views.py:374
 msgid "msg.unknown.exception.occur"
 msgstr "何らかの例外が発生しました。"
 
-#: easybuggy/views.py:341
+#: easybuggy/views.py:382
 msgid "title.dbconnectionleak.page"
 msgstr "ユーザー一覧"
 
-#: easybuggy/views.py:342
+#: easybuggy/views.py:383
 msgid "msg.note.dbconnectionleak"
 msgstr ""
 "データベースコネクションリークは、MySQLなどの外部RDBMSを使用する場合にのみ発"
 "生します。外部RDBMSを使用する場合は、<code>settings.py</code>を編集して下さ"
 "い。"
 
-#: easybuggy/views.py:358
+#: easybuggy/views.py:399
 msgid "title.filedescriptorleak.page"
 msgstr "アクセス履歴"
 
-#: easybuggy/views.py:359
+#: easybuggy/views.py:400
 msgid "msg.note.filedescriptorleak"
 msgstr "このページを読み込むたびに、ファイルディスクリプタリークが発生します。"
 
-#: easybuggy/views.py:395
+#: easybuggy/views.py:436
 msgid "title.threadleak.page"
 msgstr "現在のスレッド数の表示"
 
-#: easybuggy/views.py:396
+#: easybuggy/views.py:437
 msgid "msg.note.threadleak"
 msgstr "このページを読み込むたびに、スレッドリークが発生します。"
 
-#: easybuggy/views.py:412
+#: easybuggy/views.py:453
 msgid "title.commandinjection.page"
 msgstr "メールアドレスの確認"
 
-#: easybuggy/views.py:413
+#: easybuggy/views.py:454
 msgid "msg.note.commandinjection"
 msgstr ""
 "<code>test@gmail.com;rm -fr /important-dir/</code>を入力すると、サーバ上の重"
-"要なディレクトリが削除されます。 "
+"要なディレクトリが削除されます。"
 
-#: easybuggy/views.py:419
+#: easybuggy/views.py:460
 msgid "msg.send.mail.success"
 msgstr "メールの送信が完了しました。メールを確認して下さい。"
 
-#: easybuggy/views.py:421
+#: easybuggy/views.py:462
 msgid "msg.send.mail.failure"
 msgstr "何らかの理由により、メールの送信が失敗しました。"
 
-#: easybuggy/views.py:427
+#: easybuggy/views.py:468
 msgid "title.intoverflow.page"
 msgstr "月までの距離"
 
-#: easybuggy/views.py:428
+#: easybuggy/views.py:469
 msgid "msg.note.intoverflow"
 msgstr "63以上の数を入力すると、整数オーバーフローが発生します。"
 
-#: easybuggy/views.py:450
+#: easybuggy/views.py:491
 msgid "msg.answer.is.correct"
 msgstr "正解です。"
 
-#: easybuggy/views.py:458
+#: easybuggy/views.py:499
 msgid "title.lossoftrailingdigits.page"
 msgstr "小数の足し算"
 
-#: easybuggy/views.py:459
+#: easybuggy/views.py:500
 msgid "msg.note.lossoftrailingdigits"
 msgstr "0.0000000000000001を入力すると、情報欠落が発生します。"
 
 # "画面をロードし続けると、最終的にOutOfMemoryErrorがスローされます。"
-#: easybuggy/views.py:471
+#: easybuggy/views.py:512
 msgid "title.roundofferror.page"
 msgstr "簡単な引き算"
 
-#: easybuggy/views.py:472
+#: easybuggy/views.py:513
 msgid "msg.note.roundofferror"
 msgstr "1を入力すると、丸め誤差が発生します。"
 
-#: easybuggy/views.py:484
+#: easybuggy/views.py:525
 msgid "title.truncationerror.page"
 msgstr "小数の割り算"
 
-#: easybuggy/views.py:485
+#: easybuggy/views.py:526
 msgid "msg.note.truncationerror"
-msgstr "3、7、9を入力すると、打ち切り誤差が発生します。 "
+msgstr "3、7、9を入力すると、打ち切り誤差が発生します。"
 
-#: easybuggy/views.py:497
+#: easybuggy/views.py:538
 msgid "title.mojibake.page"
 msgstr "文字列の先頭大文字化"
 
-#: easybuggy/views.py:498 easybuggy/views.py:512
+#: easybuggy/views.py:539 easybuggy/views.py:553
 msgid "msg.enter.string"
 msgstr "文字列を入力して下さい。"
 
-#: easybuggy/views.py:499
+#: easybuggy/views.py:540
 msgid "msg.note.mojibake"
 msgstr "文字列に日本語を入力すると、文字化けが発生します。"
 
-#: easybuggy/views.py:511
+#: easybuggy/views.py:552
 msgid "title.xss.page"
 msgstr "文字列の逆転"
 
-#: easybuggy/views.py:513 templates/xss.html:16
+#: easybuggy/views.py:554 templates/xss.html:16
 msgid "msg.note.xss"
 msgstr ""
 "名前に<code>>tpircs/<;)eikooc.tnemucod(trela>tpIrcs<</code>を入力すると、セッ"
 "ションIDが表示されます。"
 
-#: easybuggy/views.py:524
+#: easybuggy/views.py:565
 msgid "title.sqlijc.page"
 msgstr "暗証番号検索"
 
-#: easybuggy/views.py:525
+#: easybuggy/views.py:566
 msgid "msg.note.sqlijc"
 msgstr ""
 "<code>Mark</code>と<code>password</code>を入力すると、暗証番号が表示されま"
 "す。パスワードに<code>' OR '1'='1</code>を入力すると、他のユーザーの情報が表"
 "示できます。"
 
-#: easybuggy/views.py:539
+#: easybuggy/views.py:580
 msgid "title.unrestrictedextupload.page"
 msgstr "画像ファイルのグレースケール変換"
 
-#: easybuggy/views.py:540
+#: easybuggy/views.py:581
 msgid "msg.note.unrestrictedextupload"
 msgstr ""
 "以下の内容を書いたHTMLファイル(ファイル名：index.html)をアップロードして、"
 "http://localhost:8080/static/uploadfiles/index.htmlにユーザーをアクセスさせる"
 "と、そのユーザーのCookieが攻撃者のサイトに送信されます。"
 
-#: easybuggy/views.py:557
+#: easybuggy/views.py:598
 msgid "title.unrestrictedsizeupload.page"
 msgstr "画像ファイルの色反転"
 
-#: easybuggy/views.py:558
+#: easybuggy/views.py:599
 msgid "msg.note.unrestrictedsizeupload"
 msgstr ""
 "アップロード可能なファイルサイズの制限が無いため、DoS攻撃などに対して脆弱で"
 "す。"
 
-#: easybuggy/views.py:574
+#: easybuggy/views.py:615
 msgid "msg.not.image.file"
 msgstr "画像ファイルではありません。"
 
@@ -393,7 +399,7 @@ msgstr "ネットワークソケットリーク"
 #: templates/index.html:46
 msgid "function.description.network.socket.leak"
 msgstr ""
-"このページをロードするたびに、ネットワークソケットリークが発生します。 "
+"このページをロードするたびに、ネットワークソケットリークが発生します。"
 
 #: templates/index.html:49
 msgid "function.name.database.connection.leak"
@@ -402,7 +408,7 @@ msgstr "データベースコネクションリーク"
 #: templates/index.html:50
 msgid "function.description.database.connection.leak"
 msgstr ""
-" このページをロードするたびに、データベースコネクションリークが発生します。 "
+" このページをロードするたびに、データベースコネクションリークが発生します。"
 
 #: templates/index.html:53
 msgid "function.name.file.descriptor.leak"
@@ -411,7 +417,7 @@ msgstr "ファイルディスクリプタリーク"
 #: templates/index.html:54
 msgid "function.description.file.descriptor.leak"
 msgstr ""
-"このページをロードするたびに、ファイルディスクリプタリークが発生します。 "
+"このページをロードするたびに、ファイルディスクリプタリークが発生します。"
 
 #: templates/index.html:57
 msgid "function.name.thread.leak"
@@ -435,7 +441,7 @@ msgstr "整数オーバーフロー"
 
 #: templates/index.html:66
 msgid "function.description.int.overflow"
-msgstr "整数オーバーフローを発生させることができます。 "
+msgstr "整数オーバーフローを発生させることができます。"
 
 #: templates/index.html:69
 msgid "function.name.round.off.error"
@@ -459,7 +465,7 @@ msgstr "情報落ち"
 
 #: templates/index.html:78
 msgid "function.description.loss.of.trailing.digits"
-msgstr "情報落ちを発生させることができます。 "
+msgstr "情報落ちを発生させることができます。"
 
 #: templates/index.html:85
 msgid "section.vulnerabilities"
@@ -521,13 +527,21 @@ msgstr "ブルートフォース攻撃可能なログイン画面"
 msgid "function.description.brute.force"
 msgstr ""
 "このログインページにはアカウントロックが無いため、ブルートフォース攻撃に対し"
-"ての脆弱です。 "
+"ての脆弱です。"
 
 #: templates/index.html:114
+msgid "function.name.open.redirect"
+msgstr "オープンリダイレクト可能なログイン画面"
+
+#: templates/index.html:115
+msgid "function.description.open.redirect"
+msgstr "このログインページにはオープンリダイレクトの脆弱性があります。"
+
+#: templates/index.html:118
 msgid "function.name.verbose.error.message"
 msgstr "親切過ぎる認証エラーメッセージ"
 
-#: templates/index.html:115
+#: templates/index.html:119
 msgid "function.description.verbose.error.message"
 msgstr ""
 "このログインページのエラーメッセージは親切過ぎるため、IDとパスワードが推測さ"

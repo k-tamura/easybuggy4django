@@ -157,6 +157,47 @@ def bruteforce(request):
         return render(request, 'login.html', d)
 
 
+def openredirect(request):
+    if request.user.is_authenticated:
+        return redirect("/admins/main")
+    else:
+        d = {
+            'title': _('title.login.page'),
+            'note': _('msg.note.open.redirect'),
+        }
+        if request.method == 'GET':
+            return render(request, 'login.html', d)
+        elif request.method == 'POST':
+            username = request.POST.get("username")
+            password = request.POST.get("password")
+
+            if is_account_lockedout(username):
+                d['errmsg'] = _("msg.account.locked") % {"count" : settings.ACCOUNT_LOCK_COUNT}
+            else:
+                user = authenticate(request, username=username, password=password)
+                if user is not None:
+                    login(request, user)
+                    # authentication succeeded, then reset account lock
+                    reset_account_lock(username)
+                    request.session["username"] = username
+                    if "goto" in request.GET:
+                        return redirect(request.GET.get("goto"))
+                    else:
+                        target = request.POST.get("target")
+                        if target is None:
+                            return redirect("/admins/main")
+                        else:
+                            del request.session['target']
+                            return redirect(target)
+                else:
+                    d['errmsg'] = _("msg.authentication.fail")
+
+                # account lock count +1
+                increment_account_lock_num(username)
+
+        return render(request, 'login.html', d)
+
+
 def verbosemsg(request):
     if request.user.is_authenticated:
         return redirect("/admins/main")

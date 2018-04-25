@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^commandinjection/$', views.commandinjection, name='commandinjection'),
     url(r'^unrestrictedsizeupload/$', views.unrestrictedsizeupload, name='unrestrictedsizeupload'),
     url(r'^unrestrictedextupload/$', views.unrestrictedextupload, name='unrestrictedextupload'),
-    url(r'^verbosemsg/*', views.verbosemsg, name='verbosemsg'),
     url(r'^bruteforce/*', views.bruteforce, name='bruteforce'),
+    url(r'^openredirect/*', views.openredirect, name='openredirect'),
+    url(r'^verbosemsg/*', views.verbosemsg, name='verbosemsg'),
 ]
