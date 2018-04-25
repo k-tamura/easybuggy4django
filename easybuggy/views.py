@@ -1,7 +1,7 @@
 import datetime
 import logging
-# import urllib.request
 import os
+import re
 import tempfile
 import threading
 import time
@@ -13,6 +13,7 @@ import requests
 from PIL import Image, ImageOps
 from django import forms
 from django.conf import settings
+from django.contrib.auth import authenticate, login, logout
 from django.db import transaction, connection, DatabaseError
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -38,6 +39,8 @@ switch_flag = True
 file_refs = []
 netsockets_refs = []
 
+all_users_login_history = {}
+
 
 def index(request):
     d = {'title': 'EasyBuggy Django'}
@@ -48,6 +51,152 @@ def index(request):
 
 def ping(request):
     return HttpResponse("It works!")
+
+
+def admins(request):
+    # Login (authentication) is needed to access admin pages (under /admins).
+    if not request.user.is_authenticated:
+        target = request.path
+        login_type = request.GET.get("logintype")
+        query_string = request.META['QUERY_STRING']
+
+        # Remove "login_type" parameter from query string.
+        if login_type is not None and query_string is not None:
+            query_string = query_string.replace("logintype=" + login_type + "&", "")
+            query_string = query_string.replace("&logintype=" + login_type, "")
+            query_string = query_string.replace("logintype=" + login_type, "")
+            if (len(query_string) > 0):
+                query_string = "?" + query_string
+
+        # Not authenticated yet
+        request.session['target'] = target
+
+        if login_type is None:
+            # TODO for session fixation
+            # redirect(response.encodeRedirectURL("/login" + query_string))
+            return redirect("/login" + query_string)
+        # elif "sessionfixation".equals(login_type):
+        #    redirect(response.encodeRedirectURL("/" + login_type + "/login" + query_string))
+        else:
+            return redirect("/" + login_type + "/login" + query_string)
+    else:
+        d = {
+            'title': _('title.adminmain.page'),
+        }
+        return render(request, 'adminmain.html', d)
+
+
+def admins_logout(request):
+    logout(request)
+    return index(request)
+
+
+def admins_login(request):
+    if request.user.is_authenticated:
+        return redirect("/admins/main")
+    else:
+        d = {
+            'title': _('title.login.page'),
+        }
+        if request.method == 'GET':
+            return render(request, 'login.html', d)
+        elif request.method == 'POST':
+            username = request.POST.get("username")
+            password = request.POST.get("password")
+
+            if is_account_lockedout(username):
+                d['errmsg'] = _("msg.account.locked")
+            else:
+                user = authenticate(request, username=username, password=password)
+                if user is not None:
+                    login(request, user)
+                    # authentication succeeded, then reset account lock
+                    reset_account_lock(username)
+                    request.session["username"] = username
+                    target = request.POST.get("target")
+                    if target is None:
+                        return redirect("/admins/main")
+                    else:
+                        del request.session['target']
+                        return redirect(target)
+                else:
+                    d['errmsg'] = _("msg.authentication.fail")
+
+                # account lock count +1
+                increment_account_lock_num(username)
+
+        return render(request, 'login.html', d)
+
+
+def bruteforce(request):
+    if request.user.is_authenticated:
+        return redirect("/admins/main")
+    else:
+        d = {
+            'title': _('title.login.page'),
+            'note': _('msg.note.brute.force'),
+        }
+        if request.method == 'GET':
+            return render(request, 'login.html', d)
+        elif request.method == 'POST':
+            username = request.POST.get("username")
+            password = request.POST.get("password")
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                request.session["username"] = username
+                target = request.POST.get("target")
+                if target is None:
+                    return redirect("/admins/main")
+                else:
+                    del request.session['target']
+                    return redirect(target)
+            else:
+                d['errmsg'] = _("msg.authentication.fail")
+
+        return render(request, 'login.html', d)
+
+
+def verbosemsg(request):
+    if request.user.is_authenticated:
+        return redirect("/admins/main")
+    else:
+        d = {
+            'title': _('title.login.page'),
+            'note': _('msg.note.verbose.errror.message'),
+        }
+        if request.method == 'GET':
+            return render(request, 'login.html', d)
+        elif request.method == 'POST':
+            username = request.POST.get("username")
+            password = request.POST.get("password")
+
+            if is_account_lockedout(username):
+                d['errmsg'] = _("msg.account.locked")
+            elif not is_user_exist(username):
+                d['errmsg'] = _("msg.user.not.exist")
+            elif not bool(re.match("[0-9a-z]{8}", password)):
+                d['errmsg'] = _("msg.low.alphnum8")
+            else:
+                user = authenticate(request, username=username, password=password)
+                if user is not None:
+                    login(request, user)
+                    # authentication succeeded, then reset account lock
+                    reset_account_lock(username)
+                    request.session["username"] = username
+                    target = request.POST.get("target")
+                    if target is None:
+                        return redirect("/admins/main")
+                    else:
+                        del request.session['target']
+                        return redirect(target)
+                else:
+                    d['errmsg'] = _("msg.password.not.match")
+
+            # account lock count +1
+            increment_account_lock_num(username)
+
+        return render(request, 'login.html', d)
 
 
 def deadlock(request):
@@ -381,7 +530,6 @@ def unrestrictedextupload(request):
         if form.is_valid():
             uploaded_file = request.FILES['file']
             handle_uploaded_file(uploaded_file)
-            content_type = uploaded_file.content_type.split('/')[0]
             grayscale(uploaded_file)
             d['file_path'] = os.path.join("static", "uploadfiles", uploaded_file.name)
     else:
@@ -474,3 +622,33 @@ def grayscale(f):
     im = Image.open(f)
     im_convert = ImageOps.grayscale(im)
     im_convert.save(get_uploaded_file(f))
+
+
+def increment_account_lock_num(username):
+    if username in all_users_login_history:
+        user_login_history = all_users_login_history[username]
+        user_login_history[0] = user_login_history[0] + 1
+        user_login_history[1] = datetime.datetime.now()
+    else:
+        user_login_history = [1, datetime.datetime.now()]
+        all_users_login_history[username] = user_login_history
+
+
+def reset_account_lock(username):
+    all_users_login_history[username] = [0, None]
+
+
+def is_account_lockedout(username):
+    if username is None or username not in all_users_login_history:
+        return False
+    user_login_history = all_users_login_history[username]
+    return user_login_history[1] is not None \
+           and user_login_history[0] == settings.ACCOUNT_LOCK_COUNT \
+           and ((datetime.datetime.now() - user_login_history[1]).seconds < settings.ACCOUNT_LOCK_TIME)
+
+
+def is_user_exist(username):
+    from django.contrib.auth.models import User
+    if User.objects.filter(username=username).exists():
+        return True
+    return False

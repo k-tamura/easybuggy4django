@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-13 16:05+0900\n"
+"POT-Creation-Date: 2018-04-25 12:51+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,23 +18,65 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: easybuggy/views.py:52
+#: easybuggy/views.py:84
+msgid "title.adminmain.page"
+msgstr "管理者向けメインページ"
+
+#: easybuggy/views.py:99 easybuggy/views.py:136 easybuggy/views.py:165
+msgid "title.login.page"
+msgstr "管理者ログインページ"
+
+#: easybuggy/views.py:108 easybuggy/views.py:175
+msgid "msg.account.locked"
+msgstr ""
+"ログイン連続失敗回数が10回を超えたため、アカウントがロックされています。"
+
+#: easybuggy/views.py:126 easybuggy/views.py:199
+msgid "msg.password.not.match"
+msgstr "パスワードが一致しません。"
+
+#: easybuggy/views.py:137
+msgid "msg.note.brute.force"
+msgstr ""
+"<code>admin</code>と<code>password</code>を入力すると、ログインできます。この"
+"ページにはログイン試行回数の制限が無いため、ブルートフォース攻撃が可能です。"
+
+#: easybuggy/views.py:155
+msgid "msg.authentication.fail"
+msgstr "認証に失敗しました。再度ログインして下さい。"
+
+#: easybuggy/views.py:166
+msgid "msg.note.verbose.errror.message"
+msgstr ""
+"<code>admin</code>と<code>password</code>を入力すると、ログインできます。この"
+"画面での認証エラーのメッセージは詳細過ぎるため、ログイン可能なアカウントが推"
+"測しやすくなっています。"
+
+#: easybuggy/views.py:178
+msgid "msg.user.not.exist"
+msgstr "ユーザーが存在しません。"
+
+#: easybuggy/views.py:181
+msgid "msg.low.alphnum8"
+msgstr "パスワードは8桁の英数字です。"
+
+#: easybuggy/views.py:206
 msgid "title.deadlock.page"
 msgstr "デッドロックの検知"
 
-#: easybuggy/views.py:53
+#: easybuggy/views.py:207
 msgid "msg.dead.lock.not.occur"
 msgstr "デッドロックは発生していません。"
 
-#: easybuggy/views.py:54
+#: easybuggy/views.py:208
 msgid "msg.note.deadlock"
 msgstr "このページを連続で数回ロードすると、デッドロックが発生します。"
 
-#: easybuggy/views.py:79
+#: easybuggy/views.py:233
 msgid "title.deadlock2.page"
 msgstr "ユーザーの一括登録"
 
-#: easybuggy/views.py:80
+#: easybuggy/views.py:234
 msgid "msg.note.deadlock2"
 msgstr ""
 "2つのウインドウまたはタブを開き、一方でユーザーIDを降順にソートして「更新」ボ"
@@ -42,159 +84,161 @@ msgstr ""
 "と、データベースでデッドロックが発生します。 ただし、行ロックをサポートしない"
 "デフォルトのDB(SQLite)では発生しません。"
 
-#: easybuggy/views.py:116 easybuggy/views.py:123
+#: easybuggy/views.py:278 easybuggy/views.py:285
 msgid "title.memoryleak.page"
 msgstr "メモリの使用量"
 
-#: easybuggy/views.py:117 easybuggy/views.py:124
+#: easybuggy/views.py:279 easybuggy/views.py:286
 msgid "msg.note.memoryleak"
 msgstr "このページを読み込むたびに、メモリリークが発生します。"
 
-#: easybuggy/views.py:150
+#: easybuggy/views.py:312
 msgid "title.netsocketleak.page"
 msgstr "応答時間の測定"
 
-#: easybuggy/views.py:151
+#: easybuggy/views.py:313
 msgid "msg.note.netsocketleak"
 msgstr "このページを読み込むたびに、ネットワークソケットリークが発生します。"
 
-#: easybuggy/views.py:172
+#: easybuggy/views.py:335
 msgid "msg.unknown.exception.occur"
 msgstr "何らかの例外が発生しました。"
 
-#: easybuggy/views.py:180
+#: easybuggy/views.py:343
 msgid "title.dbconnectionleak.page"
 msgstr "ユーザー一覧"
 
-#: easybuggy/views.py:181
+#: easybuggy/views.py:344
 msgid "msg.note.dbconnectionleak"
 msgstr ""
 "データベースコネクションリークは、MySQLなどの外部RDBMSを使用する場合にのみ発"
 "生します。外部RDBMSを使用する場合は、<code>settings.py</code>を編集して下さ"
 "い。"
 
-#: easybuggy/views.py:195
+#: easybuggy/views.py:360
 msgid "title.filedescriptorleak.page"
 msgstr "アクセス履歴"
 
-#: easybuggy/views.py:196
+#: easybuggy/views.py:361
 msgid "msg.note.filedescriptorleak"
 msgstr "このページを読み込むたびに、ファイルディスクリプタリークが発生します。"
 
-#: easybuggy/views.py:228
+#: easybuggy/views.py:397
 msgid "title.threadleak.page"
 msgstr "現在のスレッド数の表示"
 
-#: easybuggy/views.py:229
+#: easybuggy/views.py:398
 msgid "msg.note.threadleak"
 msgstr "このページを読み込むたびに、スレッドリークが発生します。"
 
-#: easybuggy/views.py:245
+#: easybuggy/views.py:414
 msgid "title.commandinjection.page"
 msgstr "メールアドレスの確認"
 
-#: easybuggy/views.py:246
+#: easybuggy/views.py:415
 msgid "msg.note.commandinjection"
 msgstr ""
 "<code>test@gmail.com;rm -fr /important-dir/</code>を入力すると、サーバ上の重"
 "要なディレクトリが削除されます。 "
 
-#: easybuggy/views.py:252
+#: easybuggy/views.py:421
 msgid "msg.send.mail.success"
 msgstr "メールの送信が完了しました。メールを確認して下さい。"
 
-#: easybuggy/views.py:254
+#: easybuggy/views.py:423
 msgid "msg.send.mail.failure"
 msgstr "何らかの理由により、メールの送信が失敗しました。"
 
-#: easybuggy/views.py:260
+#: easybuggy/views.py:429
 msgid "title.intoverflow.page"
 msgstr "月までの距離"
 
-#: easybuggy/views.py:261
+#: easybuggy/views.py:430
 msgid "msg.note.intoverflow"
 msgstr "63以上の数を入力すると、整数オーバーフローが発生します。"
 
-#: easybuggy/views.py:285
+#: easybuggy/views.py:452
 msgid "msg.answer.is.correct"
 msgstr "正解です。"
 
-#: easybuggy/views.py:293
+#: easybuggy/views.py:460
 msgid "title.lossoftrailingdigits.page"
 msgstr "小数の足し算"
 
-#: easybuggy/views.py:294
+#: easybuggy/views.py:461
 msgid "msg.note.lossoftrailingdigits"
 msgstr "0.0000000000000001を入力すると、情報欠落が発生します。"
 
 # "画面をロードし続けると、最終的にOutOfMemoryErrorがスローされます。"
-#: easybuggy/views.py:306
+#: easybuggy/views.py:473
 msgid "title.roundofferror.page"
 msgstr "簡単な引き算"
 
-#: easybuggy/views.py:307
+#: easybuggy/views.py:474
 msgid "msg.note.roundofferror"
 msgstr "1を入力すると、丸め誤差が発生します。"
 
-#: easybuggy/views.py:319
+#: easybuggy/views.py:486
 msgid "title.truncationerror.page"
 msgstr "小数の割り算"
 
-#: easybuggy/views.py:320
+#: easybuggy/views.py:487
 msgid "msg.note.truncationerror"
 msgstr "3、7、9を入力すると、打ち切り誤差が発生します。 "
 
-#: easybuggy/views.py:332
-#, fuzzy
-#| msgid "title.sqlijc.page"
+#: easybuggy/views.py:499
 msgid "title.xss.page"
-msgstr "暗証番号検索"
+msgstr "文字列の逆転"
 
-#: easybuggy/views.py:333
+#: easybuggy/views.py:500
 msgid "msg.enter.string"
 msgstr "文字列を入力して下さい。"
 
-#: easybuggy/views.py:334 templates/xss.html:16
+#: easybuggy/views.py:501 templates/xss.html:16
 msgid "msg.note.xss"
 msgstr ""
 "名前に<code>>tpircs/<;)eikooc.tnemucod(trela>tpIrcs<</code>を入力すると、セッ"
 "ションIDが表示されます。"
 
-#: easybuggy/views.py:345
+#: easybuggy/views.py:512
 msgid "title.sqlijc.page"
 msgstr "暗証番号検索"
 
-#: easybuggy/views.py:346
+#: easybuggy/views.py:513
 msgid "msg.note.sqlijc"
 msgstr ""
 "<code>Mark</code>と<code>password</code>を入力すると、暗証番号が表示されま"
 "す。パスワードに<code>' OR '1'='1</code>を入力すると、他のユーザーの情報が表"
 "示できます。"
 
-#: easybuggy/views.py:360
+#: easybuggy/views.py:527
 msgid "title.unrestrictedextupload.page"
 msgstr "画像ファイルのグレースケール変換"
 
-#: easybuggy/views.py:361
+#: easybuggy/views.py:528
 msgid "msg.note.unrestrictedextupload"
 msgstr ""
 "以下の内容を書いたHTMLファイル(ファイル名：index.html)をアップロードして、"
 "http://localhost:8080/static/uploadfiles/index.htmlにユーザーをアクセスさせる"
 "と、そのユーザーのCookieが攻撃者のサイトに送信されます。"
 
-#: easybuggy/views.py:379
+#: easybuggy/views.py:546
 msgid "title.unrestrictedsizeupload.page"
 msgstr "画像ファイルの色反転"
 
-#: easybuggy/views.py:380
+#: easybuggy/views.py:547
 msgid "msg.note.unrestrictedsizeupload"
 msgstr ""
 "アップロード可能なファイルサイズの制限が無いため、DoS攻撃などに対して脆弱で"
 "す。"
 
-#: easybuggy/views.py:396
+#: easybuggy/views.py:563
 msgid "msg.not.image.file"
 msgstr "画像ファイルではありません。"
+
+#: templates/adminmain.html:5
+msgid "msg.admin.page.top"
+msgstr "管理者ページへようこそ！！"
 
 #: templates/commandinjection.html:7
 msgid "msg.enter.mail.address"
@@ -208,6 +252,7 @@ msgid "label.submit"
 msgstr "送信"
 
 #: templates/dbconnectionleak.html:7 templates/deadlock2.html:12
+#: templates/login.html:10
 msgid "label.user.id"
 msgstr "ユーザーID"
 
@@ -248,9 +293,17 @@ msgstr "IPアドレス"
 msgid "label.session.id"
 msgstr "セッションID"
 
-#: templates/header.html:5
+#: templates/header.html:6
 msgid "label.go.to.main"
 msgstr "メインページへ"
+
+#: templates/header.html:10
+msgid "label.login.user.id"
+msgstr "ログインユーザーID"
+
+#: templates/header.html:11
+msgid "label.logout"
+msgstr "ログアウト"
 
 #: templates/index.html:11
 msgid "description.all"
@@ -426,6 +479,26 @@ msgstr ""
 "このページにはファイルアップロードの拡張子制限が無いため、コードインジェク"
 "ションなどに対して脆弱です。"
 
+#: templates/index.html:106
+msgid "function.name.brute.force"
+msgstr "ブルートフォース攻撃可能なログイン画面"
+
+#: templates/index.html:107
+msgid "function.description.brute.force"
+msgstr ""
+"このログインページにはアカウントロックが無いため、ブルートフォース攻撃に対し"
+"ての脆弱です。 "
+
+#: templates/index.html:110
+msgid "function.name.verbose.error.message"
+msgstr "親切過ぎる認証エラーメッセージ"
+
+#: templates/index.html:111
+msgid "function.description.verbose.error.message"
+msgstr ""
+"このログインページのエラーメッセージは親切過ぎるため、IDとパスワードが推測さ"
+"れる可能性が高いです。"
+
 #: templates/intoverflow.html:7
 msgid "msg.question.reach.the.moon"
 msgstr ""
@@ -440,6 +513,19 @@ msgstr "回数"
 #: templates/roundofferror.html:10 templates/truncationerror.html:11
 msgid "label.calculate"
 msgstr "計算する"
+
+#: templates/login.html:5
+msgid "msg.need.admin.privilege"
+msgstr ""
+"ここから先は管理者権限が必要です。ユーザーIDとパスワードを入力して下さい。"
+
+#: templates/login.html:14 templates/sqlijc.html:10
+msgid "label.password"
+msgstr "パスワード"
+
+#: templates/login.html:19
+msgid "label.login"
+msgstr "ログイン"
 
 #: templates/lossoftrailingdigits.html:7
 msgid "msg.enter.decimal.value"
@@ -474,10 +560,6 @@ msgstr "正の整数を入力して下さい。"
 #: templates/sqlijc.html:7
 msgid "msg.enter.name.and.passwd"
 msgstr "名前とパスワードを入力すると、暗証番号が表示されます。"
-
-#: templates/sqlijc.html:10
-msgid "label.password"
-msgstr "パスワード"
 
 #: templates/sqlijc.html:17
 msgid "label.secret"

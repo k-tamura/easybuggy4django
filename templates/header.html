@@ -2,7 +2,15 @@
 <table style="width: 100%;">
     <tr>
         <td><h2><span class="glyphicon glyphicon-globe"></span> <span>{{ title }}</span></h2></td>
+        {% if not request.session.username %}
         <td align="right"><a href="/">{% trans 'label.go.to.main' %}</a></td>
+        {% endif %}
+        {% if request.session.username %}
+        <td align="right">
+            <p>{% trans 'label.login.user.id' %}: {{ request.session.username }}</p>
+            <a href="/logout">{% trans 'label.logout' %}</a>
+        </td>
+        {% endif %}
     </tr>
 </table>
 <hr style="margin-top: 0px"/>

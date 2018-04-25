@@ -5,6 +5,9 @@ app_name = "easybuggy"
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^login/*', views.admins_login, name='admins_login'),
+    url(r'^logout/$', views.admins_logout, name='admins_logout'),
+    url(r'^admins/*', views.admins, name='admins'),
     url(r'^ping/$', views.ping, name='ping'),
     url(r'^deadlock/$', views.deadlock, name='deadlock'),
     url(r'^deadlock2/$', views.deadlock2, name='deadlock2'),
@@ -24,4 +27,6 @@ urlpatterns = [
     url(r'^commandinjection/$', views.commandinjection, name='commandinjection'),
     url(r'^unrestrictedsizeupload/$', views.unrestrictedsizeupload, name='unrestrictedsizeupload'),
     url(r'^unrestrictedextupload/$', views.unrestrictedextupload, name='unrestrictedextupload'),
+    url(r'^verbosemsg/*', views.verbosemsg, name='verbosemsg'),
+    url(r'^bruteforce/*', views.bruteforce, name='bruteforce'),
 ]

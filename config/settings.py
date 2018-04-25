@@ -181,3 +181,6 @@ LOGGING = {
         },
     },
 }
+
+ACCOUNT_LOCK_TIME = 3600
+ACCOUNT_LOCK_COUNT = 10

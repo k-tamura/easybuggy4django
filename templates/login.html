@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block body %}
+{% include "header.html" %}
+<p>{% trans 'msg.need.admin.privilege' %}</p>
+<form method="POST" action="">
+{% csrf_token %}
+    <table width="400px" height="150px">
+        <tr>
+            <td>{% trans 'label.user.id' %} :&nbsp;</td>
+            <td><input type="text" name="username" size="20"></td>
+        </tr>
+        <tr>
+            <td>{% trans 'label.password' %} :&nbsp;</td>
+            <td><input type="password" name="password" size="20" autocomplete="off"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="{% trans 'label.login' %}"></td>
+        </tr>
+    </table>
+    {% include "messages.html" %}
+</form>
+{% endblock %}

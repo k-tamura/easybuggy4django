@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block body %}
+{% include "header.html" %}
+{% trans 'msg.admin.page.top' %}<br><br>
+<!--
+<ul>
+    <li><a href="/uid/serverinfo.jsp">{% trans 'title.serverinfo.page' %}</a></li>
+    <li><a href="/admins/csrf">{% trans 'title.csrf.page' %}</a></li>
+    <li><a href="/admins/clickjacking">{% trans 'title.clickjacking.page' %}</a></li>
+</ul>
+-->
+{% endblock %}
