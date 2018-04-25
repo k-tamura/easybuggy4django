@@ -105,7 +105,7 @@ def admins_login(request):
             password = request.POST.get("password")
 
             if is_account_lockedout(username):
-                d['errmsg'] = _("msg.account.locked")
+                d['errmsg'] = _("msg.account.locked") % {"count" : settings.ACCOUNT_LOCK_COUNT}
             else:
                 user = authenticate(request, username=username, password=password)
                 if user is not None:
@@ -172,7 +172,7 @@ def verbosemsg(request):
             password = request.POST.get("password")
 
             if is_account_lockedout(username):
-                d['errmsg'] = _("msg.account.locked")
+                d['errmsg'] = _("msg.account.locked") % {"count" : settings.ACCOUNT_LOCK_COUNT}
             elif not is_user_exist(username):
                 d['errmsg'] = _("msg.user.not.exist")
             elif not bool(re.match("[0-9a-z]{8}", password)):

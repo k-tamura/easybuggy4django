@@ -29,7 +29,7 @@ msgstr "管理者ログインページ"
 #: easybuggy/views.py:108 easybuggy/views.py:175
 msgid "msg.account.locked"
 msgstr ""
-"ログイン連続失敗回数が10回を超えたため、アカウントがロックされています。"
+"ログイン連続失敗回数が%(count)s回を超えたため、アカウントがロックされています。"
 
 #: easybuggy/views.py:123 easybuggy/views.py:155
 msgid "msg.authentication.fail"
