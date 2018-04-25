@@ -492,6 +492,20 @@ def te(request):
     return render(request, 'truncationerror.html', d)
 
 
+def mojibake(request):
+    d = {
+        'title': _('title.mojibake.page'),
+        'msg': _('msg.enter.string'),
+        'note': _('msg.note.mojibake'),
+    }
+    if request.method == 'POST':
+        request.encoding = 'ISO-8859-1'
+        input_str = request.POST["string"]
+        if input_str is not None:
+            d['msg'] = input_str.title()
+    return render(request, 'mojibake.html', d)
+
+
 def xss(request):
     d = {
         'title': _('title.xss.page'),

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block body %}
+{% include "header.html" %}
+<form action="" method="post" enctype="application/x-www-form-urlencoded">
+    {% csrf_token %}
+    <p>{% trans 'description.capitalize.string' %}</p><br/>
+    <label>{% trans 'label.string' %}</label><span>: </span>
+    <input type="text" name="string" size="100" maxlength="100"/><br/>
+    <br/> <input type="submit" value="{% trans 'label.submit' %}"/><br/><br/>
+    {% include "messages.html" %}
+</form>
+{% endblock %}
