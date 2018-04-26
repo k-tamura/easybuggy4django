@@ -39,6 +39,7 @@ switch_flag = True
 file_refs = []
 netsockets_refs = []
 
+# Dictionary for in-memory account locking
 all_users_login_history = {}
 
 
@@ -53,47 +54,85 @@ def ping(request):
     return HttpResponse("It works!")
 
 
-def admins(request):
+# -----------------------------------------------------------------------
+# Authentication filter function
+def redirect_login(request):
     # Login (authentication) is needed to access admin pages (under /admins).
-    if not request.user.is_authenticated:
-        target = request.path
-        login_type = request.GET.get("logintype")
-        query_string = request.META['QUERY_STRING']
+    target = request.path
+    login_type = request.GET.get("logintype")
+    query_string = request.META['QUERY_STRING']
 
-        # Remove "login_type" parameter from query string.
-        if login_type is not None and query_string is not None:
-            query_string = query_string.replace("logintype=" + login_type + "&", "")
-            query_string = query_string.replace("&logintype=" + login_type, "")
-            query_string = query_string.replace("logintype=" + login_type, "")
-            if (len(query_string) > 0):
-                query_string = "?" + query_string
+    # Remove "login_type" parameter from query string.
+    if login_type is not None and query_string is not None:
+        query_string = query_string.replace("logintype=" + login_type + "&", "")
+        query_string = query_string.replace("&logintype=" + login_type, "")
+        query_string = query_string.replace("logintype=" + login_type, "")
+        if len(query_string) > 0:
+            query_string = "?" + query_string
 
-        # Not authenticated yet
-        request.session['target'] = target
+    # Not authenticated yet
+    request.session['target'] = target
 
-        if login_type is None:
-            # TODO for session fixation
-            # redirect(response.encodeRedirectURL("/login" + query_string))
-            return redirect("/login" + query_string)
-        # elif "sessionfixation".equals(login_type):
-        #    redirect(response.encodeRedirectURL("/" + login_type + "/login" + query_string))
-        else:
-            return redirect("/" + login_type + "/login" + query_string)
+    if login_type is None:
+        # TODO for session fixation
+        # redirect(response.encodeRedirectURL("/login" + query_string))
+        return redirect("/login" + query_string)
+
+    # elif "sessionfixation".equals(login_type):
+    #    redirect(response.encodeRedirectURL("/" + login_type + "/login" + query_string))
     else:
-        d = {
-            'title': _('title.adminmain.page'),
-        }
-        return render(request, 'adminmain.html', d)
+        return redirect("/" + login_type + "/login" + query_string)
+# -----------------------------------------------------------------------
+
+
+# -----------------------------------------------------------------------
+# Admin Pages
+def main(request):
+    if not request.user.is_authenticated:
+        return redirect_login(request)
+    d = {
+        'title': _('title.adminmain.page'),
+    }
+    return render(request, 'adminmain.html', d)
+
+
+@csrf_exempt
+def csrf(request):
+    if not request.user.is_authenticated:
+        return redirect_login(request)
+    d = {
+        'title': _('title.csrf.page'),
+        'note': _('msg.note.csrf'),
+    }
+    if request.method == 'POST' and "username" in request.session:
+        username = request.session["username"]
+        password = request.POST["password"]
+        if password is not None:
+            try:
+                from django.contrib.auth.models import User
+                User.objects.filter(is_superuser=True)
+                u = User.objects.get(username=username)
+                u.set_password(password)
+                u.save()
+                d['complete'] = True
+            except Exception as e:
+                logger.exception('Exception occurs: %s', e)
+                d['msg'] = _('msg.passwd.change.failed')
+    return render(request, 'csrf.html', d)
+# -----------------------------------------------------------------------
 
 
 def admins_logout(request):
-    logout(request)
+    if request.user.is_authenticated:
+        logout(request)
     return index(request)
 
 
+# -----------------------------------------------------------------------
+# Login functions
 def admins_login(request):
     if request.user.is_authenticated:
-        return redirect("/admins/main")
+        return main(request)
     else:
         d = {
             'title': _('title.login.page'),
@@ -105,7 +144,7 @@ def admins_login(request):
             password = request.POST.get("password")
 
             if is_account_lockedout(username):
-                d['errmsg'] = _("msg.account.locked") % {"count" : settings.ACCOUNT_LOCK_COUNT}
+                d['errmsg'] = _("msg.account.locked") % {"count": settings.ACCOUNT_LOCK_COUNT}
             else:
                 user = authenticate(request, username=username, password=password)
                 if user is not None:
@@ -113,10 +152,10 @@ def admins_login(request):
                     # authentication succeeded, then reset account lock
                     reset_account_lock(username)
                     request.session["username"] = username
-                    target = request.POST.get("target")
-                    if target is None:
-                        return redirect("/admins/main")
+                    if 'target' not in request.session:
+                        return main(request)
                     else:
+                        target = request.session['target']
                         del request.session['target']
                         return redirect(target)
                 else:
@@ -130,7 +169,7 @@ def admins_login(request):
 
 def bruteforce(request):
     if request.user.is_authenticated:
-        return redirect("/admins/main")
+        return main(request)
     else:
         d = {
             'title': _('title.login.page'),
@@ -145,10 +184,10 @@ def bruteforce(request):
             if user is not None:
                 login(request, user)
                 request.session["username"] = username
-                target = request.POST.get("target")
-                if target is None:
-                    return redirect("/admins/main")
+                if 'target' not in request.session:
+                    return main(request)
                 else:
+                    target = request.session['target']
                     del request.session['target']
                     return redirect(target)
             else:
@@ -159,7 +198,7 @@ def bruteforce(request):
 
 def openredirect(request):
     if request.user.is_authenticated:
-        return redirect("/admins/main")
+        return main(request)
     else:
         d = {
             'title': _('title.login.page'),
@@ -172,7 +211,7 @@ def openredirect(request):
             password = request.POST.get("password")
 
             if is_account_lockedout(username):
-                d['errmsg'] = _("msg.account.locked") % {"count" : settings.ACCOUNT_LOCK_COUNT}
+                d['errmsg'] = _("msg.account.locked") % {"count": settings.ACCOUNT_LOCK_COUNT}
             else:
                 user = authenticate(request, username=username, password=password)
                 if user is not None:
@@ -183,10 +222,10 @@ def openredirect(request):
                     if "goto" in request.GET:
                         return redirect(request.GET.get("goto"))
                     else:
-                        target = request.POST.get("target")
-                        if target is None:
-                            return redirect("/admins/main")
+                        if 'target' not in request.session:
+                            return main(request)
                         else:
+                            target = request.session['target']
                             del request.session['target']
                             return redirect(target)
                 else:
@@ -200,7 +239,7 @@ def openredirect(request):
 
 def verbosemsg(request):
     if request.user.is_authenticated:
-        return redirect("/admins/main")
+        return main(request)
     else:
         d = {
             'title': _('title.login.page'),
@@ -213,7 +252,7 @@ def verbosemsg(request):
             password = request.POST.get("password")
 
             if is_account_lockedout(username):
-                d['errmsg'] = _("msg.account.locked") % {"count" : settings.ACCOUNT_LOCK_COUNT}
+                d['errmsg'] = _("msg.account.locked") % {"count": settings.ACCOUNT_LOCK_COUNT}
             elif not is_user_exist(username):
                 d['errmsg'] = _("msg.user.not.exist")
             elif not bool(re.match("[0-9a-z]{8}", password)):
@@ -225,10 +264,10 @@ def verbosemsg(request):
                     # authentication succeeded, then reset account lock
                     reset_account_lock(username)
                     request.session["username"] = username
-                    target = request.POST.get("target")
-                    if target is None:
-                        return redirect("/admins/main")
+                    if 'target' not in request.session:
+                        return main(request)
                     else:
+                        target = request.session['target']
                         del request.session['target']
                         return redirect(target)
                 else:
@@ -238,6 +277,7 @@ def verbosemsg(request):
             increment_account_lock_num(username)
 
         return render(request, 'login.html', d)
+# -----------------------------------------------------------------------
 
 
 def deadlock(request):
@@ -698,7 +738,7 @@ def is_account_lockedout(username):
         return False
     user_login_history = all_users_login_history[username]
     return user_login_history[1] is not None \
-           and user_login_history[0] == settings.ACCOUNT_LOCK_COUNT \
+           and user_login_history[0] >= settings.ACCOUNT_LOCK_COUNT \
            and ((datetime.datetime.now() - user_login_history[1]).seconds < settings.ACCOUNT_LOCK_TIME)
 
 
