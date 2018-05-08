@@ -144,7 +144,7 @@ def admins_login(request):
             password = request.POST.get("password")
 
             if is_account_lockedout(username):
-                d['errmsg'] = _("msg.account.locked") % {"count": settings.ACCOUNT_LOCK_COUNT}
+                d['errmsg'] = _("msg.authentication.fail")
             else:
                 user = authenticate(request, username=username, password=password)
                 if user is not None:
@@ -211,7 +211,7 @@ def openredirect(request):
             password = request.POST.get("password")
 
             if is_account_lockedout(username):
-                d['errmsg'] = _("msg.account.locked") % {"count": settings.ACCOUNT_LOCK_COUNT}
+                d['errmsg'] = _("msg.authentication.fail")
             else:
                 user = authenticate(request, username=username, password=password)
                 if user is not None:
