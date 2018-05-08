@@ -25,6 +25,10 @@ from easybuggy4django.easybuggy.uploadhandler import QuotaUploadHandler
 from .forms import UploadFileForm
 from .models import User
 
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
 logger = logging.getLogger('easybuggy')
 
 # TODO change directory from "static" to another
@@ -488,7 +492,7 @@ def active_threads_count():
         sleep(100)
 
 
-def commandinjection(request):
+def commandijct(request):
     d = {
         'title': _('title.commandinjection.page'),
         'note': _('msg.note.commandinjection'),
@@ -501,6 +505,37 @@ def commandinjection(request):
         else:
             d['result'] = _('msg.send.mail.failure')
     return render(request, 'commandinjection.html', d)
+
+
+def mailheaderijct(request):
+
+    d = {
+        'title': _('title.mailheaderinjection.page'),
+        'note': _('msg.note.mailheaderinjection'),
+    }
+
+    if request.method == 'POST':
+
+        name = request.POST.get("name")
+        mail = request.POST.get("mail")
+        subject = request.POST.get("subject")
+        content = request.POST.get("content")
+
+        if not subject or subject is None or not content or content is None:
+            d['errmsg'] = _('msg.mail.is.empty')
+            return render(request, 'mailheaderinjection.html', d)
+
+        msg_body = _('label.name') + ': ' + name + '<br>' + _('label.mail') + ': ' + mail + '<br><br>' + _(
+            'label.content') + ': ' + content + '<br>'
+
+        try:
+            send_email(subject, msg_body)
+            d['msg'] = _("msg.sent.mail")
+        except Exception as e:
+            logger.exception('Exception occurs: %s', e)
+            d['errmsg'] = _('msg.unknown.exception.occur')
+
+    return render(request, 'mailheaderinjection.html', d)
 
 
 def iof(request):
@@ -658,7 +693,6 @@ def unrestrictedsizeupload(request):
     d['form'] = form
     return render(request, 'unrestrictedsizeupload.html', d)
 
-
 # -------- private method
 def get_order(request):
     order = request.GET.get("order")
@@ -747,3 +781,24 @@ def is_user_exist(username):
     if User.objects.filter(username=username).exists():
         return True
     return False
+
+
+# Python smtplib's mail header injection vulnerability has been fixed by the following commit:
+# https://github.com/python/cpython/commit/5b2d9ddf69cecfb9ad4e687fab3f34ecc5a9ea4f#diff-7d35ae5e9e22a15ee979f1cba58bc60a
+# However, the following bug has not been fixed in smtplib (Python) 3.6, so it may cause the security issue depending
+# on mail server that does not correctly implement RFC:
+# https://bugs.python.org/issue32606
+def send_email(subject, msg_body):
+    msg = MIMEMultipart('alternative')
+    msg['Subject'] = subject
+    msg['From'] = 'from@example.com'
+    msg['To'] = settings.MAIL_ADMIN_ADDRESS
+    msg.attach(MIMEText(msg_body, 'plain'))
+
+    smtp_server = smtplib.SMTP(settings.MAIL_SMTP_HOST, port=settings.MAIL_SMTP_PORT)
+    if settings.MAIL_SMTP_STARTTLS_ENABLE:
+        smtp_server.starttls()
+    if settings.MAIL_SMTP_AUTH:
+        smtp_server.login(settings.MAIL_USER, settings.MAIL_PASSWORD)
+
+    smtp_server.sendmail('from@example.com', settings.MAIL_ADMIN_ADDRESS, msg.as_string())

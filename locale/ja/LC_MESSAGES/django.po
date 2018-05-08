@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-26 17:42+0900\n"
+"POT-Creation-Date: 2018-05-08 16:01+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,86 +18,89 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: easybuggy/views.py:94
+#: easybuggy/views.py:98
 msgid "title.adminmain.page"
 msgstr "管理者向けメインページ"
 
-#: easybuggy/views.py:104 templates/adminmain.html:9
+#: easybuggy/views.py:108 templates/adminmain.html:9
 msgid "title.csrf.page"
 msgstr "パスワード変更"
 
-#: easybuggy/views.py:105
+#: easybuggy/views.py:109
 msgid "msg.note.csrf"
-msgstr "このページは、ユーザーが意図しないリクエストも受信して、パスワードを変更してしまいます。"
+msgstr ""
+"このページは、ユーザーが意図しないリクエストも受信して、パスワードを変更して"
+"しまいます。"
 
-#: easybuggy/views.py:120
+#: easybuggy/views.py:124
 msgid "msg.passwd.change.failed"
 msgstr "パスワードの変更に失敗しました。"
 
-#: easybuggy/views.py:138 easybuggy/views.py:175 easybuggy/views.py:204
-#: easybuggy/views.py:245
+#: easybuggy/views.py:142 easybuggy/views.py:179 easybuggy/views.py:208
+#: easybuggy/views.py:249
 msgid "title.login.page"
 msgstr "管理者ログインページ"
 
-#: easybuggy/views.py:147 easybuggy/views.py:214 easybuggy/views.py:255
-msgid "msg.account.locked"
-msgstr ""
-"ログイン連続失敗回数が%(count)s回を超えたため、アカウントがロックされていま"
-"す。"
-
-#: easybuggy/views.py:162 easybuggy/views.py:194 easybuggy/views.py:232
+#: easybuggy/views.py:151 easybuggy/views.py:166 easybuggy/views.py:198
+#: easybuggy/views.py:218 easybuggy/views.py:236
 msgid "msg.authentication.fail"
 msgstr "認証に失敗しました。再度ログインして下さい。"
 
-#: easybuggy/views.py:176
+#: easybuggy/views.py:180
 msgid "msg.note.brute.force"
 msgstr ""
 "<code>admin</code>と<code>password</code>を入力すると、ログインできます。この"
 "ページにはログイン試行回数の制限が無いため、ブルートフォース攻撃が可能です。"
 
-#: easybuggy/views.py:205
+#: easybuggy/views.py:209
 msgid "msg.note.open.redirect"
 msgstr ""
 "<code>admin</code>と<code>password</code>を入力すると、ログインできます。クエ"
 "リストリングに<code>goto=[悪意のあるサイトのURL]</code>を付加すると、チェック"
 "せずに悪意のあるサイトのURLにリダイレクトします。"
 
-#: easybuggy/views.py:246
+#: easybuggy/views.py:250
 msgid "msg.note.verbose.errror.message"
 msgstr ""
 "<code>admin</code>と<code>password</code>を入力すると、ログインできます。この"
 "画面での認証エラーのメッセージは詳細過ぎるため、ログイン可能なアカウントが推"
 "測しやすくなっています。"
 
-#: easybuggy/views.py:257
+#: easybuggy/views.py:259
+msgid "msg.account.locked"
+msgstr ""
+"ログイン連続失敗回数が%(count)s回を超えたため、アカウントがロックされていま"
+"す。"
+
+#: easybuggy/views.py:261
 msgid "msg.user.not.exist"
 msgstr "ユーザーが存在しません。"
 
-#: easybuggy/views.py:259
+#: easybuggy/views.py:263
 msgid "msg.low.alphnum8"
 msgstr "パスワードは8桁の英数字です。"
 
-#: easybuggy/views.py:274
+#: easybuggy/views.py:278
 msgid "msg.password.not.match"
 msgstr "パスワードが一致しません。"
 
-#: easybuggy/views.py:285
+#: easybuggy/views.py:289
 msgid "title.deadlock.page"
 msgstr "デッドロックの検知"
 
-#: easybuggy/views.py:286
+#: easybuggy/views.py:290
 msgid "msg.dead.lock.not.occur"
 msgstr "デッドロックは発生していません。"
 
-#: easybuggy/views.py:287
+#: easybuggy/views.py:291
 msgid "msg.note.deadlock"
 msgstr "このページを連続で数回ロードすると、デッドロックが発生します。"
 
-#: easybuggy/views.py:312
+#: easybuggy/views.py:316
 msgid "title.deadlock2.page"
 msgstr "ユーザーの一括登録"
 
-#: easybuggy/views.py:313
+#: easybuggy/views.py:317
 msgid "msg.note.deadlock2"
 msgstr ""
 "2つのウインドウまたはタブを開き、一方でユーザーIDを降順にソートして「更新」ボ"
@@ -105,163 +108,193 @@ msgstr ""
 "と、データベースでデッドロックが発生します。 ただし、行ロックをサポートしない"
 "デフォルトのDB(SQLite)では発生しません。"
 
-#: easybuggy/views.py:357 easybuggy/views.py:364
+#: easybuggy/views.py:361 easybuggy/views.py:368
 msgid "title.memoryleak.page"
 msgstr "メモリの使用量"
 
-#: easybuggy/views.py:358 easybuggy/views.py:365
+#: easybuggy/views.py:362 easybuggy/views.py:369
 msgid "msg.note.memoryleak"
 msgstr "このページを読み込むたびに、メモリリークが発生します。"
 
-#: easybuggy/views.py:391
+#: easybuggy/views.py:395
 msgid "title.netsocketleak.page"
 msgstr "応答時間の測定"
 
-#: easybuggy/views.py:392
+#: easybuggy/views.py:396
 msgid "msg.note.netsocketleak"
 msgstr "このページを読み込むたびに、ネットワークソケットリークが発生します。"
 
-#: easybuggy/views.py:414
+#: easybuggy/views.py:418 easybuggy/views.py:538
 msgid "msg.unknown.exception.occur"
 msgstr "何らかの例外が発生しました。"
 
-#: easybuggy/views.py:422
+#: easybuggy/views.py:426
 msgid "title.dbconnectionleak.page"
 msgstr "ユーザー一覧"
 
-#: easybuggy/views.py:423
+#: easybuggy/views.py:427
 msgid "msg.note.dbconnectionleak"
 msgstr ""
 "データベースコネクションリークは、MySQLなどの外部RDBMSを使用する場合にのみ発"
 "生します。外部RDBMSを使用する場合は、<code>settings.py</code>を編集して下さ"
 "い。"
 
-#: easybuggy/views.py:439
+#: easybuggy/views.py:443
 msgid "title.filedescriptorleak.page"
 msgstr "アクセス履歴"
 
-#: easybuggy/views.py:440
+#: easybuggy/views.py:444
 msgid "msg.note.filedescriptorleak"
 msgstr "このページを読み込むたびに、ファイルディスクリプタリークが発生します。"
 
-#: easybuggy/views.py:476
+#: easybuggy/views.py:480
 msgid "title.threadleak.page"
 msgstr "現在のスレッド数の表示"
 
-#: easybuggy/views.py:477
+#: easybuggy/views.py:481
 msgid "msg.note.threadleak"
 msgstr "このページを読み込むたびに、スレッドリークが発生します。"
 
-#: easybuggy/views.py:493
+#: easybuggy/views.py:497
 msgid "title.commandinjection.page"
 msgstr "メールアドレスの確認"
 
-#: easybuggy/views.py:494
+#: easybuggy/views.py:498
 msgid "msg.note.commandinjection"
 msgstr ""
 "<code>test@gmail.com;rm -fr /important-dir/</code>を入力すると、サーバ上の重"
 "要なディレクトリが削除されます。"
 
-#: easybuggy/views.py:500
+#: easybuggy/views.py:504
 msgid "msg.send.mail.success"
 msgstr "メールの送信が完了しました。メールを確認して下さい。"
 
-#: easybuggy/views.py:502
+#: easybuggy/views.py:506
 msgid "msg.send.mail.failure"
 msgstr "何らかの理由により、メールの送信が失敗しました。"
 
-#: easybuggy/views.py:508
+#: easybuggy/views.py:513
+msgid "title.mailheaderinjection.page"
+msgstr "管理者への問い合わせ"
+
+#: easybuggy/views.py:514
+msgid "msg.note.mailheaderinjection"
+msgstr "ブラウザの開発者モードで件名のinputタグをtextareaタグに変更し、「[任意件名][改行]Bcc :[任意メールアドレス]」を入力して送信すると、[任意メールアドレス]にメールを送信できます。"
+
+#: easybuggy/views.py:527
+msgid "msg.mail.is.empty"
+msgstr "件名と本文を入力して下さい。"
+
+#: easybuggy/views.py:530 templates/dbconnectionleak.html:8
+#: templates/deadlock2.html:19 templates/sqlijc.html:8 templates/sqlijc.html:16
+msgid "label.name"
+msgstr "名前"
+
+#: easybuggy/views.py:530 templates/dbconnectionleak.html:10
+#: templates/deadlock2.html:21
+msgid "label.mail"
+msgstr "メールアドレス"
+
+#: easybuggy/views.py:531 templates/mailheaderinjection.html:23
+msgid "label.content"
+msgstr "本文"
+
+#: easybuggy/views.py:535
+msgid "msg.sent.mail"
+msgstr "メールが正常に送信されました。"
+
+#: easybuggy/views.py:545
 msgid "title.intoverflow.page"
 msgstr "月までの距離"
 
-#: easybuggy/views.py:509
+#: easybuggy/views.py:546
 msgid "msg.note.intoverflow"
 msgstr "63以上の数を入力すると、整数オーバーフローが発生します。"
 
-#: easybuggy/views.py:531
+#: easybuggy/views.py:568
 msgid "msg.answer.is.correct"
 msgstr "正解です。"
 
-#: easybuggy/views.py:539
+#: easybuggy/views.py:576
 msgid "title.lossoftrailingdigits.page"
 msgstr "小数の足し算"
 
-#: easybuggy/views.py:540
+#: easybuggy/views.py:577
 msgid "msg.note.lossoftrailingdigits"
 msgstr "0.0000000000000001を入力すると、情報欠落が発生します。"
 
 # "画面をロードし続けると、最終的にOutOfMemoryErrorがスローされます。"
-#: easybuggy/views.py:552
+#: easybuggy/views.py:589
 msgid "title.roundofferror.page"
 msgstr "簡単な引き算"
 
-#: easybuggy/views.py:553
+#: easybuggy/views.py:590
 msgid "msg.note.roundofferror"
 msgstr "1を入力すると、丸め誤差が発生します。"
 
-#: easybuggy/views.py:565
+#: easybuggy/views.py:602
 msgid "title.truncationerror.page"
 msgstr "小数の割り算"
 
-#: easybuggy/views.py:566
+#: easybuggy/views.py:603
 msgid "msg.note.truncationerror"
 msgstr "3、7、9を入力すると、打ち切り誤差が発生します。"
 
-#: easybuggy/views.py:578
+#: easybuggy/views.py:615
 msgid "title.mojibake.page"
 msgstr "文字列の先頭大文字化"
 
-#: easybuggy/views.py:579 easybuggy/views.py:593
+#: easybuggy/views.py:616 easybuggy/views.py:630
 msgid "msg.enter.string"
 msgstr "文字列を入力して下さい。"
 
-#: easybuggy/views.py:580
+#: easybuggy/views.py:617
 msgid "msg.note.mojibake"
 msgstr "文字列に日本語を入力すると、文字化けが発生します。"
 
-#: easybuggy/views.py:592
+#: easybuggy/views.py:629
 msgid "title.xss.page"
 msgstr "文字列の逆転"
 
-#: easybuggy/views.py:594 templates/xss.html:16
+#: easybuggy/views.py:631 templates/xss.html:16
 msgid "msg.note.xss"
 msgstr ""
 "名前に<code>>tpircs/<;)eikooc.tnemucod(trela>tpIrcs<</code>を入力すると、セッ"
 "ションIDが表示されます。"
 
-#: easybuggy/views.py:605
+#: easybuggy/views.py:642
 msgid "title.sqlijc.page"
 msgstr "暗証番号検索"
 
-#: easybuggy/views.py:606
+#: easybuggy/views.py:643
 msgid "msg.note.sqlijc"
 msgstr ""
 "<code>Mark</code>と<code>password</code>を入力すると、暗証番号が表示されま"
 "す。パスワードに<code>' OR '1'='1</code>を入力すると、他のユーザーの情報が表"
 "示できます。"
 
-#: easybuggy/views.py:620
+#: easybuggy/views.py:657
 msgid "title.unrestrictedextupload.page"
 msgstr "画像ファイルのグレースケール変換"
 
-#: easybuggy/views.py:621
+#: easybuggy/views.py:658
 msgid "msg.note.unrestrictedextupload"
 msgstr ""
 "以下の内容を書いたHTMLファイル(ファイル名：index.html)をアップロードして、"
 "http://localhost:8080/static/uploadfiles/index.htmlにユーザーをアクセスさせる"
 "と、そのユーザーのCookieが攻撃者のサイトに送信されます。"
 
-#: easybuggy/views.py:638
+#: easybuggy/views.py:675
 msgid "title.unrestrictedsizeupload.page"
 msgstr "画像ファイルの色反転"
 
-#: easybuggy/views.py:639
+#: easybuggy/views.py:676
 msgid "msg.note.unrestrictedsizeupload"
 msgstr ""
 "アップロード可能なファイルサイズの制限が無いため、DoS攻撃などに対して脆弱で"
 "す。"
 
-#: easybuggy/views.py:655
+#: easybuggy/views.py:692
 msgid "msg.not.image.file"
 msgstr "画像ファイルではありません。"
 
@@ -288,7 +321,8 @@ msgstr ""
 "す。"
 
 #: templates/commandinjection.html:12 templates/csrf.html:9
-#: templates/mojibake.html:10 templates/sqlijc.html:12 templates/xss.html:10
+#: templates/mailheaderinjection.html:27 templates/mojibake.html:10
+#: templates/sqlijc.html:12 templates/xss.html:10
 msgid "label.submit"
 msgstr "送信"
 
@@ -313,18 +347,9 @@ msgstr "管理者メインページへ"
 msgid "label.user.id"
 msgstr "ユーザーID"
 
-#: templates/dbconnectionleak.html:8 templates/deadlock2.html:19
-#: templates/sqlijc.html:8 templates/sqlijc.html:16
-msgid "label.name"
-msgstr "名前"
-
 #: templates/dbconnectionleak.html:9 templates/deadlock2.html:20
 msgid "label.phone"
 msgstr "電話番号"
-
-#: templates/dbconnectionleak.html:10 templates/deadlock2.html:21
-msgid "label.mail"
-msgstr "メールアドレス"
 
 #: templates/deadlock2.html:5
 msgid "msg.update.users"
@@ -524,58 +549,66 @@ msgid "function.description.os.command.injection"
 msgstr "このページにはOSコマンドインジェクションの脆弱性があります。"
 
 #: templates/index.html:102
+msgid "function.name.mail.header.injection"
+msgstr "メールヘッダーインジェクション"
+
+#: templates/index.html:103
+msgid "function.description.mail.header.injection"
+msgstr "このページにはメールヘッダーインジェクションの脆弱性があります。"
+
+#: templates/index.html:106
 msgid "function.name.unrestricted.size.upload"
 msgstr "サイズ制限の無いファイルアップロード"
 
-#: templates/index.html:103
+#: templates/index.html:107
 msgid "function.description.unrestricted.size.upload"
 msgstr ""
 "このページにはファイルアップロードのサイズ制限が無いため、DoS攻撃などに対して"
 "脆弱です。 "
 
-#: templates/index.html:106
+#: templates/index.html:110
 msgid "function.name.unrestricted.ext.upload"
 msgstr "拡張子制限の無いファイルアップロード"
 
-#: templates/index.html:107
+#: templates/index.html:111
 msgid "function.description.unrestricted.ext.upload"
 msgstr ""
 "このページにはファイルアップロードの拡張子制限が無いため、コードインジェク"
 "ションなどに対して脆弱です。"
 
-#: templates/index.html:110
+#: templates/index.html:114
 msgid "function.name.brute.force"
 msgstr "ブルートフォース攻撃可能なログイン画面"
 
-#: templates/index.html:111
+#: templates/index.html:115
 msgid "function.description.brute.force"
 msgstr ""
 "このログインページにはアカウントロックが無いため、ブルートフォース攻撃に対し"
 "ての脆弱です。"
 
-#: templates/index.html:114
+#: templates/index.html:118
 msgid "function.name.open.redirect"
 msgstr "オープンリダイレクト可能なログイン画面"
 
-#: templates/index.html:115
+#: templates/index.html:119
 msgid "function.description.open.redirect"
 msgstr "このログインページにはオープンリダイレクトの脆弱性があります。"
 
-#: templates/index.html:118
+#: templates/index.html:122
 msgid "function.name.verbose.error.message"
 msgstr "親切過ぎる認証エラーメッセージ"
 
-#: templates/index.html:119
+#: templates/index.html:123
 msgid "function.description.verbose.error.message"
 msgstr ""
 "このログインページのエラーメッセージは親切過ぎるため、IDとパスワードが推測さ"
 "れる可能性が高いです。"
 
-#: templates/index.html:122
+#: templates/index.html:126
 msgid "function.name.csrf"
 msgstr "CSRF (クロスサイトリクエストフォージェリ)"
 
-#: templates/index.html:123
+#: templates/index.html:127
 msgid "function.description.csrf"
 msgstr "パスワード変更ページにはCSRFの脆弱性があります。"
 
@@ -606,6 +639,22 @@ msgstr "ログイン"
 #: templates/lossoftrailingdigits.html:7
 msgid "msg.enter.decimal.value"
 msgstr "絶対値が1未満の小数を入力して下さい。"
+
+#: templates/mailheaderinjection.html:8
+msgid "description.send.mail"
+msgstr "サイトの管理者にメールを送信できます。"
+
+#: templates/mailheaderinjection.html:11
+msgid "label.your.name"
+msgstr "あなたの名前"
+
+#: templates/mailheaderinjection.html:15
+msgid "label.your.mail"
+msgstr "あなたのメールアドレス"
+
+#: templates/mailheaderinjection.html:19
+msgid "label.subject"
+msgstr "件名"
 
 #: templates/memoryleak.html:5
 msgid "label.process.memory.info"

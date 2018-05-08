@@ -94,9 +94,13 @@
         {% trans 'function.name.sql.injection' %}</a>:
         <span>{% trans 'function.description.sql.injection' %}</span>
     </p></li>
-    <li><p><a href="{% url 'easybuggy:commandinjection' %}" shape="rect">
+    <li><p><a href="{% url 'easybuggy:commandijct' %}" shape="rect">
         {% trans 'function.name.os.command.injection' %}</a>:
         <span>{% trans 'function.description.os.command.injection' %}</span>
+    </p></li>
+    <li><p><a href="{% url 'easybuggy:mailheaderijct' %}" shape="rect">
+        {% trans 'function.name.mail.header.injection' %}</a>:
+        <span>{% trans 'function.description.mail.header.injection' %}</span>
     </p></li>
     <li><p><a href="{% url 'easybuggy:unrestrictedsizeupload' %}" shape="rect">
         {% trans 'function.name.unrestricted.size.upload' %}</a>:

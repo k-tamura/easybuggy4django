@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-26 17:42+0900\n"
+"POT-Creation-Date: 2018-05-08 16:01+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,87 +18,90 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: easybuggy/views.py:94
+#: easybuggy/views.py:98
 msgid "title.adminmain.page"
 msgstr "Main Page for Administrators"
 
-#: easybuggy/views.py:104 templates/adminmain.html:9
+#: easybuggy/views.py:108 templates/adminmain.html:9
 msgid "title.csrf.page"
 msgstr "Change Your Password"
 
-#: easybuggy/views.py:105
+#: easybuggy/views.py:109
 msgid "msg.note.csrf"
-msgstr "This page receives a request that a user does not intend and changes the user's password."
+msgstr ""
+"This page receives a request that a user does not intend and changes the "
+"user's password."
 
-#: easybuggy/views.py:120
+#: easybuggy/views.py:124
 msgid "msg.passwd.change.failed"
 msgstr "Password change failed."
 
-#: easybuggy/views.py:138 easybuggy/views.py:175 easybuggy/views.py:204
-#: easybuggy/views.py:245
+#: easybuggy/views.py:142 easybuggy/views.py:179 easybuggy/views.py:208
+#: easybuggy/views.py:249
 msgid "title.login.page"
 msgstr "Login Page for Administrators"
 
-#: easybuggy/views.py:147 easybuggy/views.py:214 easybuggy/views.py:255
-msgid "msg.account.locked"
-msgstr ""
-"Your account is locked out because the number of login failures exceeds "
-"%(count)s times."
-
-#: easybuggy/views.py:162 easybuggy/views.py:194 easybuggy/views.py:232
+#: easybuggy/views.py:151 easybuggy/views.py:166 easybuggy/views.py:198
+#: easybuggy/views.py:218 easybuggy/views.py:236
 msgid "msg.authentication.fail"
 msgstr "Authentication failed. Please login again."
 
-#: easybuggy/views.py:176
+#: easybuggy/views.py:180
 msgid "msg.note.brute.force"
 msgstr ""
 "You can login with <code>admin</code> and <code>password</code>. The number "
 "of login attempts is not limited on this page, so the brute force attack is "
 "possible."
 
-#: easybuggy/views.py:205
+#: easybuggy/views.py:209
 msgid "msg.note.open.redirect"
 msgstr ""
 "You can login with <code>admin</code> and <code>password</code>. If you add "
 "<code>goto=[an URL of a malicious site]</code> to the query string, you can "
 "redirect to the malicious site."
 
-#: easybuggy/views.py:246
+#: easybuggy/views.py:250
 msgid "msg.note.verbose.errror.message"
 msgstr ""
 "You can login with <code>admin</code> and <code>password</code>. It is easy "
 "to guess an account who can logs in since authentication error messages on "
 "this page is too detailed."
 
-#: easybuggy/views.py:257
+#: easybuggy/views.py:259
+msgid "msg.account.locked"
+msgstr ""
+"Your account is locked out because the number of login failures exceeds "
+"%(count)s times."
+
+#: easybuggy/views.py:261
 msgid "msg.user.not.exist"
 msgstr "The user does not exist."
 
-#: easybuggy/views.py:259
+#: easybuggy/views.py:263
 msgid "msg.low.alphnum8"
 msgstr "Password is 8 lowercase alphanumeric characters."
 
-#: easybuggy/views.py:274
+#: easybuggy/views.py:278
 msgid "msg.password.not.match"
 msgstr "The password does not match."
 
-#: easybuggy/views.py:285
+#: easybuggy/views.py:289
 msgid "title.deadlock.page"
 msgstr "Detect Deadlock"
 
-#: easybuggy/views.py:286
+#: easybuggy/views.py:290
 msgid "msg.dead.lock.not.occur"
 msgstr "Deadlock has not occurred yet."
 
-#: easybuggy/views.py:287
+#: easybuggy/views.py:291
 msgid "msg.note.deadlock"
 msgstr "Deadlock occurs after continuously loading this page few times."
 
-#: easybuggy/views.py:312
+#: easybuggy/views.py:316
 msgid "title.deadlock2.page"
 msgstr "Batch Update of Users"
 
-#: easybuggy/views.py:313
+#: easybuggy/views.py:317
 msgid "msg.note.deadlock2"
 msgstr ""
 "If you open two windows (or tabs) and sort in the ascending order of user ID "
@@ -107,165 +110,195 @@ msgstr ""
 "deadlock occurs in database. However, deadlock does not occur when using "
 "default DB (SQLite) that does not support row locking"
 
-#: easybuggy/views.py:357 easybuggy/views.py:364
+#: easybuggy/views.py:361 easybuggy/views.py:368
 msgid "title.memoryleak.page"
 msgstr "Memory Usage"
 
-#: easybuggy/views.py:358 easybuggy/views.py:365
+#: easybuggy/views.py:362 easybuggy/views.py:369
 msgid "msg.note.memoryleak"
 msgstr "Memory leak occurs every time you load this page."
 
-#: easybuggy/views.py:391
+#: easybuggy/views.py:395
 msgid "title.netsocketleak.page"
 msgstr "Measure Response Time"
 
-#: easybuggy/views.py:392
+#: easybuggy/views.py:396
 msgid "msg.note.netsocketleak"
 msgstr "Network socket leak occurs every time you load this page."
 
-#: easybuggy/views.py:414
+#: easybuggy/views.py:418 easybuggy/views.py:538
 msgid "msg.unknown.exception.occur"
 msgstr "Unknown exception occurs."
 
-#: easybuggy/views.py:422
+#: easybuggy/views.py:426
 msgid "title.dbconnectionleak.page"
 msgstr "User List"
 
-#: easybuggy/views.py:423
+#: easybuggy/views.py:427
 msgid "msg.note.dbconnectionleak"
 msgstr ""
 "Database connection leak occurs if using an external RDBMS such as MySQL. "
 "Please edit <code>settings.py</code> if using an external RDBMS."
 
-#: easybuggy/views.py:439
+#: easybuggy/views.py:443
 msgid "title.filedescriptorleak.page"
 msgstr "Access History"
 
-#: easybuggy/views.py:440
+#: easybuggy/views.py:444
 msgid "msg.note.filedescriptorleak"
 msgstr "File descriptor leak occurs every time you load this page."
 
-#: easybuggy/views.py:476
+#: easybuggy/views.py:480
 msgid "title.threadleak.page"
 msgstr "Display Current Thread Count"
 
-#: easybuggy/views.py:477
+#: easybuggy/views.py:481
 msgid "msg.note.threadleak"
 msgstr "Thread leak occurs every time you load this page."
 
-#: easybuggy/views.py:493
+#: easybuggy/views.py:497
 msgid "title.commandinjection.page"
 msgstr "Checking Your Mail Address"
 
-#: easybuggy/views.py:494
+#: easybuggy/views.py:498
 msgid "msg.note.commandinjection"
 msgstr ""
 "<code>/important-dir/</code> directory will be removed on this server if you "
 "enter <code>test@gmail.com;rm -fr /important-dir/</code>."
 
-#: easybuggy/views.py:500
+#: easybuggy/views.py:504
 msgid "msg.send.mail.success"
 msgstr "Sending an email failed due to any reason."
 
-#: easybuggy/views.py:502
+#: easybuggy/views.py:506
 msgid "msg.send.mail.failure"
 msgstr ""
 "Please enter your email address. EasyBuggy will send you an email to confirm "
 "that you can accept it."
 
-#: easybuggy/views.py:508
+#: easybuggy/views.py:513
+msgid "title.mailheaderinjection.page"
+msgstr "Question to Administrator"
+
+#: easybuggy/views.py:514
+msgid "msg.note.mailheaderinjection"
+msgstr "If you change the input tag of the subject field to a textarea tag by browser's developer mode and set it to <code>[subject][line break]Bcc :[a mail address]</code>, then you can send a mail to the address."
+
+#: easybuggy/views.py:527
+msgid "msg.mail.is.empty"
+msgstr "Please enter subject and content."
+
+#: easybuggy/views.py:530 templates/dbconnectionleak.html:8
+#: templates/deadlock2.html:19 templates/sqlijc.html:8 templates/sqlijc.html:16
+msgid "label.name"
+msgstr "Name"
+
+#: easybuggy/views.py:530 templates/dbconnectionleak.html:10
+#: templates/deadlock2.html:21
+msgid "label.mail"
+msgstr "Mail Address"
+
+#: easybuggy/views.py:531 templates/mailheaderinjection.html:23
+msgid "label.content"
+msgstr "Content"
+
+#: easybuggy/views.py:535
+msgid "msg.sent.mail"
+msgstr "The mail was sent successfully."
+
+#: easybuggy/views.py:545
 msgid "title.intoverflow.page"
 msgstr "The Distance from Earth to the Moon"
 
-#: easybuggy/views.py:509
+#: easybuggy/views.py:546
 msgid "msg.note.intoverflow"
 msgstr ""
 "Integer overflow occurs if you enter a number greater than or equal to 63."
 
-#: easybuggy/views.py:531
+#: easybuggy/views.py:568
 msgid "msg.answer.is.correct"
 msgstr "Your answer is correct!"
 
-#: easybuggy/views.py:539
+#: easybuggy/views.py:576
 msgid "title.lossoftrailingdigits.page"
 msgstr "Decimal Addition"
 
-#: easybuggy/views.py:540
+#: easybuggy/views.py:577
 msgid "msg.note.lossoftrailingdigits"
 msgstr "Loss of trailing digits occurs if you enter 0.0000000000000001."
 
 # "If keeping on loading this page, OutOfMemoryError is finally thrown."
-#: easybuggy/views.py:552
+#: easybuggy/views.py:589
 msgid "title.roundofferror.page"
 msgstr "Easy Subtraction"
 
-#: easybuggy/views.py:553
+#: easybuggy/views.py:590
 msgid "msg.note.roundofferror"
 msgstr "Round off error occurs if you enter 1."
 
-#: easybuggy/views.py:565
+#: easybuggy/views.py:602
 msgid "title.truncationerror.page"
 msgstr "Decimal Division"
 
-#: easybuggy/views.py:566
+#: easybuggy/views.py:603
 msgid "msg.note.truncationerror"
 msgstr "Truncation error occurs if you enter 3 or 7 or 9."
 
-#: easybuggy/views.py:578
+#: easybuggy/views.py:615
 msgid "title.mojibake.page"
 msgstr "Capitalize String"
 
-#: easybuggy/views.py:579 easybuggy/views.py:593
+#: easybuggy/views.py:616 easybuggy/views.py:630
 msgid "msg.enter.string"
 msgstr "Please enter a string."
 
-#: easybuggy/views.py:580
+#: easybuggy/views.py:617
 msgid "msg.note.mojibake"
 msgstr "Mojibake occurs if you enter a multi-byte string."
 
-#: easybuggy/views.py:592
+#: easybuggy/views.py:629
 msgid "title.xss.page"
 msgstr "Reverse String"
 
-#: easybuggy/views.py:594 templates/xss.html:16
+#: easybuggy/views.py:631 templates/xss.html:16
 msgid "msg.note.xss"
 msgstr ""
 "Session ID is shown if you enter name to <code>>tpircs/<;)eikooc."
 "tnemucod(trela>tpIrcs<</code>"
 
-#: easybuggy/views.py:605
+#: easybuggy/views.py:642
 msgid "title.sqlijc.page"
 msgstr "Search Your Secret Number"
 
-#: easybuggy/views.py:606
+#: easybuggy/views.py:643
 msgid "msg.note.sqlijc"
 msgstr ""
 "You can see a secret number if you enter <code>Mark</code> and "
 "<code>password</code>. You can see other users information if you enter "
 "password to <code>' OR '1'='1</code>"
 
-#: easybuggy/views.py:620
+#: easybuggy/views.py:657
 msgid "title.unrestrictedextupload.page"
 msgstr "Convert Gray Scale of Image File"
 
-#: easybuggy/views.py:621
+#: easybuggy/views.py:658
 msgid "msg.note.unrestrictedextupload"
 msgstr ""
 "If you upload HTML file (named index.html) including the following code and "
 "make a user access http://localhost:8080/static/uploadfiles/index.html, then "
 "the user's cookie is sent to attacker's site."
 
-#: easybuggy/views.py:638
+#: easybuggy/views.py:675
 msgid "title.unrestrictedsizeupload.page"
 msgstr "Reverse Color of Image File"
 
-#: easybuggy/views.py:639
+#: easybuggy/views.py:676
 msgid "msg.note.unrestrictedsizeupload"
 msgstr ""
 "This page is vulnerable for attacks such as DoS because there are no "
 "limitation for uploading file size."
 
-#: easybuggy/views.py:655
+#: easybuggy/views.py:692
 msgid "msg.not.image.file"
 msgstr "The chosen file is not an image file."
 
@@ -292,13 +325,16 @@ msgstr ""
 "that you can accept it."
 
 #: templates/commandinjection.html:12 templates/csrf.html:9
-#: templates/mojibake.html:10 templates/sqlijc.html:12 templates/xss.html:10
+#: templates/mailheaderinjection.html:27 templates/mojibake.html:10
+#: templates/sqlijc.html:12 templates/xss.html:10
 msgid "label.submit"
 msgstr "Submit"
 
 #: templates/csrf.html:6
 msgid "msg.enter.passwd"
-msgstr "If you enter a new password and click the submit button, then your password will be changed."
+msgstr ""
+"If you enter a new password and click the submit button, then your password "
+"will be changed."
 
 #: templates/csrf.html:7 templates/login.html:14 templates/sqlijc.html:10
 msgid "label.password"
@@ -317,18 +353,9 @@ msgstr "Go to admin main page"
 msgid "label.user.id"
 msgstr "User ID"
 
-#: templates/dbconnectionleak.html:8 templates/deadlock2.html:19
-#: templates/sqlijc.html:8 templates/sqlijc.html:16
-msgid "label.name"
-msgstr "Name"
-
 #: templates/dbconnectionleak.html:9 templates/deadlock2.html:20
 msgid "label.phone"
 msgstr "Phone"
-
-#: templates/dbconnectionleak.html:10 templates/deadlock2.html:21
-msgid "label.mail"
-msgstr "Mail Address"
 
 #: templates/deadlock2.html:5
 msgid "msg.update.users"
@@ -526,58 +553,66 @@ msgid "function.description.os.command.injection"
 msgstr "There is an OS command injection vulnerability in this page."
 
 #: templates/index.html:102
+msgid "function.name.mail.header.injection"
+msgstr "Mail Header Injection"
+
+#: templates/index.html:103
+msgid "function.description.mail.header.injection"
+msgstr "There is a mail header injection vulnerability in this page."
+
+#: templates/index.html:106
 msgid "function.name.unrestricted.size.upload"
 msgstr "Size Unrestricted File Upload"
 
-#: templates/index.html:103
+#: templates/index.html:107
 msgid "function.description.unrestricted.size.upload"
 msgstr ""
 "This page is vulnerable for attacks such as DoS because there are no "
 "limitation for uploading file size."
 
-#: templates/index.html:106
+#: templates/index.html:110
 msgid "function.name.unrestricted.ext.upload"
 msgstr "Extension Unrestricted File Upload"
 
-#: templates/index.html:107
+#: templates/index.html:111
 msgid "function.description.unrestricted.ext.upload"
 msgstr ""
 "This page is vulnerable for attacks such as code injection because there are "
 "no limitation for uploading file extension."
 
-#: templates/index.html:110
+#: templates/index.html:114
 msgid "function.name.brute.force"
 msgstr "Login page that allows brute-force attacks"
 
-#: templates/index.html:111
+#: templates/index.html:115
 msgid "function.description.brute.force"
 msgstr ""
 "This login page is vulnerable for brute-force attack because it does not "
 "have an account lock mechanism."
 
-#: templates/index.html:114
+#: templates/index.html:118
 msgid "function.name.open.redirect"
 msgstr "Login page that allows Open Redirect"
 
-#: templates/index.html:115
+#: templates/index.html:119
 msgid "function.description.open.redirect"
 msgstr "There is an open redirect vulnerability in this login page."
 
-#: templates/index.html:118
+#: templates/index.html:122
 msgid "function.name.verbose.error.message"
 msgstr "Verbose Authentication Error Messages"
 
-#: templates/index.html:119
+#: templates/index.html:123
 msgid "function.description.verbose.error.message"
 msgstr ""
 "It is easy to guess an account who can logs in because authentication error "
 "messages on this page are too detailed."
 
-#: templates/index.html:122
+#: templates/index.html:126
 msgid "function.name.csrf"
 msgstr "CSRF (Cross-site Request Forgery)"
 
-#: templates/index.html:123
+#: templates/index.html:127
 msgid "function.description.csrf"
 msgstr "There is a CSRF vulnerability in the change password page."
 
@@ -607,6 +642,22 @@ msgstr "Login"
 #: templates/lossoftrailingdigits.html:7
 msgid "msg.enter.decimal.value"
 msgstr "Please enter the absolute value of a decimal number less than 1."
+
+#: templates/mailheaderinjection.html:8
+msgid "description.send.mail"
+msgstr "You can send a mail to the site administrator."
+
+#: templates/mailheaderinjection.html:11
+msgid "label.your.name"
+msgstr "Your Name"
+
+#: templates/mailheaderinjection.html:15
+msgid "label.your.mail"
+msgstr "Your Mail Address"
+
+#: templates/mailheaderinjection.html:19
+msgid "label.subject"
+msgstr "Subject"
 
 #: templates/memoryleak.html:5
 msgid "label.process.memory.info"

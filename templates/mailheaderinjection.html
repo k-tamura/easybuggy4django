@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block body %}
+{% include "header.html" %}
+{% if not isReady %}
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>{% trans 'description.send.mail' %}</p>
+    <table class="table table-bordered" style="font-size: small;">
+        <tr>
+            <td>{% trans 'label.your.name' %}:&nbsp;</td>
+            <td><input type="text" name="name" size="50"/></td>
+        </tr>
+        <tr>
+            <td>{% trans 'label.your.mail' %}:&nbsp;</td>
+            <td><input type="text" name="mail" size="50"/></td>
+        </tr>
+        <tr>
+            <td>{% trans 'label.subject' %}:&nbsp;</td>
+            <td><input type="text" name="subject" size="50"/></td>
+        </tr>
+        <tr>
+            <td>{% trans 'label.content' %}:&nbsp;</td>
+            <td><textarea rows="10" cols="50" name="content"></textarea></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center"><input type="submit" value="{% trans 'label.submit' %}"/></td>
+        </tr>
+    </table>
+</form>
+{% endif %}
+{% include "messages.html" %}
+{% endblock %}
