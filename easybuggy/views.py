@@ -21,7 +21,7 @@ from django.template.defaultfilters import filesizeformat
 from django.utils.translation import ugettext as _
 from django.views.decorators.csrf import csrf_exempt
 
-from easybuggy4django.easybuggy.uploadhandler import QuotaUploadHandler
+from .uploadhandler import QuotaUploadHandler
 from .forms import UploadFileForm
 from .models import User
 
