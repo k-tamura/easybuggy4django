@@ -9,11 +9,13 @@ on <https://github.com/k-tamura/easybuggy/wiki>`__.
 
 Under Constructing!
 
-:clock4: Quick Start
+Quick Start
 --------------------
 
 ::
 
+    $ git clone https://github.com/k-tamura/easybuggy4django.git
+    $ pip install -r requirements.txt
     $ python manage.py runserver
 
 Access to
