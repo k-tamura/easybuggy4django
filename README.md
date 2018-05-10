@@ -7,6 +7,8 @@ Under Constructing!
 :clock4: Quick Start
 -
 
+    $ git clone https://github.com/k-tamura/easybuggy4django.git
+    $ pip install -r requirements.txt
     $ python manage.py runserver
 
 Access to
