@@ -30,4 +30,4 @@ Access to
 To stop:
 ^^^^^^^^
 
-Use CTRL+C
+Use :kbd:`CTRL` + :kbd:`C`
