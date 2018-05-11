@@ -8,6 +8,7 @@ Under Constructing!
 -
 
     $ git clone https://github.com/k-tamura/easybuggy4django.git
+    $ cd easybuggy4django/
     $ pip install -r requirements.txt
     $ python manage.py runserver
 
