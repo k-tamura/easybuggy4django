@@ -16,6 +16,8 @@ Quick Start
 
     $ git clone https://github.com/k-tamura/easybuggy4django.git
     $ cd easybuggy4django/
+    $ python -m venv venv
+    $ source venv/bin/activate
     $ pip install -r requirements.txt
     $ python manage.py runserver
 
