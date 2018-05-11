@@ -7,8 +7,6 @@ application in order to understand behavior of bugs and vulnerabilities,
 for example, `memory leak, deadlock, infinite loop, SQL injection and so
 on <https://github.com/k-tamura/easybuggy/wiki>`__.
 
-Under Constructing!
-
 Quick Start
 --------------------
 
@@ -16,10 +14,15 @@ Quick Start
 
     $ git clone https://github.com/k-tamura/easybuggy4django.git
     $ cd easybuggy4django/
-    $ python -m venv venv
-    $ source venv/bin/activate
     $ pip install -r requirements.txt
     $ python manage.py runserver
+
+However it is recommended to use venv (before running the above commands):
+
+::
+
+    $ python -m venv venv
+    $ source venv/bin/activate
 
 Access to
 
@@ -31,3 +34,4 @@ To stop:
 ^^^^^^^^
 
 Use :kbd:`CTRL` + :kbd:`C`
+
