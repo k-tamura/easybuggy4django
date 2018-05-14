@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^te/$', views.te, name='te'),
     url(r'^xss/$', views.xss, name='xss'),
     url(r'^sqlijc/$', views.sqlijc, name='sqlijc'),
+    url(r'^codeijct/$', views.codeijct, name='codeijct'),
     url(r'^commandijct/$', views.commandijct, name='commandijct'),
     url(r'^mailheaderijct/$', views.mailheaderijct, name='mailheaderijct'),
     url(r'^unrestrictedsizeupload/$', views.unrestrictedsizeupload, name='unrestrictedsizeupload'),

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block body %}
+{% include "header.html" %}
+<form action="" method="post">
+    {% csrf_token %}
+    <p>{% trans 'msg.enter.math.expression' %}</p>
+    <input type="text" name="expression" size="80" maxlength="300" value="{{expression}}"/> =
+    {% if value %}
+    <span>{{value}}</span>
+    {% endif %}
+    <br/><br/>
+    <input type="submit" value="{% trans 'label.calculate' %}"/><br/><br/>
+    {% include "messages.html" %}
+</form>
+{% endblock %}

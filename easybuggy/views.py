@@ -2,9 +2,12 @@ import datetime
 import logging
 import os
 import re
+import smtplib
 import tempfile
 import threading
 import time
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 from time import sleep
 
 import numpy as np
@@ -18,16 +21,13 @@ from django.db import transaction, connection, DatabaseError
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template.defaultfilters import filesizeformat
+from django.utils.baseconv import base64
 from django.utils.translation import ugettext as _
 from django.views.decorators.csrf import csrf_exempt
 
-from .uploadhandler import QuotaUploadHandler
 from .forms import UploadFileForm
 from .models import User
-
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
+from .uploadhandler import QuotaUploadHandler
 
 logger = logging.getLogger('easybuggy')
 
@@ -490,6 +490,26 @@ def active_threads_count():
     while True:
         logger.info("Current thread count: " + str(threading.active_count()))
         sleep(100)
+
+
+def codeijct(request):
+    d = {
+        'title': _('title.codeinjection.page'),
+        'note': _('msg.note.codeinjection'),
+    }
+    if request.method == 'POST':
+        expression = request.POST.get('expression', '')
+        if expression is not None and expression is not '':
+            d['expression'] = expression
+            expression = expression.replace("math", "__import__('math')")
+            try:
+                d['value'] = eval(expression)
+            except Exception as e:
+                logger.exception('Exception occurs: %s', e)
+                d['errmsg'] = _("msg.invalid.expression") % {"exception": e}
+            finally:
+                pass
+    return render(request, 'codeinjection.html', d)
 
 
 def commandijct(request):
