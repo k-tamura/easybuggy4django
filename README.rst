@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/k-tamura/easybuggy4django/.svg)](https://travis-ci.com/k-tamura/easybuggy4django/)
+
 EasyBuggy Django
 ================
 
