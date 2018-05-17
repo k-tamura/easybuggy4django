@@ -1,6 +1,15 @@
-.. image:: https://travis-ci.com/k-tamura/easybuggy4django.svg?branch=master
-   :target: https://travis-ci.com/k-tamura/easybuggy4django
-   
+ .. image:: https://travis-ci.com/k-tamura/easybuggy4django.svg?branch=master&style=flat
+    :target: https://travis-ci.com/k-tamura/easybuggy4django
+    :alt: Build status
+ 
+ .. image:: https://img.shields.io/badge/License-MIT-yellow.svg?style=flat
+    :target: https://opensource.org/licenses/MIT
+    :alt: License
+
+ .. image:: https://img.shields.io/github/release/k-tamura/easybuggy4django.svg?style=flat
+    :target: https://github.com/k-tamura/easybuggy4django/releases/latest
+    :alt: Latest Version
+
 EasyBuggy Django
 ================
 
