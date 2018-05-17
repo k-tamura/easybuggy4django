@@ -48,7 +48,10 @@ all_users_login_history = {}
 
 
 def index(request):
-    d = {'title': 'EasyBuggy Django'}
+    d = {
+        'title': 'EasyBuggy Django',
+        'isOnlyVulnerabilities': settings.IS_ONLY_VULNERABILITIES,
+    }
     if 'dlpinit' in request.session:
         del request.session['dlpinit']
     return render(request, 'index.html', d)

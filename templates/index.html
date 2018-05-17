@@ -15,6 +15,7 @@
 </header>
 <hr/>
 
+{% if not isOnlyVulnerabilities %}
 <h2>
     <span class="glyphicon glyphicon-knight"></span>
     <span>{% trans 'section.troubles' %}</span>
@@ -78,7 +79,7 @@
         <span>{% trans 'function.description.loss.of.trailing.digits' %}</span>
     </p></li>
 </ul>
-
+{% endif %}
 
 <h2>
     <span class="glyphicon glyphicon-knight"></span>
