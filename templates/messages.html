@@ -6,7 +6,7 @@
 {% if errmsg %}
 <div class="alert alert-danger" role="alert">
     <span class="glyphicon glyphicon-warning-sign"></span>
-    <th>{{ errmsg }}</th><br/>
+    <th>{% autoescape off %}{{ errmsg }}{% endautoescape %}</th><br/>
 </div>
 {% endif %}
 {% if note %}

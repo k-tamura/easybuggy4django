@@ -10,3 +10,4 @@ psutil==5.4.3
 pytz==2018.3
 requests==2.18.4
 urllib3==1.22
+ldap3==2.5

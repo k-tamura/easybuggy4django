@@ -194,3 +194,6 @@ MAIL_PASSWORD = 'test'
 MAIL_ADMIN_ADDRESS = 'root@localhost'
 
 IS_ONLY_VULNERABILITIES = False
+
+LDAP_HOST = 'localhost'
+LDAP_PORT = 389

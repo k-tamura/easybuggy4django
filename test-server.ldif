@@ -1,0 +1,50 @@
+dn: dc=t246osslab,dc=org
+objectclass: top
+objectclass: domain
+objectclass: extensibleObject
+dc: t246osslab
+
+dn: ou=people,dc=t246osslab,dc=org
+objectclass: top
+objectclass: organizationalUnit
+ou: people
+
+dn: uid=admin,ou=people,dc=t246osslab,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Ben Alex
+sn: Alex
+uid: admin
+userPassword: password
+
+dn: uid=admin2,ou=people,dc=t246osslab,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Bob Hamilton
+sn: Hamilton
+uid: admin2
+userPassword: pas2w0rd
+
+dn: uid=admin3,ou=people,dc=t246osslab,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Joe Smeth
+sn: Smeth
+uid: admin3
+userPassword: pa33word
+
+dn: uid=admin4,ou=people,dc=t246osslab,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Mouse, Jerry
+sn: Mouse
+uid: admin4
+userPassword: pathwood

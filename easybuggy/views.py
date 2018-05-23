@@ -17,13 +17,15 @@ from PIL import Image, ImageOps
 from django import forms
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.backends import UserModel
 from django.db import transaction, connection, DatabaseError
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template.defaultfilters import filesizeformat
-from django.utils.baseconv import base64
 from django.utils.translation import ugettext as _
 from django.views.decorators.csrf import csrf_exempt
+from ldap3 import Server, Connection, ALL
+from ldap3.core.exceptions import LDAPExceptionError
 
 from .forms import UploadFileForm
 from .models import User
@@ -54,6 +56,7 @@ def index(request):
     }
     if 'dlpinit' in request.session:
         del request.session['dlpinit']
+
     return render(request, 'index.html', d)
 
 
@@ -170,6 +173,57 @@ def admins_login(request):
 
                 # account lock count +1
                 increment_account_lock_num(username)
+
+        return render(request, 'login.html', d)
+
+
+def ldapijc(request):
+    if request.user.is_authenticated:
+        return main(request)
+    else:
+        d = {
+            'title': _('title.login.page'),
+            'note': _('msg.note.ldap.injection'),
+        }
+        if request.method == 'GET':
+            return render(request, 'login.html', d)
+        elif request.method == 'POST':
+            username = request.POST.get("username")
+            password = request.POST.get("password")
+
+            if is_account_lockedout(username):
+                d['errmsg'] = _("msg.authentication.fail")
+            else:
+                username = request.POST.get("username")
+                password = request.POST.get("password")
+                try:
+                    server = Server(settings.LDAP_HOST, settings.LDAP_PORT, get_info=ALL)
+                    conn = Connection(server, 'uid=admin,ou=people,dc=t246osslab,dc=org', 'password', auto_bind=True)
+                    conn.search('ou=people,dc=t246osslab,dc=org',
+                                '(&(uid=' + username + ')(userPassword=' + password + '))',
+                                attributes=['uid'])  # TODO trim
+                    if len(conn.entries) > 0:
+                        user = UserModel._default_manager.get_by_natural_key(conn.entries[0].uid)
+                        login(request, user)
+                        # authentication succeeded, then reset account lock
+                        reset_account_lock(username)
+                        request.session["username"] = username
+                        if 'target' not in request.session:
+                            return main(request)
+                        else:
+                            target = request.session['target']
+                            del request.session['target']
+                            return redirect(target)
+                    else:
+                        d['errmsg'] = _("msg.authentication.fail")
+                        # account lock count +1
+                        increment_account_lock_num(username)
+
+                except LDAPExceptionError as le:
+                    d['errmsg'] = _("msg.ldap.access.fail")
+                except Exception as e:
+                    logger.exception('Exception occurs: %s', e)
+                    d['errmsg'] = _('msg.unknown.exception.occur') + ": " + str(e)
 
         return render(request, 'login.html', d)
 
