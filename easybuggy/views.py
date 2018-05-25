@@ -6,9 +6,11 @@ import smtplib
 import tempfile
 import threading
 import time
+import xml.sax
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from time import sleep
+from xml.etree.ElementTree import *
 
 import numpy as np
 import psutil
@@ -770,6 +772,62 @@ def unrestrictedsizeupload(request):
     d['form'] = form
     return render(request, 'unrestrictedsizeupload.html', d)
 
+
+@csrf_exempt
+def xxe(request):
+    request.upload_handlers.insert(0, QuotaUploadHandler())
+    d = {
+        'title': _('title.xxe.page'),
+        'note': _('msg.note.xxe'),
+    }
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            uploaded_file = request.FILES['file']
+            content_type = uploaded_file.content_type
+            if content_type == "text/xml":
+                my_xml = '''
+                <!DOCTYPE person [<!ENTITY param SYSTEM "file:///etc/passwd">]>
+                <person>
+                <name>&param;</name>
+                </person>
+                '''
+
+                str_text = ''
+                for line in uploaded_file:
+                    str_text = str_text + line.decode()
+
+                # tree = ElementTree.parse(uploaded_file.read())
+                obj = MyObject()
+                parser = MyContentHandler(obj)
+                xml.sax.parseString(str_text, parser)
+                d['results'] = parser.results
+            else:
+                d['errmsg'] = _('msg.not.xml.file')
+    else:
+        form = UploadFileForm()
+    d['form'] = form
+    d['normal_xml'] = '<people>\n' \
+                      '    <person>\n' \
+                      '        <id>user00</id>\n' \
+                      '        <name>Mark Smith</name>\n' \
+                      '        <phone>090-9999-8888</phone>\n' \
+                      '        <mail>Mark@gmail.com</mail>\n' \
+                      '    </person>\n' \
+                      '    <person>\n' \
+                      '        <id>user01</id>\n' \
+                      '        <name>Peter Davis</name>\n' \
+                      '        <phone>090-6666-8888</phone>\n' \
+                      '        <mail>Peter@gmail.com</mail>\n' \
+                      '    </person>\n' \
+                      '</people>'
+    d['xxe_xml'] = '<!DOCTYPE person [<!ENTITY param SYSTEM "file:///etc/passwd">]>\n' \
+        '<person>\n' \
+        '<name>&param;</name>\n' \
+        '</person>'
+    return render(request, 'xxe.html', d)
+
+
 # -------- private method
 def get_order(request):
     order = request.GET.get("order")
@@ -830,6 +888,9 @@ def grayscale(f):
     im_convert.save(get_uploaded_file(f))
 
 
+def import_users(f):
+    pass
+
 def increment_account_lock_num(username):
     if username in all_users_login_history:
         user_login_history = all_users_login_history[username]
@@ -879,3 +940,56 @@ def send_email(subject, msg_body):
         smtp_server.login(settings.MAIL_USER, settings.MAIL_PASSWORD)
 
     smtp_server.sendmail(settings.MAIL_USER, settings.MAIL_ADMIN_ADDRESS, msg.as_string())
+
+
+class MyObject:
+    def __init__(self):
+        self.id = None
+        self.name = None
+        self.phone = None
+        self.mail = None
+
+    def __repr__(self):
+        return "%s (%s, %s, %s)" % (self.id, self.name, self.phone, self.mail)
+
+
+class MyContentHandler(xml.sax.ContentHandler):
+    def __init__(self, object):
+        xml.sax.ContentHandler.__init__(self)
+        self.object = object
+        self.results = []
+
+    def startElement(self, name, attrs):
+        self.chars = ""
+
+    def endElement(self, name):
+        if name == "id":
+            self.object.id = self.chars
+        elif name == "name":
+            self.object.name = self.chars
+        elif name == "phone":
+            self.object.phone = self.chars
+        elif name == "mail":
+            self.object.mail = self.chars
+        elif name == "person":
+            if self.object.id is not None:
+                try:
+                    user = User.objects.get(id=self.object.id)
+                    user.name = self.object.name
+                    user.phone = self.object.phone
+                    user.mail = self.object.mail
+                    user.save()
+                    logger.info(self.object.id + " is updated.")
+                    self.results.append(self.object.id + " is updated.")
+                except User.DoesNotExist as db_err:
+                    logger.info(self.object.id + " does not exist.")
+                    self.results.append(self.object.id + " does not exist.")
+                except DatabaseError as db_err:
+                    logger.exception('DatabaseError occurs: %s', db_err)
+                    raise db_err
+                except Exception as e:
+                    logger.exception('Exception occurs: %s', e)
+                    raise e
+
+    def characters(self, content):
+        self.chars += content

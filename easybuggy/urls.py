@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^mailheaderijct/$', views.mailheaderijct, name='mailheaderijct'),
     url(r'^unrestrictedsizeupload/$', views.unrestrictedsizeupload, name='unrestrictedsizeupload'),
     url(r'^unrestrictedextupload/$', views.unrestrictedextupload, name='unrestrictedextupload'),
+    url(r'^xxe/$', views.xxe, name='xxe'),
     url(r'^ldapijc/*', views.ldapijc, name='ldapijc'),
     url(r'^bruteforce/*', views.bruteforce, name='bruteforce'),
     url(r'^openredirect/*', views.openredirect, name='openredirect'),
