@@ -25,6 +25,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template.defaultfilters import filesizeformat
 from django.utils.translation import ugettext as _
+from django.views.decorators.clickjacking import xframe_options_exempt
 from django.views.decorators.csrf import csrf_exempt
 from ldap3 import Server, Connection, ALL
 from ldap3.core.exceptions import LDAPExceptionError
@@ -654,7 +655,7 @@ def lotd(request):
         'note': _('msg.note.lossoftrailingdigits'),
     }
     if request.method == 'POST':
-        number = request.POST["number"]
+        number = request.POST.get("number")
         d['number'] = number
         if number is not None and -1 < float(number) < 1:
             d['result'] = float(number) + 1
@@ -667,7 +668,7 @@ def roe(request):
         'note': _('msg.note.roundofferror'),
     }
     if request.method == 'POST':
-        number = request.POST["number"]
+        number = request.POST.get("number")
         d['number'] = number
         if number is not None and number is not "0" and number.isdigit():
             d['result'] = float(number) - 0.9
@@ -680,7 +681,7 @@ def te(request):
         'note': _('msg.note.truncationerror'),
     }
     if request.method == 'POST':
-        number = request.POST["number"]
+        number = request.POST.get("number")
         d['number'] = number
         if number is not None and number is not "0" and number.isdigit():
             d['result'] = 10.0 / float(number)
@@ -695,7 +696,7 @@ def mojibake(request):
     }
     if request.method == 'POST':
         request.encoding = 'ISO-8859-1'
-        input_str = request.POST["string"]
+        input_str = request.POST.get("string")
         if input_str is not None:
             d['msg'] = input_str.title()
     return render(request, 'mojibake.html', d)
@@ -708,7 +709,7 @@ def xss(request):
         'note': _('msg.note.xss'),
     }
     if request.method == 'POST':
-        input_str = request.POST["string"]
+        input_str = request.POST.get("string")
         if input_str is not None:
             d['msg'] = input_str[::-1]
     return render(request, 'xss.html', d)
@@ -720,8 +721,8 @@ def sqlijc(request):
         'note': _('msg.note.sqlijc'),
     }
     if request.method == 'POST':
-        name = request.POST["name"]
-        password = request.POST["password"]
+        name = request.POST.get("name")
+        password = request.POST.get("password")
         d['users'] = User.objects.raw("SELECT * FROM easybuggy_user WHERE ispublic = 'true' AND name='" + name +
                                       "' AND password='" + password + "' ORDER BY id")
     return render(request, 'sqlijc.html', d)
@@ -771,6 +772,31 @@ def unrestrictedsizeupload(request):
         form = UploadFileForm()
     d['form'] = form
     return render(request, 'unrestrictedsizeupload.html', d)
+
+
+@xframe_options_exempt
+def clickjacking(request):
+    if not request.user.is_authenticated:
+        return redirect_login(request)
+    d = {
+        'title': _('title.clickjacking.page'),
+        'note': _('msg.note.clickjacking'),
+    }
+    if request.method == 'POST' and "username" in request.session:
+        username = request.session["username"]
+        mail = request.POST.get("mail")
+        if mail is not None:
+            try:
+                from django.contrib.auth.models import User
+                User.objects.filter(is_superuser=True)
+                u = User.objects.get(username=username)
+                u.email = mail
+                u.save()
+                d['complete'] = True
+            except Exception as e:
+                logger.exception('Exception occurs: %s', e)
+                d['msg'] = _('msg.mail.change.failed')
+    return render(request, 'clickjacking.html', d)
 
 
 @csrf_exempt

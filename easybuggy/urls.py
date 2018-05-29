@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^logout/$', views.admins_logout, name='admins_logout'),
     url(r'^admins/main*', views.main, name='main'),
     url(r'^admins/csrf/$', views.csrf, name='csrf'),
+    url(r'^admins/clickjacking/$', views.clickjacking, name='clickjacking'),
     url(r'^ping/$', views.ping, name='ping'),
     url(r'^deadlock/$', views.deadlock, name='deadlock'),
     url(r'^deadlock2/$', views.deadlock2, name='deadlock2'),

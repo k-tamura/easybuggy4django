@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block body %}
+{% include "header.html" %}
+<form action="" method="post" enctype="application/x-www-form-urlencoded">
+    {% csrf_token %}
+    <p>{% trans 'msg.enter.mail' %}</p><br/>
+    <label>{% trans 'label.mail' %}</label><span>: </span>
+    <input type="text" name="mail" size="30" maxlength="30"/><br/>
+    <br/> <input type="submit" value="{% trans 'label.submit' %}"/><br/><br/>
+    {% if complete %}
+    <p>{% trans 'msg.mail.changed' %}</p><a href="/admins/main">{% trans 'label.goto.admin.page' %}</a><br/><br/>
+    {% endif %}
+    {% include "messages.html" %}
+</form>
+{% endblock %}
