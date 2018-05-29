@@ -10,7 +10,6 @@ import xml.sax
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from time import sleep
-from xml.etree.ElementTree import *
 
 import numpy as np
 import psutil
@@ -119,7 +118,7 @@ def csrf(request):
     }
     if request.method == 'POST' and "username" in request.session:
         username = request.session["username"]
-        password = request.POST["password"]
+        password = request.POST.get("password")
         if password is not None:
             try:
                 from django.contrib.auth.models import User
