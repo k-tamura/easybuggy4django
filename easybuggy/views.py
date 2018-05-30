@@ -3,9 +3,11 @@ import logging
 import os
 import re
 import smtplib
+import sys
 import tempfile
 import threading
 import time
+import traceback
 import xml.sax
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -153,7 +155,6 @@ def admins_login(request):
 def deadlock(request):
     d = {
         'title': _('title.deadlock.page'),
-        'msg': _('msg.dead.lock.not.occur'),
         'note': _('msg.note.deadlock'),
     }
     if 'dlpinit' not in request.session:
@@ -174,6 +175,16 @@ def deadlock(request):
                 sleep(5)
                 with a_lock:
                     logger.info("Locked b_lock. -> Locked a_lock.")
+    stack_traces = []
+    for tid, stack in sys._current_frames().items():
+        stack_trace = str(traceback.format_stack(stack))
+        if stack_trace.find('a_lock') >= 0 or stack_trace.find('b_lock') >= 0:
+            stack_traces.append(stack_trace)
+    if len(stack_traces) >= 2:
+        d['stack_traces'] = stack_traces
+        d['msg'] = _('msg.dead.lock.detected')
+    else:
+        d['msg'] = _('msg.dead.lock.not.occur')
     return render(request, 'deadlock.html', d)
 
 
