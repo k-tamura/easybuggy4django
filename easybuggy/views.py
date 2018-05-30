@@ -19,7 +19,7 @@ from django import forms
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.backends import UserModel
-from django.db import transaction, connection, DatabaseError
+from django.db import transaction, connection, DatabaseError, OperationalError
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template.defaultfilters import filesizeformat
@@ -38,14 +38,13 @@ logger = logging.getLogger('easybuggy')
 # TODO change directory from "static" to another
 UPLOAD_DIR = os.path.join(settings.BASE_DIR, "static", "uploadfiles")
 
-a = []
-
 a_lock = threading.Lock()
 b_lock = threading.Lock()
 switch_flag = True
 
+memory_refs = []
 file_refs = []
-netsockets_refs = []
+netsocket_refs = []
 
 # Dictionary for in-memory account locking
 all_users_login_history = {}
@@ -94,11 +93,11 @@ def redirect_login(request):
     #    redirect(response.encodeRedirectURL("/" + login_type + "/login" + query_string))
     else:
         return redirect("/" + login_type + "/login" + query_string)
-# -----------------------------------------------------------------------
 
 
 # -----------------------------------------------------------------------
-# Admin Pages
+
+
 def main(request):
     if not request.user.is_authenticated:
         return redirect_login(request)
@@ -108,40 +107,12 @@ def main(request):
     return render(request, 'adminmain.html', d)
 
 
-@csrf_exempt
-def csrf(request):
-    if not request.user.is_authenticated:
-        return redirect_login(request)
-    d = {
-        'title': _('title.csrf.page'),
-        'note': _('msg.note.csrf'),
-    }
-    if request.method == 'POST' and "username" in request.session:
-        username = request.session["username"]
-        password = request.POST.get("password")
-        if password is not None:
-            try:
-                from django.contrib.auth.models import User
-                User.objects.filter(is_superuser=True)
-                u = User.objects.get(username=username)
-                u.set_password(password)
-                u.save()
-                d['complete'] = True
-            except Exception as e:
-                logger.exception('Exception occurs: %s', e)
-                d['msg'] = _('msg.passwd.change.failed')
-    return render(request, 'csrf.html', d)
-# -----------------------------------------------------------------------
-
-
 def admins_logout(request):
     if request.user.is_authenticated:
         logout(request)
     return index(request)
 
 
-# -----------------------------------------------------------------------
-# Login functions
 def admins_login(request):
     if request.user.is_authenticated:
         return main(request)
@@ -177,170 +148,6 @@ def admins_login(request):
                 increment_account_lock_num(username)
 
         return render(request, 'login.html', d)
-
-
-def ldapijc(request):
-    if request.user.is_authenticated:
-        return main(request)
-    else:
-        d = {
-            'title': _('title.login.page'),
-            'note': _('msg.note.ldap.injection'),
-        }
-        if request.method == 'GET':
-            return render(request, 'login.html', d)
-        elif request.method == 'POST':
-            username = request.POST.get("username")
-            password = request.POST.get("password")
-
-            if is_account_lockedout(username):
-                d['errmsg'] = _("msg.authentication.fail")
-            else:
-                username = request.POST.get("username")
-                password = request.POST.get("password")
-                try:
-                    server = Server(settings.LDAP_HOST, settings.LDAP_PORT, get_info=ALL)
-                    conn = Connection(server, 'uid=admin,ou=people,dc=t246osslab,dc=org', 'password', auto_bind=True)
-                    conn.search('ou=people,dc=t246osslab,dc=org',
-                                '(&(uid=' + username + ')(userPassword=' + password + '))',
-                                attributes=['uid'])  # TODO trim
-                    if len(conn.entries) > 0:
-                        user = UserModel._default_manager.get_by_natural_key(conn.entries[0].uid)
-                        login(request, user)
-                        # authentication succeeded, then reset account lock
-                        reset_account_lock(username)
-                        request.session["username"] = username
-                        if 'target' not in request.session:
-                            return main(request)
-                        else:
-                            target = request.session['target']
-                            del request.session['target']
-                            return redirect(target)
-                    else:
-                        d['errmsg'] = _("msg.authentication.fail")
-                        # account lock count +1
-                        increment_account_lock_num(username)
-
-                except LDAPExceptionError as le:
-                    d['errmsg'] = _("msg.ldap.access.fail")
-                except Exception as e:
-                    logger.exception('Exception occurs: %s', e)
-                    d['errmsg'] = _('msg.unknown.exception.occur') + ": " + str(e)
-
-        return render(request, 'login.html', d)
-
-
-def bruteforce(request):
-    if request.user.is_authenticated:
-        return main(request)
-    else:
-        d = {
-            'title': _('title.login.page'),
-            'note': _('msg.note.brute.force'),
-        }
-        if request.method == 'GET':
-            return render(request, 'login.html', d)
-        elif request.method == 'POST':
-            username = request.POST.get("username")
-            password = request.POST.get("password")
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                request.session["username"] = username
-                if 'target' not in request.session:
-                    return main(request)
-                else:
-                    target = request.session['target']
-                    del request.session['target']
-                    return redirect(target)
-            else:
-                d['errmsg'] = _("msg.authentication.fail")
-
-        return render(request, 'login.html', d)
-
-
-def openredirect(request):
-    if request.user.is_authenticated:
-        return main(request)
-    else:
-        d = {
-            'title': _('title.login.page'),
-            'note': _('msg.note.open.redirect'),
-        }
-        if request.method == 'GET':
-            return render(request, 'login.html', d)
-        elif request.method == 'POST':
-            username = request.POST.get("username")
-            password = request.POST.get("password")
-
-            if is_account_lockedout(username):
-                d['errmsg'] = _("msg.authentication.fail")
-            else:
-                user = authenticate(request, username=username, password=password)
-                if user is not None:
-                    login(request, user)
-                    # authentication succeeded, then reset account lock
-                    reset_account_lock(username)
-                    request.session["username"] = username
-                    if "goto" in request.GET:
-                        return redirect(request.GET.get("goto"))
-                    else:
-                        if 'target' not in request.session:
-                            return main(request)
-                        else:
-                            target = request.session['target']
-                            del request.session['target']
-                            return redirect(target)
-                else:
-                    d['errmsg'] = _("msg.authentication.fail")
-
-                # account lock count +1
-                increment_account_lock_num(username)
-
-        return render(request, 'login.html', d)
-
-
-def verbosemsg(request):
-    if request.user.is_authenticated:
-        return main(request)
-    else:
-        d = {
-            'title': _('title.login.page'),
-            'note': _('msg.note.verbose.errror.message'),
-        }
-        if request.method == 'GET':
-            return render(request, 'login.html', d)
-        elif request.method == 'POST':
-            username = request.POST.get("username")
-            password = request.POST.get("password")
-
-            if is_account_lockedout(username):
-                d['errmsg'] = _("msg.account.locked") % {"count": settings.ACCOUNT_LOCK_COUNT}
-            elif not is_user_exist(username):
-                d['errmsg'] = _("msg.user.not.exist")
-            elif not bool(re.match("[0-9a-z]{8}", password)):
-                d['errmsg'] = _("msg.low.alphnum8")
-            else:
-                user = authenticate(request, username=username, password=password)
-                if user is not None:
-                    login(request, user)
-                    # authentication succeeded, then reset account lock
-                    reset_account_lock(username)
-                    request.session["username"] = username
-                    if 'target' not in request.session:
-                        return main(request)
-                    else:
-                        target = request.session['target']
-                        del request.session['target']
-                        return redirect(target)
-                else:
-                    d['errmsg'] = _("msg.password.not.match")
-
-            # account lock count +1
-            increment_account_lock_num(username)
-
-        return render(request, 'login.html', d)
-# -----------------------------------------------------------------------
 
 
 def deadlock(request):
@@ -392,6 +199,9 @@ def deadlock2(request):
                     user.save()
                     logger.info(uid + " is updated.")
                     sleep(1)
+                d['msg'] = _('msg.update.records') % {'count': number}
+            except OperationalError:
+                d['errmsg'] = _('msg.deadlock.occurs')
             except DatabaseError as db_err:
                 logger.exception('DatabaseError occurs: %s', db_err)
                 raise db_err
@@ -449,7 +259,7 @@ def memoryleak(request):
     return render(request, 'memoryleak.html', d)
 
 
-def netsocketleak(request):
+def network_socket_leak(request):
     d = {
         'title': _('title.netsocketleak.page'),
         'note': _('msg.note.netsocketleak'),
@@ -467,7 +277,7 @@ def netsocketleak(request):
             d['response_code'] = response.status_code
             d['ping_url'] = ping_url
             d['response_time'] = datetime.datetime.now() - start
-            netsockets_refs.append(response)  # TODO remove if possible
+            netsocket_refs.append(response)  # TODO remove if possible
         finally:
             # res.close()
             # response.close() # This line may not work if using requests 2.1.0 or earlier due to https://github.com/requests/requests/issues/1973
@@ -480,7 +290,7 @@ def netsocketleak(request):
 
 # TODO This function cannot leak connections
 # See also: https://stackoverflow.com/questions/24661754/necessity-of-explicit-cursor-close
-def dbconnectionleak(request):
+def db_connection_leak(request):
     d = {
         'title': _('title.dbconnectionleak.page'),
         'note': _('msg.note.dbconnectionleak'),
@@ -497,7 +307,7 @@ def dbconnectionleak(request):
     return render(request, 'dbconnectionleak.html', d)
 
 
-def filedescriptorleak(request):
+def file_descriptor_leak(request):
     d = {
         'title': _('title.filedescriptorleak.page'),
         'note': _('msg.note.filedescriptorleak'),
@@ -534,7 +344,7 @@ def filedescriptorleak(request):
     return render(request, 'filedescriptorleak.html', d)
 
 
-def threadleak(request):
+def thread_leak(request):
     d = {
         'title': _('title.threadleak.page'),
         'note': _('msg.note.threadleak'),
@@ -545,13 +355,166 @@ def threadleak(request):
     return render(request, 'threadleak.html', d)
 
 
-def active_threads_count():
-    while True:
-        logger.info("Current thread count: " + str(threading.active_count()))
-        sleep(100)
+def mojibake(request):
+    d = {
+        'title': _('title.mojibake.page'),
+        'msg': _('msg.enter.string'),
+        'note': _('msg.note.mojibake'),
+    }
+    if request.method == 'POST':
+        request.encoding = 'ISO-8859-1'
+        input_str = request.POST.get("string")
+        if input_str is not None:
+            d['msg'] = input_str.title()
+    return render(request, 'mojibake.html', d)
 
 
-def codeijct(request):
+def integer_overflow(request):
+    d = {
+        'title': _('title.intoverflow.page'),
+        'note': _('msg.note.intoverflow'),
+    }
+    if request.method == 'POST':
+        str_times = request.POST.get("times")
+
+        if str_times is not None and str_times is not '':
+            times = int(str_times)
+            if times >= 0:
+                # TODO Change a better way
+                thickness = int(np.array([2 ** times, ], dtype=int)) / 10  # mm
+                thickness_m = int(thickness) / 1000  # m
+                thickness_km = int(thickness_m) / 1000  # km
+
+                if times >= 0:
+                    d['times'] = str_times
+                    description = str(thickness) + " mm"
+                    if thickness_m is not None and thickness_km is not None:
+                        if 1 <= thickness_m and thickness_km < 1:
+                            description += " = " + str(thickness_m) + " m"
+                        if 1 <= thickness_km:
+                            description += " = " + str(thickness_km) + " km"
+                    if times == 42:
+                        description += " : " + _('msg.answer.is.correct')
+                    d['description'] = description
+
+    return render(request, 'intoverflow.html', d)
+
+
+def round_off_error(request):
+    d = {
+        'title': _('title.roundofferror.page'),
+        'note': _('msg.note.roundofferror'),
+    }
+    if request.method == 'POST':
+        number = request.POST.get("number")
+        d['number'] = number
+        if number is not None and number is not "0" and number.isdigit():
+            d['result'] = float(number) - 0.9
+    return render(request, 'roundofferror.html', d)
+
+
+def truncation_error(request):
+    d = {
+        'title': _('title.truncationerror.page'),
+        'note': _('msg.note.truncationerror'),
+    }
+    if request.method == 'POST':
+        number = request.POST.get("number")
+        d['number'] = number
+        if number is not None and number is not "0" and number.isdigit():
+            d['result'] = 10.0 / float(number)
+    return render(request, 'truncationerror.html', d)
+
+
+def loss_of_trailing_digits(request):
+    d = {
+        'title': _('title.lossoftrailingdigits.page'),
+        'note': _('msg.note.lossoftrailingdigits'),
+    }
+    if request.method == 'POST':
+        number = request.POST.get("number")
+        d['number'] = number
+        if number is not None and -1 < float(number) < 1:
+            d['result'] = float(number) + 1
+    return render(request, 'lossoftrailingdigits.html', d)
+
+
+def xss(request):
+    d = {
+        'title': _('title.xss.page'),
+        'msg': _('msg.enter.string'),
+        'note': _('msg.note.xss'),
+    }
+    if request.method == 'POST':
+        input_str = request.POST.get("string")
+        if input_str is not None:
+            d['msg'] = input_str[::-1]
+    return render(request, 'xss.html', d)
+
+
+def sql_injection(request):
+    d = {
+        'title': _('title.sqlijc.page'),
+        'note': _('msg.note.sqlijc'),
+    }
+    if request.method == 'POST':
+        name = request.POST.get("name")
+        password = request.POST.get("password")
+        d['users'] = User.objects.raw("SELECT * FROM easybuggy_user WHERE ispublic = 'true' AND name='" + name +
+                                      "' AND password='" + password + "' ORDER BY id")
+    return render(request, 'sqlijc.html', d)
+
+
+def ldap_injection(request):
+    if request.user.is_authenticated:
+        return main(request)
+    else:
+        d = {
+            'title': _('title.login.page'),
+            'note': _('msg.note.ldap.injection'),
+        }
+        if request.method == 'GET':
+            return render(request, 'login.html', d)
+        elif request.method == 'POST':
+            username = request.POST.get("username")
+            password = request.POST.get("password")
+
+            if is_account_lockedout(username):
+                d['errmsg'] = _("msg.authentication.fail")
+            else:
+                try:
+                    server = Server(settings.LDAP_HOST, settings.LDAP_PORT, get_info=ALL)
+                    conn = Connection(server, 'uid=admin,ou=people,dc=t246osslab,dc=org', 'password', auto_bind=True)
+                    conn.search('ou=people,dc=t246osslab,dc=org',
+                                '(&(uid=' + username + ')(userPassword=' + password + '))',
+                                attributes=['uid'])  # TODO trim
+                    if len(conn.entries) > 0:
+                        user = UserModel._default_manager.get_by_natural_key(conn.entries[0].uid)
+                        login(request, user)
+                        # authentication succeeded, then reset account lock
+                        reset_account_lock(username)
+                        request.session["username"] = username
+                        if 'target' not in request.session:
+                            return main(request)
+                        else:
+                            target = request.session['target']
+                            del request.session['target']
+                            return redirect(target)
+                    else:
+                        d['errmsg'] = _("msg.authentication.fail")
+                        # account lock count +1
+                        increment_account_lock_num(username)
+
+                except LDAPExceptionError as le:
+                    d['errmsg'] = _("msg.ldap.access.fail")
+                except Exception as e:
+                    logger.exception('Exception occurs: %s', e)
+                    d['errmsg'] = _('msg.unknown.exception.occur') + ": " + str(e)
+
+        return render(request, 'login.html', d)
+
+
+def code_injection(request):
     d = {
         'title': _('title.codeinjection.page'),
         'note': _('msg.note.codeinjection'),
@@ -571,7 +534,7 @@ def codeijct(request):
     return render(request, 'codeinjection.html', d)
 
 
-def commandijct(request):
+def command_injection(request):
     d = {
         'title': _('title.commandinjection.page'),
         'note': _('msg.note.commandinjection'),
@@ -586,8 +549,7 @@ def commandijct(request):
     return render(request, 'commandinjection.html', d)
 
 
-def mailheaderijct(request):
-
+def mail_header_injection(request):
     d = {
         'title': _('title.mailheaderinjection.page'),
         'note': _('msg.note.mailheaderinjection'),
@@ -617,118 +579,34 @@ def mailheaderijct(request):
     return render(request, 'mailheaderinjection.html', d)
 
 
-def iof(request):
+def unrestricted_size_upload(request):
     d = {
-        'title': _('title.intoverflow.page'),
-        'note': _('msg.note.intoverflow'),
+        'title': _('title.unrestrictedsizeupload.page'),
+        'note': _('msg.note.unrestrictedsizeupload'),
     }
     if request.method == 'POST':
-        str_times = request.POST.get("times")
-
-        if str_times is not None and str_times is not '':
-            times = int(str_times)
-            if times >= 0:
-                # TODO Change a better way
-                thickness = int(np.array([2 ** times, ], dtype=int)) / 10  # mm
-                thickness_m = int(thickness) / 1000  # m
-                thickness_km = int(thickness_m) / 1000  # km
-
-                if times >= 0:
-                    d['times'] = str_times
-                    description = str(thickness) + " mm"
-                    if thickness_m is not None and thickness_km is not None:
-                        if thickness_m >= 1 and thickness_km < 1:
-                            description += " = " + str(thickness_m) + " m"
-                        if thickness_km >= 1:
-                            description += " = " + str(thickness_km) + " km"
-                    if times == 42:
-                        description += " : " + _('msg.answer.is.correct')
-                    d['description'] = description
-
-    return render(request, 'intoverflow.html', d)
-
-
-def lotd(request):
-    d = {
-        'title': _('title.lossoftrailingdigits.page'),
-        'note': _('msg.note.lossoftrailingdigits'),
-    }
-    if request.method == 'POST':
-        number = request.POST.get("number")
-        d['number'] = number
-        if number is not None and -1 < float(number) < 1:
-            d['result'] = float(number) + 1
-    return render(request, 'lossoftrailingdigits.html', d)
-
-
-def roe(request):
-    d = {
-        'title': _('title.roundofferror.page'),
-        'note': _('msg.note.roundofferror'),
-    }
-    if request.method == 'POST':
-        number = request.POST.get("number")
-        d['number'] = number
-        if number is not None and number is not "0" and number.isdigit():
-            d['result'] = float(number) - 0.9
-    return render(request, 'roundofferror.html', d)
-
-
-def te(request):
-    d = {
-        'title': _('title.truncationerror.page'),
-        'note': _('msg.note.truncationerror'),
-    }
-    if request.method == 'POST':
-        number = request.POST.get("number")
-        d['number'] = number
-        if number is not None and number is not "0" and number.isdigit():
-            d['result'] = 10.0 / float(number)
-    return render(request, 'truncationerror.html', d)
-
-
-def mojibake(request):
-    d = {
-        'title': _('title.mojibake.page'),
-        'msg': _('msg.enter.string'),
-        'note': _('msg.note.mojibake'),
-    }
-    if request.method == 'POST':
-        request.encoding = 'ISO-8859-1'
-        input_str = request.POST.get("string")
-        if input_str is not None:
-            d['msg'] = input_str.title()
-    return render(request, 'mojibake.html', d)
-
-
-def xss(request):
-    d = {
-        'title': _('title.xss.page'),
-        'msg': _('msg.enter.string'),
-        'note': _('msg.note.xss'),
-    }
-    if request.method == 'POST':
-        input_str = request.POST.get("string")
-        if input_str is not None:
-            d['msg'] = input_str[::-1]
-    return render(request, 'xss.html', d)
-
-
-def sqlijc(request):
-    d = {
-        'title': _('title.sqlijc.page'),
-        'note': _('msg.note.sqlijc'),
-    }
-    if request.method == 'POST':
-        name = request.POST.get("name")
-        password = request.POST.get("password")
-        d['users'] = User.objects.raw("SELECT * FROM easybuggy_user WHERE ispublic = 'true' AND name='" + name +
-                                      "' AND password='" + password + "' ORDER BY id")
-    return render(request, 'sqlijc.html', d)
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            uploaded_file = request.FILES['file']
+            handle_uploaded_file(uploaded_file)
+            content_type = uploaded_file.content_type.split('/')[0]
+            if content_type in settings.CONTENT_TYPES:
+                # This size check is too late
+                if settings.MAX_UPLOAD_SIZE < uploaded_file._size:
+                    raise forms.ValidationError('Please keep filesize under %s. Current filesize %s' % (
+                        filesizeformat(settings.MAX_UPLOAD_SIZE), filesizeformat(uploaded_file._size)))
+                invert(uploaded_file)
+                d['file_path'] = os.path.join("static", "uploadfiles", uploaded_file.name)
+            else:
+                d['errmsg'] = _('msg.not.image.file')
+    else:
+        form = UploadFileForm()
+    d['form'] = form
+    return render(request, 'unrestrictedsizeupload.html', d)
 
 
 @csrf_exempt
-def unrestrictedextupload(request):
+def unrestricted_extension_upload(request):
     request.upload_handlers.insert(0, QuotaUploadHandler())
     d = {
         'title': _('title.unrestrictedextupload.page'),
@@ -747,30 +625,141 @@ def unrestrictedextupload(request):
     return render(request, 'unrestrictedextupload.html', d)
 
 
-def unrestrictedsizeupload(request):
-    d = {
-        'title': _('title.unrestrictedsizeupload.page'),
-        'note': _('msg.note.unrestrictedsizeupload'),
-    }
-    if request.method == 'POST':
-        form = UploadFileForm(request.POST, request.FILES)
-        if form.is_valid():
-            uploaded_file = request.FILES['file']
-            handle_uploaded_file(uploaded_file)
-            content_type = uploaded_file.content_type.split('/')[0]
-            if content_type in settings.CONTENT_TYPES:
-                # This size check is too late
-                if uploaded_file._size > settings.MAX_UPLOAD_SIZE:
-                    raise forms.ValidationError('Please keep filesize under %s. Current filesize %s' % (
-                        filesizeformat(settings.MAX_UPLOAD_SIZE), filesizeformat(uploaded_file._size)))
-                invert(uploaded_file)
-                d['file_path'] = os.path.join("static", "uploadfiles", uploaded_file.name)
-            else:
-                d['errmsg'] = _('msg.not.image.file')
+def brute_force(request):
+    if request.user.is_authenticated:
+        return main(request)
     else:
-        form = UploadFileForm()
-    d['form'] = form
-    return render(request, 'unrestrictedsizeupload.html', d)
+        d = {
+            'title': _('title.login.page'),
+            'note': _('msg.note.brute.force'),
+        }
+        if request.method == 'GET':
+            return render(request, 'login.html', d)
+        elif request.method == 'POST':
+            username = request.POST.get("username")
+            password = request.POST.get("password")
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                request.session["username"] = username
+                if 'target' not in request.session:
+                    return main(request)
+                else:
+                    target = request.session['target']
+                    del request.session['target']
+                    return redirect(target)
+            else:
+                d['errmsg'] = _("msg.authentication.fail")
+
+        return render(request, 'login.html', d)
+
+
+def open_redirect(request):
+    if request.user.is_authenticated:
+        return main(request)
+    else:
+        d = {
+            'title': _('title.login.page'),
+            'note': _('msg.note.open.redirect'),
+        }
+        if request.method == 'GET':
+            return render(request, 'login.html', d)
+        elif request.method == 'POST':
+            username = request.POST.get("username")
+            password = request.POST.get("password")
+
+            if is_account_lockedout(username):
+                d['errmsg'] = _("msg.authentication.fail")
+            else:
+                user = authenticate(request, username=username, password=password)
+                if user is not None:
+                    login(request, user)
+                    # authentication succeeded, then reset account lock
+                    reset_account_lock(username)
+                    request.session["username"] = username
+                    if "goto" in request.GET:
+                        return redirect(request.GET.get("goto"))
+                    else:
+                        if 'target' not in request.session:
+                            return main(request)
+                        else:
+                            target = request.session['target']
+                            del request.session['target']
+                            return redirect(target)
+                else:
+                    d['errmsg'] = _("msg.authentication.fail")
+
+                # account lock count +1
+                increment_account_lock_num(username)
+
+        return render(request, 'login.html', d)
+
+
+def verbose_message(request):
+    if request.user.is_authenticated:
+        return main(request)
+    else:
+        d = {
+            'title': _('title.login.page'),
+            'note': _('msg.note.verbose.errror.message'),
+        }
+        if request.method == 'GET':
+            return render(request, 'login.html', d)
+        elif request.method == 'POST':
+            username = request.POST.get("username")
+            password = request.POST.get("password")
+
+            if is_account_lockedout(username):
+                d['errmsg'] = _("msg.account.locked") % {"count": settings.ACCOUNT_LOCK_COUNT}
+            elif not is_user_exist(username):
+                d['errmsg'] = _("msg.user.not.exist")
+            elif not bool(re.match("[0-9a-z]{8}", password)):
+                d['errmsg'] = _("msg.low.alphnum8")
+            else:
+                user = authenticate(request, username=username, password=password)
+                if user is not None:
+                    login(request, user)
+                    # authentication succeeded, then reset account lock
+                    reset_account_lock(username)
+                    request.session["username"] = username
+                    if 'target' not in request.session:
+                        return main(request)
+                    else:
+                        target = request.session['target']
+                        del request.session['target']
+                        return redirect(target)
+                else:
+                    d['errmsg'] = _("msg.password.not.match")
+
+            # account lock count +1
+            increment_account_lock_num(username)
+
+        return render(request, 'login.html', d)
+
+
+@csrf_exempt
+def csrf(request):
+    if not request.user.is_authenticated:
+        return redirect_login(request)
+    d = {
+        'title': _('title.csrf.page'),
+        'note': _('msg.note.csrf'),
+    }
+    if request.method == 'POST' and "username" in request.session:
+        username = request.session["username"]
+        password = request.POST.get("password")
+        if password is not None:
+            try:
+                from django.contrib.auth.models import User
+                User.objects.filter(is_superuser=True)
+                u = User.objects.get(username=username)
+                u.set_password(password)
+                u.save()
+                d['complete'] = True
+            except Exception as e:
+                logger.exception('Exception occurs: %s', e)
+                d['msg'] = _('msg.passwd.change.failed')
+    return render(request, 'csrf.html', d)
 
 
 @xframe_options_exempt
@@ -811,18 +800,9 @@ def xxe(request):
             uploaded_file = request.FILES['file']
             content_type = uploaded_file.content_type
             if content_type == "text/xml":
-                my_xml = '''
-                <!DOCTYPE person [<!ENTITY param SYSTEM "file:///etc/passwd">]>
-                <person>
-                <name>&param;</name>
-                </person>
-                '''
-
                 str_text = ''
                 for line in uploaded_file:
                     str_text = str_text + line.decode()
-
-                # tree = ElementTree.parse(uploaded_file.read())
                 obj = MyObject()
                 parser = MyContentHandler(obj)
                 xml.sax.parseString(str_text, parser)
@@ -847,13 +827,19 @@ def xxe(request):
                       '    </person>\n' \
                       '</people>'
     d['xxe_xml'] = '<!DOCTYPE person [<!ENTITY param SYSTEM "file:///etc/passwd">]>\n' \
-        '<person>\n' \
-        '<name>&param;</name>\n' \
-        '</person>'
+                   '<person>\n' \
+                   '<name>&param;</name>\n' \
+                   '</person>'
     return render(request, 'xxe.html', d)
 
 
 # -------- private method
+def active_threads_count():
+    while True:
+        logger.info("Current thread count: " + str(threading.active_count()))
+        sleep(100)
+
+
 def get_order(request):
     order = request.GET.get("order")
     if order == 'asc':
@@ -865,7 +851,7 @@ def get_order(request):
 
 def leak_memory():
     for i in range(100000):
-        a.append(time.time())
+        memory_refs.append(time.time())
 
 
 def convert_bytes(n):
@@ -913,9 +899,6 @@ def grayscale(f):
     im_convert.save(get_uploaded_file(f))
 
 
-def import_users(f):
-    pass
-
 def increment_account_lock_num(username):
     if username in all_users_login_history:
         user_login_history = all_users_login_history[username]
@@ -935,7 +918,7 @@ def is_account_lockedout(username):
         return False
     user_login_history = all_users_login_history[username]
     return user_login_history[1] is not None \
-           and user_login_history[0] >= settings.ACCOUNT_LOCK_COUNT \
+           and settings.ACCOUNT_LOCK_COUNT <= user_login_history[0] \
            and ((datetime.datetime.now() - user_login_history[1]).seconds < settings.ACCOUNT_LOCK_TIME)
 
 
@@ -1006,7 +989,7 @@ class MyContentHandler(xml.sax.ContentHandler):
                     user.save()
                     logger.info(self.object.id + " is updated.")
                     self.results.append(self.object.id + " is updated.")
-                except User.DoesNotExist as db_err:
+                except User.DoesNotExist:
                     logger.info(self.object.id + " does not exist.")
                     self.results.append(self.object.id + " does not exist.")
                 except DatabaseError as db_err:

@@ -44,7 +44,7 @@ objectclass: top
 objectclass: person
 objectclass: organizationalPerson
 objectclass: inetOrgPerson
-cn: Mouse, Jerry
+cn: Mouse Jerry
 sn: Mouse
 uid: admin4
 userPassword: pathwood
