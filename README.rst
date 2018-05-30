@@ -33,7 +33,7 @@ However it is recommended to use venv (before running the above commands):
 
 ::
 
-    $ python -m venv venv
+    $ python3 -m venv venv
     $ source venv/bin/activate
 
 Access to
