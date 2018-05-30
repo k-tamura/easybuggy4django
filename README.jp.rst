@@ -30,7 +30,7 @@ EasyBuggy Djangoは、Django 2.0で開発されたEasyBuggyのクローンです
 
 ::
 
-    $ python -m venv venv
+    $ python3 -m venv venv
     $ source venv/bin/activate
 
 以下にアクセス:
