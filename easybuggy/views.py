@@ -613,7 +613,13 @@ def unrestricted_size_upload(request):
                     raise forms.ValidationError('Please keep filesize under %s. Current filesize %s' % (
                         filesizeformat(settings.MAX_UPLOAD_SIZE), filesizeformat(uploaded_file._size)))
                 invert(uploaded_file)
-                d['file_path'] = os.path.join("static", "uploadfiles", uploaded_file.name)
+                try:
+                    grayscale(uploaded_file)
+                except Exception as e:
+                    logger.exception('Exception occurs: %s', e)
+                    d['errmsg'] = _('msg.reverse.color.fail')
+                else:
+                    d['file_path'] = os.path.join("static", "uploadfiles", uploaded_file.name)
             else:
                 d['errmsg'] = _('msg.not.image.file')
     else:
@@ -634,8 +640,13 @@ def unrestricted_extension_upload(request):
         if form.is_valid():
             uploaded_file = request.FILES['file']
             handle_uploaded_file(uploaded_file)
-            grayscale(uploaded_file)
-            d['file_path'] = os.path.join("static", "uploadfiles", uploaded_file.name)
+            try:
+                grayscale(uploaded_file)
+            except Exception as e:
+                logger.exception('Exception occurs: %s', e)
+                d['errmsg'] = _('msg.convert.grayscale.fail')
+            else:
+                d['file_path'] = os.path.join("static", "uploadfiles", uploaded_file.name)
     else:
         form = UploadFileForm()
     d['form'] = form

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-30 22:45+0900\n"
+"POT-Creation-Date: 2018-05-31 22:14+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,42 +18,42 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: easybuggy/views.py:107
+#: easybuggy/views.py:105
 msgid "title.adminmain.page"
 msgstr "Main Page for Administrators"
 
-#: easybuggy/views.py:123 easybuggy/views.py:484 easybuggy/views.py:644
-#: easybuggy/views.py:673 easybuggy/views.py:714
+#: easybuggy/views.py:121 easybuggy/views.py:490 easybuggy/views.py:661
+#: easybuggy/views.py:690 easybuggy/views.py:731
 msgid "title.login.page"
 msgstr "Login Page for Administrators"
 
-#: easybuggy/views.py:132 easybuggy/views.py:147 easybuggy/views.py:494
-#: easybuggy/views.py:515 easybuggy/views.py:663 easybuggy/views.py:683
-#: easybuggy/views.py:701
+#: easybuggy/views.py:130 easybuggy/views.py:145 easybuggy/views.py:500
+#: easybuggy/views.py:521 easybuggy/views.py:680 easybuggy/views.py:700
+#: easybuggy/views.py:718
 msgid "msg.authentication.fail"
 msgstr "Authentication failed. Please login again."
 
-#: easybuggy/views.py:157
+#: easybuggy/views.py:155
 msgid "title.deadlock.page"
 msgstr "Detect Deadlock"
 
-#: easybuggy/views.py:158
+#: easybuggy/views.py:156
 msgid "msg.note.deadlock"
 msgstr "Deadlock occurs after continuously loading this page few times."
 
-#: easybuggy/views.py:185
+#: easybuggy/views.py:190
 msgid "msg.dead.lock.detected"
 msgstr "Deadlock is detected."
 
-#: easybuggy/views.py:187
+#: easybuggy/views.py:192
 msgid "msg.dead.lock.not.occur"
 msgstr "Deadlock has not occurred yet."
 
-#: easybuggy/views.py:193
+#: easybuggy/views.py:198
 msgid "title.deadlock2.page"
 msgstr "Batch Update of Users"
 
-#: easybuggy/views.py:194
+#: easybuggy/views.py:199
 msgid "msg.note.deadlock2"
 msgstr ""
 "If you open two windows (or tabs) and sort in the ascending order of user ID "
@@ -62,315 +62,323 @@ msgstr ""
 "deadlock occurs in database. However, deadlock does not occur when using "
 "default DB (SQLite) that does not support row locking"
 
-#: easybuggy/views.py:213
+#: easybuggy/views.py:218
 msgid "msg.update.records"
 msgstr "Updated %(count)s records."
 
-#: easybuggy/views.py:215
+#: easybuggy/views.py:221
 msgid "msg.deadlock.occurs"
 msgstr "A lock could not be obtained due to a deadlock."
 
-#: easybuggy/views.py:241 easybuggy/views.py:248
+#: easybuggy/views.py:247 easybuggy/views.py:254
 msgid "title.memoryleak.page"
 msgstr "Memory Usage"
 
-#: easybuggy/views.py:242 easybuggy/views.py:249
+#: easybuggy/views.py:248 easybuggy/views.py:255
 msgid "msg.note.memoryleak"
 msgstr "Memory leak occurs every time you load this page."
 
-#: easybuggy/views.py:275
+#: easybuggy/views.py:281
 msgid "title.netsocketleak.page"
 msgstr "Measure Response Time"
 
-#: easybuggy/views.py:276
+#: easybuggy/views.py:282
 msgid "msg.note.netsocketleak"
 msgstr "Network socket leak occurs every time you load this page."
 
-#: easybuggy/views.py:298 easybuggy/views.py:523 easybuggy/views.py:588
+#: easybuggy/views.py:304 easybuggy/views.py:529 easybuggy/views.py:594
 msgid "msg.unknown.exception.occur"
 msgstr "Unknown exception occurs."
 
-#: easybuggy/views.py:306
+#: easybuggy/views.py:312
 msgid "title.dbconnectionleak.page"
 msgstr "User List"
 
-#: easybuggy/views.py:307
+#: easybuggy/views.py:313
 msgid "msg.note.dbconnectionleak"
 msgstr ""
 "Database connection leak occurs if using an external RDBMS such as MySQL. "
 "Please edit <code>settings.py</code> if using an external RDBMS."
 
-#: easybuggy/views.py:323
+#: easybuggy/views.py:329
 msgid "title.filedescriptorleak.page"
 msgstr "Access History"
 
-#: easybuggy/views.py:324
+#: easybuggy/views.py:330
 msgid "msg.note.filedescriptorleak"
 msgstr "File descriptor leak occurs every time you load this page."
 
-#: easybuggy/views.py:360
+#: easybuggy/views.py:366
 msgid "title.threadleak.page"
 msgstr "Display Current Thread Count"
 
-#: easybuggy/views.py:361
+#: easybuggy/views.py:367
 msgid "msg.note.threadleak"
 msgstr "Thread leak occurs every time you load this page."
 
-#: easybuggy/views.py:371
+#: easybuggy/views.py:377
 msgid "title.mojibake.page"
 msgstr "Capitalize String"
 
-#: easybuggy/views.py:372 easybuggy/views.py:456
+#: easybuggy/views.py:378 easybuggy/views.py:462
 msgid "msg.enter.string"
 msgstr "Please enter a string."
 
-#: easybuggy/views.py:373
+#: easybuggy/views.py:379
 msgid "msg.note.mojibake"
 msgstr "Mojibake occurs if you enter a multi-byte string."
 
-#: easybuggy/views.py:385
+#: easybuggy/views.py:391
 msgid "title.intoverflow.page"
 msgstr "The Distance from Earth to the Moon"
 
-#: easybuggy/views.py:386
+#: easybuggy/views.py:392
 msgid "msg.note.intoverflow"
 msgstr ""
 "Integer overflow occurs if you enter a number greater than or equal to 63."
 
-#: easybuggy/views.py:408
+#: easybuggy/views.py:414
 msgid "msg.answer.is.correct"
 msgstr "Your answer is correct!"
 
 # "If keeping on loading this page, OutOfMemoryError is finally thrown."
-#: easybuggy/views.py:416
+#: easybuggy/views.py:422
 msgid "title.roundofferror.page"
 msgstr "Easy Subtraction"
 
-#: easybuggy/views.py:417
+#: easybuggy/views.py:423
 msgid "msg.note.roundofferror"
 msgstr "Round off error occurs if you enter 1."
 
-#: easybuggy/views.py:429
+#: easybuggy/views.py:435
 msgid "title.truncationerror.page"
 msgstr "Decimal Division"
 
-#: easybuggy/views.py:430
+#: easybuggy/views.py:436
 msgid "msg.note.truncationerror"
 msgstr "Truncation error occurs if you enter 3 or 7 or 9."
 
-#: easybuggy/views.py:442
+#: easybuggy/views.py:448
 msgid "title.lossoftrailingdigits.page"
 msgstr "Decimal Addition"
 
-#: easybuggy/views.py:443
+#: easybuggy/views.py:449
 msgid "msg.note.lossoftrailingdigits"
 msgstr "Loss of trailing digits occurs if you enter 0.0000000000000001."
 
-#: easybuggy/views.py:455
+#: easybuggy/views.py:461
 msgid "title.xss.page"
 msgstr "Reverse String"
 
-#: easybuggy/views.py:457 templates/xss.html:16
+#: easybuggy/views.py:463 templates/xss.html:16
 msgid "msg.note.xss"
 msgstr ""
 "JavaScript is executed if you enter name to <code>>tpircs/<;)eikooc."
 "tnemucod(trela>tpIrcs<</code>"
 
-#: easybuggy/views.py:468
+#: easybuggy/views.py:474
 msgid "title.sqlijc.page"
 msgstr "Search Your Secret Number"
 
-#: easybuggy/views.py:469
+#: easybuggy/views.py:475
 msgid "msg.note.sqlijc"
 msgstr ""
 "You can see a secret number if you enter <code>Mark</code> and "
 "<code>password</code>. You can see other users information if you enter "
 "password to <code>' OR '1'='1</code>"
 
-#: easybuggy/views.py:485
+#: easybuggy/views.py:491
 msgid "msg.note.ldap.injection"
 msgstr ""
 "You can login with <code>admin</code> and <code>password</code>. You can "
 "bypass authentication and login with <code>*)(|(objectClass=*</code> and "
 "password to <code>aaaaaaa)</code>."
 
-#: easybuggy/views.py:520
+#: easybuggy/views.py:526
 msgid "msg.ldap.access.fail"
 msgstr ""
 "Cannot access to the LDAP server, please startup an LDAP server and import "
 "<code> test-server.ldif </code>. It is also necessary to review the LDAP "
 "settings of <code>config/settings.py</code>."
 
-#: easybuggy/views.py:530
+#: easybuggy/views.py:536
 msgid "title.codeinjection.page"
 msgstr "Performing Basic Numeric Operations"
 
-#: easybuggy/views.py:531
+#: easybuggy/views.py:537
 msgid "msg.note.codeinjection"
 msgstr ""
 "If you enter <code>__import__('os')._exit(0)</code> , then JavaVM is "
 "forcibly finished due to code injection."
 
-#: easybuggy/views.py:542
+#: easybuggy/views.py:548
 msgid "msg.invalid.expression"
 msgstr "Invalid expression : %(exception)s"
 
-#: easybuggy/views.py:550
+#: easybuggy/views.py:556
 msgid "title.commandinjection.page"
 msgstr "Checking Your Mail Address"
 
-#: easybuggy/views.py:551
+#: easybuggy/views.py:557
 msgid "msg.note.commandinjection"
 msgstr ""
 "<code>/important-dir/</code> directory will be removed on this server if you "
 "enter <code>test@gmail.com;rm -fr /important-dir/</code>."
 
-#: easybuggy/views.py:557
+#: easybuggy/views.py:563
 msgid "msg.send.mail.success"
 msgstr "Sending an email failed due to any reason."
 
-#: easybuggy/views.py:559
+#: easybuggy/views.py:565
 msgid "msg.send.mail.failure"
 msgstr ""
 "Please enter your email address. EasyBuggy will send you an email to confirm "
 "that you can accept it."
 
-#: easybuggy/views.py:565
+#: easybuggy/views.py:571
 msgid "title.mailheaderinjection.page"
 msgstr "Question to Administrator"
 
-#: easybuggy/views.py:566
+#: easybuggy/views.py:572
 msgid "msg.note.mailheaderinjection"
 msgstr ""
 "If you change the input tag of the subject field to a textarea tag by "
 "browser's developer mode and set it to <code>[subject][line break]Bcc :[a "
 "mail address]</code>, then you can send a mail to the address."
 
-#: easybuggy/views.py:577
+#: easybuggy/views.py:583
 msgid "msg.mail.is.empty"
 msgstr "Please enter subject and content."
 
-#: easybuggy/views.py:580 templates/dbconnectionleak.html:8
+#: easybuggy/views.py:586 templates/dbconnectionleak.html:8
 #: templates/deadlock2.html:19 templates/sqlijc.html:8 templates/sqlijc.html:16
 msgid "label.name"
 msgstr "Name"
 
-#: easybuggy/views.py:580 templates/clickjacking.html:8
+#: easybuggy/views.py:586 templates/clickjacking.html:8
 #: templates/dbconnectionleak.html:10 templates/deadlock2.html:21
 msgid "label.mail"
 msgstr "Mail Address"
 
-#: easybuggy/views.py:581 templates/mailheaderinjection.html:23
+#: easybuggy/views.py:587 templates/mailheaderinjection.html:23
 msgid "label.content"
 msgstr "Content"
 
-#: easybuggy/views.py:585
+#: easybuggy/views.py:591
 msgid "msg.sent.mail"
 msgstr "The mail was sent successfully."
 
-#: easybuggy/views.py:595
+#: easybuggy/views.py:601
 msgid "title.unrestrictedsizeupload.page"
 msgstr "Reverse Color of Image File"
 
-#: easybuggy/views.py:596
+#: easybuggy/views.py:602
 msgid "msg.note.unrestrictedsizeupload"
 msgstr ""
 "This page is vulnerable for attacks such as DoS because there are no "
 "limitation for uploading file size."
 
-#: easybuggy/views.py:612
+#: easybuggy/views.py:620
+msgid "msg.reverse.color.fail"
+msgstr "The color reversal of the image file fails."
+
+#: easybuggy/views.py:624
 msgid "msg.not.image.file"
 msgstr "The chosen file is not an image file."
 
-#: easybuggy/views.py:623
+#: easybuggy/views.py:635
 msgid "title.unrestrictedextupload.page"
 msgstr "Convert Gray Scale of Image File"
 
-#: easybuggy/views.py:624
+#: easybuggy/views.py:636
 msgid "msg.note.unrestrictedextupload"
 msgstr ""
 "If you upload HTML file (named index.html) including the following code and "
 "make a user access http://localhost:8080/static/uploadfiles/index.html, then "
 "the user's cookie is sent to attacker's site."
 
-#: easybuggy/views.py:645
+#: easybuggy/views.py:647
+msgid "msg.convert.grayscale.fail"
+msgstr "Gray scale conversion of the image file fails."
+
+#: easybuggy/views.py:662
 msgid "msg.note.brute.force"
 msgstr ""
 "You can login with <code>admin</code> and <code>password</code>. The number "
 "of login attempts is not limited on this page, so the brute force attack is "
 "possible."
 
-#: easybuggy/views.py:674
+#: easybuggy/views.py:691
 msgid "msg.note.open.redirect"
 msgstr ""
 "You can login with <code>admin</code> and <code>password</code>. If you add "
 "<code>goto=[an URL of a malicious site]</code> to the query string, you can "
 "redirect to the malicious site."
 
-#: easybuggy/views.py:715
+#: easybuggy/views.py:732
 msgid "msg.note.verbose.errror.message"
 msgstr ""
 "You can login with <code>admin</code> and <code>password</code>. It is easy "
 "to guess an account who can logs in since authentication error messages on "
 "this page is too detailed."
 
-#: easybuggy/views.py:724
+#: easybuggy/views.py:741
 msgid "msg.account.locked"
 msgstr ""
 "Your account is locked out because the number of login failures exceeds "
 "%(count)s times."
 
-#: easybuggy/views.py:726
+#: easybuggy/views.py:743
 msgid "msg.user.not.exist"
 msgstr "The user does not exist."
 
-#: easybuggy/views.py:728
+#: easybuggy/views.py:745
 msgid "msg.low.alphnum8"
 msgstr "Password is 8 lowercase alphanumeric characters."
 
-#: easybuggy/views.py:743
+#: easybuggy/views.py:760
 msgid "msg.password.not.match"
 msgstr "The password does not match."
 
-#: easybuggy/views.py:756 templates/adminmain.html:8
+#: easybuggy/views.py:773 templates/adminmain.html:8
 msgid "title.csrf.page"
 msgstr "Change Your Password"
 
-#: easybuggy/views.py:757
+#: easybuggy/views.py:774
 msgid "msg.note.csrf"
 msgstr ""
 "This page receives a request that a user does not intend and changes the "
 "user's password."
 
-#: easybuggy/views.py:772
+#: easybuggy/views.py:789
 msgid "msg.passwd.change.failed"
 msgstr "Password change failed."
 
-#: easybuggy/views.py:781 templates/adminmain.html:9
+#: easybuggy/views.py:798 templates/adminmain.html:9
 msgid "title.clickjacking.page"
 msgstr "Change Your Mail"
 
-#: easybuggy/views.py:782
+#: easybuggy/views.py:799
 msgid "msg.note.clickjacking"
 msgstr ""
 "This page receives a request that a user does not intend and changes the "
 "user's mail address."
 
-#: easybuggy/views.py:797
+#: easybuggy/views.py:814
 msgid "msg.mail.change.failed"
 msgstr "Mail address change failed."
 
-#: easybuggy/views.py:805
+#: easybuggy/views.py:822
 msgid "title.xxe.page"
 msgstr "Batch Update of Users"
 
-#: easybuggy/views.py:806
+#: easybuggy/views.py:823
 msgid "msg.note.xxe"
 msgstr ""
 "If you upload the following XML file, you can display the password file (/"
 "etc/passwd) on the Linux server."
 
-#: easybuggy/views.py:822
+#: easybuggy/views.py:839
 msgid "msg.not.xml.file"
 msgstr "The chosen file is not an XML file."
 
