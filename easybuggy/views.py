@@ -218,7 +218,8 @@ def deadlock2(request):
                     logger.info(uid + " is updated.")
                     sleep(1)
                 d['msg'] = _('msg.update.records') % {'count': number}
-            except OperationalError:
+            except OperationalError as op_err:
+                logger.exception('OperationalError occurs: %s', op_err)
                 d['errmsg'] = _('msg.deadlock.occurs')
             except DatabaseError as db_err:
                 logger.exception('DatabaseError occurs: %s', db_err)
