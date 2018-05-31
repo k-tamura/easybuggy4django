@@ -158,8 +158,11 @@ def deadlock(request):
         'note': _('msg.note.deadlock'),
     }
     if 'dlpinit' not in request.session:
+        # Bypass deadlock logic if accessing from index page
         request.session['dlpinit'] = "True"
     else:
+        # ----------------------------------------------------------
+        # Logic that deadlock occurs if multiple threads access within five seconds
         global switch_flag
         if switch_flag:
             with a_lock:
@@ -175,11 +178,15 @@ def deadlock(request):
                 sleep(5)
                 with a_lock:
                     logger.info("Locked b_lock. -> Locked a_lock.")
+        # ----------------------------------------------------------
+
+    # Get stacktraces of deadlock threads
     stack_traces = []
     for tid, stack in sys._current_frames().items():
         stack_trace = str(traceback.format_stack(stack))
-        if stack_trace.find('a_lock') >= 0 or stack_trace.find('b_lock') >= 0:
-            stack_traces.append(stack_trace)
+        if stack_trace.find('with a_lock') >= 0 or stack_trace.find('with b_lock') >= 0:
+            stack_traces.append(traceback.extract_stack(stack))
+
     if len(stack_traces) >= 2:
         d['stack_traces'] = stack_traces
         d['msg'] = _('msg.dead.lock.detected')
