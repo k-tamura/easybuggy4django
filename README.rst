@@ -19,6 +19,8 @@ application in order to understand behavior of bugs and vulnerabilities,
 for example, memory leak, deadlock, infinite loop, SQL injection and so
 on.
 
+.. image:: /static/easybuggy.png
+
 Quick Start
 --------------------
 
