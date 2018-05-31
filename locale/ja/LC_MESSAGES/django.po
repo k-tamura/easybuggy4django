@@ -844,7 +844,7 @@ msgstr "画像ファイルの色反転を行うことができます。"
 
 #: templates/xss.html:7
 msgid "description.reverse.string"
-msgstr "文字列を入力すると、文字列が逆転して表示されます。"
+msgstr "文字列を入力すると、JavaScriptが実行されます。"
 
 #: templates/xxe.html:8
 msgid "label.result"

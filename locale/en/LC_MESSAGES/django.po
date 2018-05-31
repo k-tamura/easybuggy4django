@@ -847,7 +847,7 @@ msgstr "You can reverse the color of an image file."
 
 #: templates/xss.html:7
 msgid "description.reverse.string"
-msgstr "If you enter a string, then the reversed string is shown."
+msgstr "If you enter a string, then JavaScript is executed."
 
 #: templates/xxe.html:8
 msgid "label.result"
