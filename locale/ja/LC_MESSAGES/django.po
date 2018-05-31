@@ -172,8 +172,8 @@ msgstr "文字列の逆転"
 #: easybuggy/views.py:457 templates/xss.html:16
 msgid "msg.note.xss"
 msgstr ""
-"名前に<code>>tpircs/<;)eikooc.tnemucod(trela>tpIrcs<</code>を入力すると、セッ"
-"ションIDが表示されます。"
+"名前に<code>>tpircs/<;)eikooc.tnemucod(trela>tpIrcs<</code>を入力すると、"
+"JavaScriptが実行されます。"
 
 #: easybuggy/views.py:468
 msgid "title.sqlijc.page"
@@ -844,7 +844,7 @@ msgstr "画像ファイルの色反転を行うことができます。"
 
 #: templates/xss.html:7
 msgid "description.reverse.string"
-msgstr "文字列を入力すると、JavaScriptが実行されます。"
+msgstr "文字列を入力すると、文字列が逆転して表示されます。"
 
 #: templates/xxe.html:8
 msgid "label.result"

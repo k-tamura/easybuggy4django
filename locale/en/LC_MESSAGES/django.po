@@ -173,7 +173,7 @@ msgstr "Reverse String"
 #: easybuggy/views.py:457 templates/xss.html:16
 msgid "msg.note.xss"
 msgstr ""
-"Session ID is shown if you enter name to <code>>tpircs/<;)eikooc."
+"JavaScript is executed if you enter name to <code>>tpircs/<;)eikooc."
 "tnemucod(trela>tpIrcs<</code>"
 
 #: easybuggy/views.py:468
@@ -847,7 +847,7 @@ msgstr "You can reverse the color of an image file."
 
 #: templates/xss.html:7
 msgid "description.reverse.string"
-msgstr "If you enter a string, then JavaScript is executed."
+msgstr "If you enter a string, then the reversed string is shown."
 
 #: templates/xxe.html:8
 msgid "label.result"

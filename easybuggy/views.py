@@ -95,8 +95,6 @@ def redirect_login(request):
     #    redirect(response.encodeRedirectURL("/" + login_type + "/login" + query_string))
     else:
         return redirect("/" + login_type + "/login" + query_string)
-
-
 # -----------------------------------------------------------------------
 
 
@@ -396,7 +394,7 @@ def integer_overflow(request):
     if request.method == 'POST':
         str_times = request.POST.get("times")
 
-        if str_times is not None and str_times is not '':
+        if str_times is not None and str_times is not '' and str_times.isdigit():
             times = int(str_times)
             if times >= 0:
                 # TODO Change a better way
@@ -452,8 +450,8 @@ def loss_of_trailing_digits(request):
     }
     if request.method == 'POST':
         number = request.POST.get("number")
-        d['number'] = number
-        if number is not None and -1 < float(number) < 1:
+        if number is not None and is_number(number) and -1 < float(number) < 1:
+            d['number'] = number
             d['result'] = float(number) + 1
     return render(request, 'lossoftrailingdigits.html', d)
 
@@ -466,7 +464,7 @@ def xss(request):
     }
     if request.method == 'POST':
         input_str = request.POST.get("string")
-        if input_str is not None:
+        if input_str is not None and input_str is not  '':
             d['msg'] = input_str[::-1]
     return render(request, 'xss.html', d)
 
@@ -544,7 +542,7 @@ def code_injection(request):
             d['expression'] = expression
             expression = expression.replace("math", "__import__('math')")
             try:
-                d['value'] = eval(expression)
+                d['value'] = str(eval(expression))
             except Exception as e:
                 logger.exception('Exception occurs: %s', e)
                 d['errmsg'] = _("msg.invalid.expression") % {"exception": e}
@@ -967,6 +965,14 @@ def send_email(subject, msg_body):
         smtp_server.login(settings.MAIL_USER, settings.MAIL_PASSWORD)
 
     smtp_server.sendmail(settings.MAIL_USER, settings.MAIL_ADMIN_ADDRESS, msg.as_string())
+
+
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
 
 
 class MyObject:
