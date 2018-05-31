@@ -845,7 +845,7 @@ def xxe(request):
                       '</people>'
     d['xxe_xml'] = '<!DOCTYPE person [<!ENTITY param SYSTEM "file:///etc/passwd">]>\n' \
                    '<person>\n' \
-                   '<name>&param;</name>\n' \
+                   '<id>&param;</id>\n' \
                    '</person>'
     return render(request, 'xxe.html', d)
 
