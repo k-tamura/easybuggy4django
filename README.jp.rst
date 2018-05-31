@@ -16,6 +16,8 @@ EasyBuggy Django
 EasyBuggy Djangoは、Django 2.0で開発されたEasyBuggyのクローンです。
 `EasyBuggy <https://github.com/k-tamura/easybuggy>`__ は、メモリリーク、デッドロック、SQLインジェクションなど、バグや脆弱性の動作を理解するためにつくられたバグだらけのWebアプリケーションです。
 
+.. image:: /static/easybuggy.png
+
 クイックスタート
 --------------------
 
