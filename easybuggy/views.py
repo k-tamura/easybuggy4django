@@ -768,7 +768,7 @@ def csrf(request):
     if request.method == 'POST' and "username" in request.session:
         username = request.session["username"]
         password = request.POST.get("password")
-        if password is not None:
+        if password is not None and 8 <= len(password):
             try:
                 from django.contrib.auth.models import User
                 User.objects.filter(is_superuser=True)
@@ -779,6 +779,8 @@ def csrf(request):
             except Exception as e:
                 logger.exception('Exception occurs: %s', e)
                 d['errmsg'] = _('msg.passwd.change.failed')
+        else:
+            d['errmsg'] = _('msg.passwd.is.too.short')
     return render(request, 'csrf.html', d)
 
 
@@ -805,7 +807,7 @@ def clickjacking(request):
                 logger.exception('Exception occurs: %s', e)
                 d['errmsg'] = _('msg.mail.change.failed')
         else:
-            d['errmsg'] = _('msg.mail.format. is.invalid')
+            d['errmsg'] = _('msg.mail.format.is.invalid')
     return render(request, 'clickjacking.html', d)
 
 
