@@ -250,30 +250,48 @@ def memoryleak(request):
     try:
         ps = psutil.Process(os.getpid())
         mem = ps.memory_full_info()
-        d = {
-            'title': _('title.memoryleak.page'),
-            'note': _('msg.note.memoryleak'),
-            'pid': ps.pid,
-            'rss': convert_bytes(mem.rss),
-            'pcnt_rss': round(ps.memory_percent(memtype='rss'), 2),
-            # 'vms': mem.vms,
-            # 'shared': mem.shared,
-            # 'text': mem.text,
-            # 'lib': mem.lib,
-            # 'data': mem.data,
-            # 'dirty': mem.dirty,
-            'uss': convert_bytes(mem.uss),
-            'pcnt_uss': round(ps.memory_percent(memtype='uss'), 2),
-            'pss': convert_bytes(mem.pss),
-            'pcnt_pss': round(ps.memory_percent(memtype='pss'), 2),
-            'swap': convert_bytes(mem.swap),
-            'info': ps.as_dict(attrs=["cmdline", "username"]),
-        }
+        # d = {
+        #     'title': _('title.memoryleak.page'),
+        #     'note': _('msg.note.memoryleak'),
+        #     'pid': ps.pid,
+        #     'rss': convert_bytes(mem.rss),
+        #     'pcnt_rss': round(ps.memory_percent(memtype='rss'), 2),
+        #     # 'vms': mem.vms,
+        #     # 'shared': mem.shared,
+        #     # 'text': mem.text,
+        #     # 'lib': mem.lib,
+        #     # 'data': mem.data,
+        #     # 'dirty': mem.dirty,
+        #     'uss': convert_bytes(mem.uss),
+        #     'pcnt_uss': round(ps.memory_percent(memtype='uss'), 2),
+        #     'pss': convert_bytes(mem.pss),
+        #     'pcnt_pss': round(ps.memory_percent(memtype='pss'), 2),
+        #     'swap': convert_bytes(mem.swap),
+        #     'info': ps.as_dict(attrs=["cmdline", "username"]),
+        # }
+        add_dict(d, 'pid', ps.pid)
+        add_dict(d, 'rss', convert_bytes(mem.rss))
+        add_dict(d, 'pcnt_rss', round(ps.memory_percent(memtype='rss'), 2))
+        add_dict(d, 'uss', convert_bytes(mem.uss))
+        add_dict(d, 'pcnt_uss', round(ps.memory_percent(memtype='uss'), 2))
+        add_dict(d, 'pss', convert_bytes(mem.pss))
+        add_dict(d, 'pcnt_pss', round(ps.memory_percent(memtype='pss'), 2))
+        add_dict(d, 'swap', convert_bytes(mem.swap))
+        add_dict(d, 'info', ps.as_dict(attrs=["cmdline", "username"]))
+
     except psutil.AccessDenied:
         pass
     except psutil.NoSuchProcess:
         pass
     return render(request, 'memoryleak.html', d)
+
+
+def add_dict(d, name, value):
+    try:
+        d[name] = value
+    except AttributeError:
+        pass
+    return d
 
 
 def network_socket_leak(request):
