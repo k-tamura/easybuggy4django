@@ -4,6 +4,7 @@
 {% include "header.html" %}
 {% if file_path %}
 <img src="/{{ file_path }}"/><br/><br/>
+{% include "messages.html" %}
 <input type="button" onClick='history.back();' value="{% trans 'label.history.back' %}"/><br/>
 {% else %}
 <form action="" method="post" enctype="multipart/form-data">
@@ -13,7 +14,7 @@
     <p>{% trans 'msg.select.upload.file' %}<p/>
     <input type="submit" value="{% trans 'label.upload' %}"/>
 </form>
-{% endif %}
 <br/>
 {% include "messages.html" %}
+{% endif %}
 {% endblock %}

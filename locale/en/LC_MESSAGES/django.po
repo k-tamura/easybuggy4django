@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-01 16:11+0900\n"
+"POT-Creation-Date: 2018-06-01 17:36+0900\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,14 +22,14 @@ msgstr ""
 msgid "title.adminmain.page"
 msgstr "Main Page for Administrators"
 
-#: easybuggy/views.py:121 easybuggy/views.py:483 easybuggy/views.py:653
-#: easybuggy/views.py:682 easybuggy/views.py:723
+#: easybuggy/views.py:121 easybuggy/views.py:483 easybuggy/views.py:660
+#: easybuggy/views.py:689 easybuggy/views.py:730
 msgid "title.login.page"
 msgstr "Login Page for Administrators"
 
 #: easybuggy/views.py:130 easybuggy/views.py:145 easybuggy/views.py:493
-#: easybuggy/views.py:514 easybuggy/views.py:672 easybuggy/views.py:692
-#: easybuggy/views.py:710
+#: easybuggy/views.py:514 easybuggy/views.py:679 easybuggy/views.py:699
+#: easybuggy/views.py:717
 msgid "msg.authentication.fail"
 msgstr "Authentication failed. Please login again."
 
@@ -86,7 +86,7 @@ msgstr "Measure Response Time"
 msgid "msg.note.netsocketleak"
 msgstr "Network socket leak occurs every time you load this page."
 
-#: easybuggy/views.py:297 easybuggy/views.py:522 easybuggy/views.py:587
+#: easybuggy/views.py:297 easybuggy/views.py:522 easybuggy/views.py:590
 msgid "msg.unknown.exception.occur"
 msgstr "Unknown exception occurs."
 
@@ -225,168 +225,174 @@ msgstr ""
 "<code>/important-dir/</code> directory will be removed on this server if you "
 "enter <code>test@gmail.com;rm -fr /important-dir/</code>."
 
-#: easybuggy/views.py:556
+#: easybuggy/views.py:557
 msgid "msg.send.mail.success"
+msgstr "An email has been successfully sent."
+
+#: easybuggy/views.py:559
+msgid "msg.send.mail.failure"
 msgstr "Sending an email failed due to any reason."
 
-#: easybuggy/views.py:558
-msgid "msg.send.mail.failure"
-msgstr ""
-"Please enter your email address. EasyBuggy will send you an email to confirm "
-"that you can accept it."
+#: easybuggy/views.py:561 easybuggy/views.py:817
+msgid "msg.mail.format.is.invalid"
+msgstr "The mail address is an invalid format."
 
-#: easybuggy/views.py:564
+#: easybuggy/views.py:567
 msgid "title.mailheaderinjection.page"
 msgstr "Question to Administrator"
 
-#: easybuggy/views.py:565
+#: easybuggy/views.py:568
 msgid "msg.note.mailheaderinjection"
 msgstr ""
 "If you change the input tag of the subject field to a textarea tag by "
 "browser's developer mode and set it to <code>[subject][line break]Bcc :[a "
 "mail address]</code>, then you can send a mail to the address."
 
-#: easybuggy/views.py:576
+#: easybuggy/views.py:579
 msgid "msg.mail.is.empty"
 msgstr "Please enter subject and content."
 
-#: easybuggy/views.py:579 templates/dbconnectionleak.html:8
+#: easybuggy/views.py:582 templates/dbconnectionleak.html:8
 #: templates/deadlock2.html:19 templates/sqlijc.html:8 templates/sqlijc.html:16
 msgid "label.name"
 msgstr "Name"
 
-#: easybuggy/views.py:579 templates/clickjacking.html:8
+#: easybuggy/views.py:582 templates/clickjacking.html:8
 #: templates/dbconnectionleak.html:10 templates/deadlock2.html:21
 msgid "label.mail"
 msgstr "Mail Address"
 
-#: easybuggy/views.py:580 templates/mailheaderinjection.html:23
+#: easybuggy/views.py:583 templates/mailheaderinjection.html:23
 msgid "label.content"
 msgstr "Content"
 
-#: easybuggy/views.py:584
+#: easybuggy/views.py:587
 msgid "msg.sent.mail"
 msgstr "The mail was sent successfully."
 
-#: easybuggy/views.py:594
+#: easybuggy/views.py:597
 msgid "title.unrestrictedsizeupload.page"
 msgstr "Reverse Color of Image File"
 
-#: easybuggy/views.py:595
+#: easybuggy/views.py:598
 msgid "msg.note.unrestrictedsizeupload"
 msgstr ""
 "This page is vulnerable for attacks such as DoS because there are no "
 "limitation for uploading file size."
 
-#: easybuggy/views.py:612
+#: easybuggy/views.py:615
 msgid "msg.reverse.color.fail"
 msgstr "The color reversal of the image file fails."
 
-#: easybuggy/views.py:616
+#: easybuggy/views.py:618
+msgid "msg.reverse.color.complete"
+msgstr "The color reversal of the image file has completed."
+
+#: easybuggy/views.py:621
 msgid "msg.not.image.file"
 msgstr "The chosen file is not an image file."
 
-#: easybuggy/views.py:627
+#: easybuggy/views.py:632
 msgid "title.unrestrictedextupload.page"
 msgstr "Convert Gray Scale of Image File"
 
-#: easybuggy/views.py:628
+#: easybuggy/views.py:633
 msgid "msg.note.unrestrictedextupload"
 msgstr ""
 "If you upload HTML file (named index.html) including the following code and "
 "make a user access http://localhost:8080/static/uploadfiles/index.html, then "
 "the user's cookie is sent to attacker's site."
 
-#: easybuggy/views.py:639
+#: easybuggy/views.py:644
 msgid "msg.convert.grayscale.fail"
 msgstr "Gray scale conversion of the image file fails."
 
-#: easybuggy/views.py:654
+#: easybuggy/views.py:647
+msgid "msg.convert.grayscale.complete"
+msgstr "Gray scale conversion of the image file has completed."
+
+#: easybuggy/views.py:661
 msgid "msg.note.brute.force"
 msgstr ""
 "You can login with <code>admin</code> and <code>password</code>. The number "
 "of login attempts is not limited on this page, so the brute force attack is "
 "possible."
 
-#: easybuggy/views.py:683
+#: easybuggy/views.py:690
 msgid "msg.note.open.redirect"
 msgstr ""
 "You can login with <code>admin</code> and <code>password</code>. If you add "
 "<code>goto=[an URL of a malicious site]</code> to the query string, you can "
 "redirect to the malicious site."
 
-#: easybuggy/views.py:724
+#: easybuggy/views.py:731
 msgid "msg.note.verbose.errror.message"
 msgstr ""
 "You can login with <code>admin</code> and <code>password</code>. It is easy "
 "to guess an account who can logs in since authentication error messages on "
 "this page is too detailed."
 
-#: easybuggy/views.py:733
+#: easybuggy/views.py:740
 msgid "msg.account.locked"
 msgstr ""
 "Your account is locked out because the number of login failures exceeds "
 "%(count)s times."
 
-#: easybuggy/views.py:735
+#: easybuggy/views.py:742
 msgid "msg.user.not.exist"
 msgstr "The user does not exist."
 
-#: easybuggy/views.py:737
+#: easybuggy/views.py:744
 msgid "msg.low.alphnum8"
 msgstr "Password is 8 lowercase alphanumeric characters."
 
-#: easybuggy/views.py:752
+#: easybuggy/views.py:759
 msgid "msg.password.not.match"
 msgstr "The password does not match."
 
-#: easybuggy/views.py:765 templates/adminmain.html:8
+#: easybuggy/views.py:772 templates/adminmain.html:8
 msgid "title.csrf.page"
 msgstr "Change Your Password"
 
-#: easybuggy/views.py:766
+#: easybuggy/views.py:773
 msgid "msg.note.csrf"
 msgstr ""
 "This page receives a request that a user does not intend and changes the "
 "user's password."
 
-#: easybuggy/views.py:781
+#: easybuggy/views.py:788
 msgid "msg.passwd.change.failed"
 msgstr "Password change failed."
 
-#: easybuggy/views.py:783
+#: easybuggy/views.py:790
 msgid "msg.passwd.is.too.short"
 msgstr "The password must be at least 8 characters."
 
-#: easybuggy/views.py:792 templates/adminmain.html:9
+#: easybuggy/views.py:799 templates/adminmain.html:9
 msgid "title.clickjacking.page"
 msgstr "Change Your Mail"
 
-#: easybuggy/views.py:793
+#: easybuggy/views.py:800
 msgid "msg.note.clickjacking"
 msgstr ""
 "This page receives a request that a user does not intend and changes the "
 "user's mail address."
 
-#: easybuggy/views.py:808
+#: easybuggy/views.py:815
 msgid "msg.mail.change.failed"
 msgstr "Mail address change failed."
 
-#: easybuggy/views.py:810
-msgid "msg.mail.format.is.invalid"
-msgstr "The mail address is an invalid format."
-
-#: easybuggy/views.py:818
+#: easybuggy/views.py:825
 msgid "title.xxe.page"
 msgstr "Batch Update of Users"
 
-#: easybuggy/views.py:819
+#: easybuggy/views.py:826
 msgid "msg.note.xxe"
 msgstr ""
 "If you upload the following XML file, you can display the password file (/"
 "etc/passwd) on the Linux server."
 
-#: easybuggy/views.py:835
+#: easybuggy/views.py:842
 msgid "msg.not.xml.file"
 msgstr "The chosen file is not an XML file."
 
@@ -838,26 +844,26 @@ msgstr "Current Thread Count"
 msgid "label.obelus"
 msgstr "/"
 
-#: templates/unrestrictedextupload.html:7
-#: templates/unrestrictedsizeupload.html:7 templates/xxe.html:16
+#: templates/unrestrictedextupload.html:8
+#: templates/unrestrictedsizeupload.html:8 templates/xxe.html:16
 msgid "label.history.back"
 msgstr "Back"
 
-#: templates/unrestrictedextupload.html:11
+#: templates/unrestrictedextupload.html:12
 msgid "msg.convert.grayscale"
 msgstr "You can convert the color of an image file into gray scale."
 
-#: templates/unrestrictedextupload.html:13
-#: templates/unrestrictedsizeupload.html:13 templates/xxe.html:23
+#: templates/unrestrictedextupload.html:14
+#: templates/unrestrictedsizeupload.html:14 templates/xxe.html:23
 msgid "msg.select.upload.file"
 msgstr "Select a file to upload."
 
-#: templates/unrestrictedextupload.html:14
-#: templates/unrestrictedsizeupload.html:14 templates/xxe.html:24
+#: templates/unrestrictedextupload.html:15
+#: templates/unrestrictedsizeupload.html:15 templates/xxe.html:24
 msgid "label.upload"
 msgstr "Upload"
 
-#: templates/unrestrictedsizeupload.html:11
+#: templates/unrestrictedsizeupload.html:12
 msgid "msg.reverse.color"
 msgstr "You can reverse the color of an image file."
 

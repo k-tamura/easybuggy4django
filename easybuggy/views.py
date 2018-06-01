@@ -417,8 +417,8 @@ def round_off_error(request):
     }
     if request.method == 'POST':
         number = request.POST.get("number")
-        d['number'] = number
         if number is not None and number is not "0" and number.isdigit():
+            d['number'] = number
             d['result'] = float(number) - 0.9
     return render(request, 'roundofferror.html', d)
 
@@ -430,8 +430,8 @@ def truncation_error(request):
     }
     if request.method == 'POST':
         number = request.POST.get("number")
-        d['number'] = number
         if number is not None and number is not "0" and number.isdigit():
+            d['number'] = number
             d['result'] = 10.0 / float(number)
     return render(request, 'truncationerror.html', d)
 
@@ -551,11 +551,14 @@ def command_injection(request):
     }
     if request.method == 'POST':
         address = request.POST.get("address")
-        cmd = 'echo "This is for testing." | mail -s "Test Mail" -r from@example.com ' + address
-        if os.system(cmd) == 0:
-            d['result'] = _('msg.send.mail.success')
+        if validate_email(address):
+            cmd = 'echo "This is for testing." | mail -s "Test Mail" -r from@example.com ' + address
+            if os.system(cmd) == 0:
+                d['result'] = _('msg.send.mail.success')
+            else:
+                d['errmsg'] = _('msg.send.mail.failure')
         else:
-            d['result'] = _('msg.send.mail.failure')
+            d['errmsg'] = _('msg.mail.format.is.invalid')
     return render(request, 'commandinjection.html', d)
 
 
@@ -612,6 +615,8 @@ def unrestricted_size_upload(request):
                     d['errmsg'] = _('msg.reverse.color.fail')
                 else:
                     d['file_path'] = os.path.join("static", "uploadfiles", uploaded_file.name)
+                    d['msg'] = _('msg.reverse.color.complete')
+                    del d['note']
             else:
                 d['errmsg'] = _('msg.not.image.file')
     else:
@@ -639,6 +644,8 @@ def unrestricted_extension_upload(request):
                 d['errmsg'] = _('msg.convert.grayscale.fail')
             else:
                 d['file_path'] = os.path.join("static", "uploadfiles", uploaded_file.name)
+                d['msg'] = _('msg.convert.grayscale.complete')
+                del d['note']
     else:
         form = UploadFileForm()
     d['form'] = form
@@ -847,7 +854,7 @@ def xxe(request):
                       '        <id>user01</id>\n' \
                       '        <name>David</name>\n' \
                       '        <phone>090-6666-8888</phone>\n' \
-                      '        <mail>Peter@gmail.com</mail>\n' \
+                      '        <mail>David@gmail.com</mail>\n' \
                       '    </person>\n' \
                       '</people>'
     d['xxe_xml'] = '<!DOCTYPE person [<!ENTITY param SYSTEM "file:///etc/passwd">]>\n' \
