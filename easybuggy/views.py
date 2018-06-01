@@ -605,9 +605,8 @@ def unrestricted_size_upload(request):
                 if settings.MAX_UPLOAD_SIZE < uploaded_file._size:
                     raise forms.ValidationError('Please keep filesize under %s. Current filesize %s' % (
                         filesizeformat(settings.MAX_UPLOAD_SIZE), filesizeformat(uploaded_file._size)))
-                invert(uploaded_file)
                 try:
-                    grayscale(uploaded_file)
+                    invert(uploaded_file)
                 except Exception as e:
                     logger.exception('Exception occurs: %s', e)
                     d['errmsg'] = _('msg.reverse.color.fail')
