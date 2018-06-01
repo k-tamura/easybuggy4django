@@ -12,7 +12,7 @@ import xml.sax
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from time import sleep
-
+from validate_email import validate_email
 import numpy as np
 import psutil
 import requests
@@ -457,7 +457,7 @@ def xss(request):
     }
     if request.method == 'POST':
         input_str = request.POST.get("string")
-        if input_str is not None and input_str is not  '':
+        if input_str is not None and input_str is not '':
             d['msg'] = input_str[::-1]
     return render(request, 'xss.html', d)
 
@@ -778,7 +778,7 @@ def csrf(request):
                 d['complete'] = True
             except Exception as e:
                 logger.exception('Exception occurs: %s', e)
-                d['msg'] = _('msg.passwd.change.failed')
+                d['errmsg'] = _('msg.passwd.change.failed')
     return render(request, 'csrf.html', d)
 
 
@@ -793,7 +793,7 @@ def clickjacking(request):
     if request.method == 'POST' and "username" in request.session:
         username = request.session["username"]
         mail = request.POST.get("mail")
-        if mail is not None:
+        if validate_email(mail):
             try:
                 from django.contrib.auth.models import User
                 User.objects.filter(is_superuser=True)
@@ -803,7 +803,9 @@ def clickjacking(request):
                 d['complete'] = True
             except Exception as e:
                 logger.exception('Exception occurs: %s', e)
-                d['msg'] = _('msg.mail.change.failed')
+                d['errmsg'] = _('msg.mail.change.failed')
+        else:
+            d['errmsg'] = _('msg.mail.format. is.invalid')
     return render(request, 'clickjacking.html', d)
 
 
