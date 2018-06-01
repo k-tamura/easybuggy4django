@@ -204,10 +204,10 @@ def deadlock2(request):
             try:
                 number = 0
                 while True:
-                    number += 1
-                    uid = request.POST.get("uid_" + str(number))
+                    uid = request.POST.get("uid_" + str(number + 1))
                     if uid is None:
                         break
+                    number += 1
                     user = User.objects.get(id=uid)
                     user.name = request.POST.get(uid + "_name")
                     user.phone = request.POST.get(uid + "_phone")
@@ -836,13 +836,13 @@ def xxe(request):
     d['normal_xml'] = '<people>\n' \
                       '    <person>\n' \
                       '        <id>user00</id>\n' \
-                      '        <name>Mark Smith</name>\n' \
+                      '        <name>Mark</name>\n' \
                       '        <phone>090-9999-8888</phone>\n' \
                       '        <mail>Mark@gmail.com</mail>\n' \
                       '    </person>\n' \
                       '    <person>\n' \
                       '        <id>user01</id>\n' \
-                      '        <name>Peter Davis</name>\n' \
+                      '        <name>David</name>\n' \
                       '        <phone>090-6666-8888</phone>\n' \
                       '        <mail>Peter@gmail.com</mail>\n' \
                       '    </person>\n' \
