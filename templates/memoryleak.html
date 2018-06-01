@@ -8,33 +8,17 @@
             <th>PID</th>
             <th>Cmdline</th>
             <th>USS</th>
-            <th>PSS</th>
-            <th>Swap</th>
+            {% if pss %}<th>PSS</th>{% endif %}
+            {% if swap %}<th>Swap</th>{% endif %}
             <th>RES</th>
-            <!--
-            <th>VIRT</th>
-            <th>SHR</th>
-            <th>CODE</th>
-            <th>DATA</th>
-            <th>lib</th>
-            <th>dirty</th>
-            -->
         </tr>
         <tr>
             <td>{{ pid }}</td>
             <td>{{ info }}</td>
             <td>{{ uss }}<br />({{ pcnt_uss }} %)</td>
-            <td>{{ pss }}<br />({{ pcnt_pss }} %)</td>
-            <td>{{ swap }}</td>
+            {% if pss %}<td>{{ pss }}<br />({{ pcnt_pss }} %)</td>{% endif %}
+            {% if swap %}<td>{{ swap }}</td>{% endif %}
             <td>{{ rss }}<br />({{ pcnt_rss }} %)</td>
-            <!--
-            <td>{{ vms }}</td>
-            <td>{{ shared }}</td>
-            <td>{{ text }}</td>
-            <td>{{ data }}</td>
-            <td>{{ lib }}</td>
-            <td>{{ dirty }}</td>
-            -->
         </tr>
     </table>
 {% include "messages.html" %}
