@@ -208,8 +208,8 @@ msgstr "Performing Basic Numeric Operations"
 #: easybuggy/views.py:530
 msgid "msg.note.codeinjection"
 msgstr ""
-"If you enter <code>__import__('os')._exit(0)</code> , then JavaVM is "
-"forcibly finished due to code injection."
+"If you enter <code>__import__('os')._exit(0)</code> , then this application "
+"is forcibly finished due to code injection."
 
 #: easybuggy/views.py:541
 msgid "msg.invalid.expression"
