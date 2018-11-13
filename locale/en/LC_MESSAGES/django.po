@@ -191,7 +191,7 @@ msgstr ""
 msgid "msg.note.ldap.injection"
 msgstr ""
 "You can login with <code>admin</code> and <code>password</code>. You can "
-"bypass authentication and login with <code>*)(|(objectClass=*</code> and "
+"also bypass authentication and login with <code>*)(|(objectClass=*</code> and "
 "password to <code>aaaaaaa)</code>."
 
 #: easybuggy/views.py:519
@@ -443,7 +443,7 @@ msgstr ""
 #: templates/csrf.html:6
 msgid "msg.enter.passwd"
 msgstr ""
-"If you enter a new password and click the submit button, then your password "
+"When you enter a new password and click the submit button, your password "
 "will be changed."
 
 #: templates/csrf.html:7 templates/login.html:14 templates/sqlijc.html:10
@@ -502,8 +502,8 @@ msgstr "Log out"
 #: templates/index.html:11
 msgid "description.all"
 msgstr ""
-"Warning: Several links cause severe memory leaks or increase a CPU usage "
-"rate. They can make your computer unstable. The result may change depending "
+"Warning: Several links cause severe memory leaks or increase CPU usage "
+"rate. They can make your computer unstable. The results may change depending "
 "on Python version, OS, hardware (memory, CPU) or etc."
 
 #: templates/index.html:21
@@ -799,7 +799,7 @@ msgstr "Memory information about the process"
 #: templates/mojibake.html:7
 msgid "description.capitalize.string"
 msgstr ""
-"If you enter a string, then the capitalized string is shown. For example: "
+"When you enter a string, the capitalized string is shown. For example: "
 "capitalize string -> Capitalize String"
 
 #: templates/mojibake.html:8 templates/xss.html:8
@@ -809,7 +809,7 @@ msgstr "String"
 #: templates/netsocketleak.html:5
 msgid "description.response.time"
 msgstr ""
-"If you add pingurl=[a URL] to query string, the response code and time from "
+"When you add pingurl=[a URL] to query string, the response code and time from "
 "the url is shown."
 
 #: templates/netsocketleak.html:8
@@ -830,7 +830,7 @@ msgstr "Please enter a positive number."
 
 #: templates/sqlijc.html:7
 msgid "msg.enter.name.and.passwd"
-msgstr "If you enter your name and password, then your secret number is shown."
+msgstr "When you enter your name and password, your secret number is shown."
 
 #: templates/sqlijc.html:17
 msgid "label.secret"
@@ -869,7 +869,7 @@ msgstr "You can reverse the color of an image file."
 
 #: templates/xss.html:7
 msgid "description.reverse.string"
-msgstr "If you enter a string, then the reversed string is shown."
+msgstr "When you enter a string, the reversed string is shown."
 
 #: templates/xxe.html:8
 msgid "label.result"
@@ -878,5 +878,5 @@ msgstr "Result"
 #: templates/xxe.html:18
 msgid "msg.update.users.by.xml"
 msgstr ""
-"If you upload an XML file of the following format, users can be updated all "
+"When you upload an XML file of the following format, users can be updated all "
 "at once."
