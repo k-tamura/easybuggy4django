@@ -551,14 +551,11 @@ def command_injection(request):
     }
     if request.method == 'POST':
         address = request.POST.get("address")
-        if validate_email(address):
-            cmd = 'echo "This is for testing." | mail -s "Test Mail" -r from@example.com ' + address
-            if os.system(cmd) == 0:
-                d['result'] = _('msg.send.mail.success')
-            else:
-                d['errmsg'] = _('msg.send.mail.failure')
+        cmd = 'echo "This is for testing." | mail -s "Test Mail" -r from@example.com ' + address
+        if os.system(cmd) == 0:
+            d['result'] = _('msg.send.mail.success')
         else:
-            d['errmsg'] = _('msg.mail.format.is.invalid')
+            d['errmsg'] = _('msg.send.mail.failure')
     return render(request, 'commandinjection.html', d)
 
 
