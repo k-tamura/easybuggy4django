@@ -1,7 +1,7 @@
 wheel
 certifi
 chardet==3.0.4
-Django==2.0.3
+Django==2.2.13
 idna==2.6
 mysql-connector-python==8.0.6
 numpy==1.14.2
