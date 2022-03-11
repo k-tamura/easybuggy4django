@@ -5,7 +5,7 @@ Django==2.0.3
 idna==2.6
 mysql-connector-python==8.0.6
 numpy==1.14.2
-Pillow==5.1.0
+Pillow==9.0.1
 psutil==5.4.3
 pytz==2018.3
 requests==2.18.4
